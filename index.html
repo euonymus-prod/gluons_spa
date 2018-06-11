@@ -1,10 +1,137 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title> Ideal React Seed </title>
-    </head>
-    <body>
-        <div id="app"></div>
-        <script type="text/javascript" src="/bundle.js"></script>
-    </body>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8"/>    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/favicon.ico" type="image/x-icon" rel="icon"/><link href="/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+    <title>
+        気になる人、物、会社の隠れた関係を見つけよう -
+        グルーオンズ    </title>
+    <link rel="apple-touch-icon-precomposed" href="/webclip.png" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" href="/css/ie10-viewport-bug-workaround.css"/>    <link rel="stylesheet" href="/css/sticky-footer.css"/>    <link rel="stylesheet" href="/css/local.css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+              </head>
+  <body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-15649807-18', 'ja.gluons.link');
+  ga('send', 'pageview');
+</script>    <!-- Static navbar -->
+
+<div id="app"></div>
+
+
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand"><img src="/img/logo.gif"></a>          </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/subjects">一覧</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+   
+        <li><a href="/users/login">Login</a></li>
+        <li><a href="/users/add">Signup</a></li>
+
+   
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>    
+        <div class="container">
+        <div class="logo-top">
+  <img src="/img/logo.gif">
+</div>
+<div class="home">
+    <p class="text-center">気になる人、物、会社の隠れた関係を見つけよう</p>
+    <form method="get" accept-charset="utf-8" class="search_top text-center" action="/subjects/search"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div>
+                <div class="form-group center-block input-container-top">
+            <div class="input text"><input type="text" name="keywords" placeholder="人名、組織名、商品名、ブランド名などで検索" class="form-control" id="keywords"/></div>        </div>
+        <button class="btn btn-primary" type="submit">Gluons Search</button>
+    </form>
+    <div class="top-pickup-links center-block">
+        <div class="row">
+
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/%E6%9F%B3%E7%80%AC%E5%94%AF%E5%A4%AB/active"><img src="https://c799eb2b0cad47596bf7b1e050e83426.cdnext.stream.ne.jp/img/article/000/210/111/f952c280bec3e0ca42c0fe8cebf04c0d20170725123645446.jpg" alt="柳瀬唯夫"/></a>                </div>
+            </div>
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/Hana%E5%80%B6%E6%A5%BD%E9%83%A8%E6%8A%95%E8%B3%87%E9%87%91%E6%9C%AA%E8%BF%94%E9%82%84%E5%95%8F%E9%A1%8C/passive"><img src="https://i.ytimg.com/vi/sfjPR7UVhY8/maxresdefault.jpg" alt="Hana倶楽部投資金未返還問題"/></a>                </div>
+            </div>
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/NEM%E4%B8%8D%E6%AD%A3%E9%80%81%E9%87%91%E4%BA%8B%E4%BB%B6/active"><img src="https://cointelegraph.com/images/725_Ly9jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy82M2NlNGU3MjJjMjQ1MjZlZmUzYjg1ZWQ2N2RjM2JhNS5qcGc=.jpg" alt="NEM不正送金事件"/></a>                </div>
+            </div>
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/%E7%81%AB%E6%98%9F%EF%BC%88%E3%83%95%E3%82%A1%E3%82%BD%E3%83%B315%EF%BC%89/active"><img src="https://static.euronews.com/articles/385495/684x384_385495.jpg" alt="火星（ファソン15）"/></a>                </div>
+            </div>
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/51%E9%87%8F%E5%AD%90%E3%83%93%E3%83%83%E3%83%88%E3%82%92%E3%82%82%E3%81%A3%E3%81%9F%E9%87%8F%E5%AD%90%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF/passive"><img src="https://pc.watch.impress.co.jp/img/pcw/docs/1094/404/qubit_l.jpg" alt="51量子ビットをもった量子コンピュータ"/></a>                </div>
+            </div>
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/%E7%AC%AC4%E6%AC%A1%E5%AE%89%E5%80%8D%E5%86%85%E9%96%A3/active"><img src="https://s3.reutersmedia.net/resources/r/?m=02&amp;d=20171101&amp;t=2&amp;i=1207843666&amp;r=LYNXMPEDA025P&amp;w=1280" alt="第4次安倍内閣"/></a>                </div>
+            </div>
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/%E7%AC%AC48%E5%9B%9E%E8%A1%86%E8%AD%B0%E9%99%A2%E8%AD%B0%E5%93%A1%E7%B7%8F%E9%81%B8%E6%8C%99/active"><img src="https://d37t43gijuic4y.cloudfront.net/article/img/2017/10/12/7675ac70e68eca317f702e76.png" alt="第48回衆議院議員総選挙"/></a>                </div>
+            </div>
+               <div class="col-md-3">
+                <div class="pickup-link">
+                    <a href="/subjects/relations/%E5%85%B1%E8%AC%80%E7%BD%AA%E6%B3%95%EF%BC%88%E6%97%A5%E6%9C%AC%EF%BC%89/active"><img src="https://pbs.twimg.com/media/C2HfgdtUsAAa1re.jpg" alt="共謀罪法（日本）"/></a>                </div>
+            </div>
+   
+        </div>
+    </div>
+
+</div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; 2016 gluons&nbsp;&nbsp;&nbsp;
+<a href="/contacts">Contact us</a>&nbsp;&nbsp;&nbsp;
+<a href="/terms">Terms</a>&nbsp;&nbsp;&nbsp;
+<a href="/privacy">Privacy</a></p>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    <script type="text/javascript" src="/bundle.js"></script>
+      </body>
 </html>
