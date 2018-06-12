@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import MainQuark from './main_quark';
-import GluonTypeList from './gluon_type_list';
+import QuarkPropertyList from './quark_property_list';
 
 class Detail extends Component {
  _onChange = (value) => {
@@ -36,7 +36,7 @@ class Detail extends Component {
                   </li>
                </ul>
 
-               <GluonTypeList />
+               <QuarkPropertyList />
             </div>
 
          </div>
