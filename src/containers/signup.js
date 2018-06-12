@@ -45,9 +45,3 @@ class Signup extends Component {
  }
 }
 export default connect(state => state)(Signup);
-
-/*
-
-
-
-*/

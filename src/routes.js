@@ -4,6 +4,7 @@ import Home from './containers/home';
 import Contacts from './containers/contacts';
 import Login from './containers/login';
 import Signup from './containers/signup';
+import Detail from './containers/detail';
 
 import Terms from './components/terms';
 import Privacy from './components/privacy';
@@ -19,6 +20,7 @@ export default () => {
    <Route path='/contacts' component={Contacts}/>
 
    {/* TODO: need to build  */}
+   <Route path='/subjects/relations/:subject_name' component={Detail}/>
    <Route path='/login' component={Login}/>
    <Route path='/signup' component={Signup}/>
 
