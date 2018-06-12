@@ -4,8 +4,8 @@ import {setMessage} from '../actions/message';
 import {Link} from 'react-router-dom';
 
 import InputPreview from '../components/InputPreview';
+import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
-import GlobalFooter from './global_footer';
 import TopPickups from './top_pickups';
 
 class Home extends Component {

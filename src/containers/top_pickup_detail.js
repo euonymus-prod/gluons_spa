@@ -9,8 +9,8 @@ class TopPickupDetail extends Component {
  render () {
   const {message} = this.props.messageReducer;
   return (
-      <div class="col-md-3">
-          <div class="pickup-link">
+      <div className="col-md-3">
+          <div className="pickup-link">
               <a href="/subjects/relations/%E6%9F%B3%E7%80%AC%E5%94%AF%E5%A4%AB/active"><img src="https://c799eb2b0cad47596bf7b1e050e83426.cdnext.stream.ne.jp/img/article/000/210/111/f952c280bec3e0ca42c0fe8cebf04c0d20170725123645446.jpg" alt="柳瀬唯夫"/></a>             </div>
       </div>
   )
