@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {setMessage} from '../actions/message';
-import {Link} from 'react-router-dom';
 
 class MainQuark extends Component {
- _onChange = (value) => {
-   this.props.dispatch(setMessage(value))
- }
  render () {
-  const {message} = this.props.messageReducer;
   return (
      <div className="col-md-3 card subject-main">
         <div className="subject-image">

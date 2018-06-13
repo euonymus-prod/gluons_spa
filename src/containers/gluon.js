@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {setMessage} from '../actions/message';
 import {Link} from 'react-router-dom';
 
 import SubGluonList from './sub_gluon_list';
 
 class Gluon extends Component {
- _onChange = (value) => {
-   this.props.dispatch(setMessage(value))
- }
  render () {
-  const {message} = this.props.messageReducer;
   return (
     <div className="subject-relation white">
        <div className="subject-relation-main">
