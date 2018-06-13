@@ -7,24 +7,29 @@ import {fetchQuarkProperties} from '../actions/quark';
 import GluonList from './gluon_list';
 
 class GluonTypeList extends Component {
-    componentWillReceiveProps() {
-	if (this.props.quark) {
-            this.props.fetchQuarkProperties(this.props.quark.quark_type_id);
+
+    componentWillReceiveProps(nextProps) {
+	if (nextProps.quark) {
+	    if (!this.props.quark || nextProps.quark.quark_type_id != this.props.quark.quark_type_id) {
+		this.props.fetchQuarkProperties(nextProps.quark.quark_type_id);
+	    }
         }
     }
 
     renderQuarkProperties() {
 	console.log(this.props);
-        // return _.map(this.props.posts, post => {
-        //     return (
-        //         <GluonList />
-        //         <li className="list-group-item" key={post.id}>
-        //             <Link to={`/posts/${post.id}`}>
-        //                 {post.title}
-        //             </Link>
-        //         </li>
-        //     );
-        // });
+        return _.map(this.props.quark_properties, quark_property => {
+            return (
+               <div key={quark_property.id}>
+                   <h2>{quark_property.quark_property.caption_ja}</h2>
+	           <div className="related" >
+                    <GluonList
+		        quark_id={this.props.quark.id}
+                        quark_property_id={quark_property.quark_property.id} />
+                   </div>
+               </div>
+            );
+        });
     }
 
     render () {

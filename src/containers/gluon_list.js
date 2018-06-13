@@ -7,16 +7,11 @@ import Gluon from './gluon';
 class GluonList extends Component {
  render () {
   return (
-     <div>
-        <h2>配偶者</h2>
-        <div className="related">
            <div className="well subject-relation white">
 
               <Gluon />
 
            </div>
-        </div>
-     </div>
   )
  }
 }
