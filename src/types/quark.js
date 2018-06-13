@@ -1,0 +1,2 @@
+export const FETCH_QUARK   = 'FETCH_QUARK';
+export const FETCH_QUARK_FAILURE   = 'FETCH_QUARK_FAILURE';
