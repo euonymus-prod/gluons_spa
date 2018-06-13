@@ -30,6 +30,7 @@ function period2str(quark) {
     return ret;
 }
 function date2str(date, accuracy) {
+    if (!date) return '';
     let format = '';
     if (accuracy == 'year') {
 	format = 'YYYY';
