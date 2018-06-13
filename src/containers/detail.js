@@ -16,7 +16,7 @@ class Detail extends Component {
       <div className="container">
          <div className="row">
 
-            <MainQuark />
+            <MainQuark quark_name={this.props.match.params.quark_name}/>
 
             <div className="col-md-9 subject-relation-list">
                <ul className="nav nav-pills">

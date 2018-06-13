@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {fetchQuark} from '../actions/quark';
 
 class MainQuark extends Component {
-    componentDidMount() {
 
-        if (!this.props.post) {
-            // const { quark_name } = this.props.match.params;
-	    let quark_name = 'シェフにおまかせ!';
-            this.props.fetchQuark(quark_name);
+    componentDidMount() {
+	if (!this.props.quark) {
+            // let quark_name = 'シェフにおまかせ!';
+	    // this.props.fetchQuark(quark_name);
+            this.props.fetchQuark(this.props.quark_name);
         }
     }
 
@@ -42,7 +42,6 @@ function mapStateToProps(state) {
 function mapStateToProps({ quark }, ownProps) {
     return { 
 	quark: quark,
-	// quark_name: ownProps.match.params.quark_name
     };
 }
 
