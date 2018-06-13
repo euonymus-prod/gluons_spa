@@ -1,9 +1,7 @@
 import { FETCH_QUARK } from '../types/quark';
 import moment from 'moment'
 
-const initState = {
-    quark: {}
-}
+const initState = null;
 export default (state = initState, action) => {
     switch(action.type) {
     case FETCH_QUARK :

@@ -14,7 +14,6 @@ class MainQuark extends Component {
 
     render () {
         const { quark } = this.props;
-	console.log(quark);
         if (!quark) {
 	    return <div>Loading...</div>;
         }
