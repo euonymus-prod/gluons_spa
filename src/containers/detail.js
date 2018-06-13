@@ -21,13 +21,13 @@ class Detail extends Component {
             <div className="col-md-9 subject-relation-list">
                <ul className="nav nav-pills">
                   <li role="presentation" className="active">
-                     <a href="/subjects/relations/%E3%83%89%E3%83%8A%E3%83%AB%E3%83%89%E3%83%BB%E3%83%88%E3%83%A9%E3%83%B3%E3%83%97/active">Active</a>      
+                     <a href={`/subjects/relations/${this.props.match.params.quark_name}/active`}>Active</a>
                   </li>
                   <li role="presentation">
-                     <a href="/subjects/relations/%E3%83%89%E3%83%8A%E3%83%AB%E3%83%89%E3%83%BB%E3%83%88%E3%83%A9%E3%83%B3%E3%83%97/passive">Passive</a>
+                     <a href={`/subjects/relations/${this.props.match.params.quark_name}/passive`}>Passive</a>
                   </li>
                   <li role="presentation">
-                     <a href="/subjects/relations/%E3%83%89%E3%83%8A%E3%83%AB%E3%83%89%E3%83%BB%E3%83%88%E3%83%A9%E3%83%B3%E3%83%97/none">None</a>
+                     <a href={`/subjects/relations/${this.props.match.params.quark_name}/none`}>None</a>
                   </li>
                </ul>
 

@@ -28,7 +28,7 @@ class MainQuark extends Component {
            <h1 className="card-title">{quark.name}</h1>
            <p>{quark.period_str}</p>
            <p>{quark.description}</p>
-           <p><a href="/relations/add/{quark.id}" className="btn btn-primary">Add relation</a></p>
+           <p><a href={`/relations/add/${quark.id}`} className="btn btn-primary">Add relation</a></p>
         </div>
      </div>
   )
