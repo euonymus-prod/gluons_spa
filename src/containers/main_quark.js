@@ -19,30 +19,23 @@ class MainQuark extends Component {
         }
 
 	return (
-     <div className="col-md-3 card subject-main">
-        <div className="subject-image">
-           <img src={quark.image_path} className="card-img-top" />
-        </div>
+           <div className="col-md-3 card subject-main">
+               <div className="subject-image">
+                   <img src={quark.image_path} className="card-img-top" />
+               </div>
 
-        <div className="card-block">
-           <h1 className="card-title">{quark.name}</h1>
-           <p>{quark.period_str}</p>
-           <p>{quark.description}</p>
-           <p><a href={`/relations/add/${quark.id}`} className="btn btn-primary">Add relation</a></p>
-        </div>
-     </div>
-  )
- }
+               <div className="card-block">
+                   <h1 className="card-title">{quark.name}</h1>
+                   <p>{quark.period_str}</p>
+                   <p>{quark.description}</p>
+                   <p><a href={`/relations/add/${quark.id}`} className="btn btn-primary">Add relation</a></p>
+               </div>
+           </div>
+	);
+    }
 }
 
-
-function mapStateToProps(state) {
-    return {posts: state.quark}
-}
 function mapStateToProps({ quark }, ownProps) {
-    return { 
-	quark: quark,
-    };
+    return { quark };	
 }
-
 export default connect(mapStateToProps, { fetchQuark })(MainQuark);
