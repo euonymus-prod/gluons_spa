@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {setMessage} from '../actions/message';
 import {Link} from 'react-router-dom';
 
 import GlobalFooter from '../components/global_footer';
@@ -9,11 +8,7 @@ import MainQuark from './main_quark';
 import QuarkPropertyList from './quark_property_list';
 
 class Detail extends Component {
- _onChange = (value) => {
-   this.props.dispatch(setMessage(value))
- }
  render () {
-  const {message} = this.props.messageReducer;
   return (
    <div>
       <Navbar />
