@@ -6,7 +6,7 @@ const ROOT_URL = 'http://ja.localhost:8765/';
 // const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=euonymus';
 
-export const fetchQuark = (quark_name, callback) => {
+export const fetchQuark = (quark_name) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY}`)
 	    .then((response) => {
@@ -29,7 +29,6 @@ export const fetchQuarkProperties = (quark_type_id) => {
 		    type: FETCH_QUARK_PROPERTIES,
 		    payload: response.data
 		});
-		console.log(response.data);
 	    }).catch((response) => dispatch({
 		type: FETCH_QUARK_PROPERTIES_FAILURE,
 		error: response.error

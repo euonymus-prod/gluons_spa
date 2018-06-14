@@ -1,21 +1,36 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {fetchGluons} from '../actions/gluon';
 
 import Gluon from './gluon';
 
 class GluonList extends Component {
- render () {
-  return (
+    componentDidMount() {
+	this.props.fetchGluons(this.props.quark_id, this.props.quark_property_id);
+	console.log(1);
+	// if (nextProps.quark) {
+	//     if (!this.props.quark || nextProps.quark.quark_type_id != this.props.quark.quark_type_id) {
+	// 	this.props.fetchQuarkProperties(nextProps.quark.quark_type_id);
+	//     }
+        // }
+    }
+
+    render () {
+	return (
            <div className="well subject-relation white">
 
               <Gluon />
 
            </div>
-  )
- }
+	)
+    }
 }
-export default connect(state => state)(GluonList);
+
+// function mapStateToProps({ quark, quark_properties }, ownProps) {
+//     return { quark, quark_properties };	
+// }
+export default connect(null, { fetchGluons })(GluonList);
 
 
 /*

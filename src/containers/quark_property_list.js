@@ -17,7 +17,6 @@ class GluonTypeList extends Component {
     }
 
     renderQuarkProperties() {
-	console.log(this.props);
         return _.map(this.props.quark_properties, quark_property => {
             return (
                <div key={quark_property.id}>

@@ -1,0 +1,2 @@
+export const FETCH_GLUONS   = 'FETCH_GLUONS';
+export const FETCH_GLUONS_FAILURE   = 'FETCH_GLUONS_FAILURE';
