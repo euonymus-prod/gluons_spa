@@ -40,6 +40,23 @@ class GluonTypeList extends Component {
 	return (
             <div>
 		{this.renderQuarkProperties()}
+
+               <div>
+                   <h2>{this.props.quark.name}とは</h2>
+	           <div className="related" >
+                    <GluonList
+		        quark_id={this.props.quark.id}
+                        quark_property_id="active" />
+                   </div>
+               </div>
+               <div>
+                   <h2>{this.props.quark.name}に関する事項</h2>
+	           <div className="related" >
+                    <GluonList
+		        quark_id={this.props.quark.id}
+                        quark_property_id="passive" />
+                   </div>
+               </div>
 	    </div>
 	)
     }
