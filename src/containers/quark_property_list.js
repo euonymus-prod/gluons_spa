@@ -20,12 +20,11 @@ class GluonTypeList extends Component {
         return _.map(this.props.quark_properties, quark_property => {
             return (
                <div key={quark_property.id}>
-                   <h2>{quark_property.quark_property.caption_ja}</h2>
-	           <div className="related" >
                     <GluonList
 		        quark_id={this.props.quark.id}
-                        quark_property_id={quark_property.quark_property.id} />
-                   </div>
+                        quark_property_id={quark_property.quark_property.id}
+                        quark_property_caption={quark_property.quark_property.caption_ja}
+		    />
                </div>
             );
         });
@@ -40,23 +39,18 @@ class GluonTypeList extends Component {
 	return (
             <div>
 		{this.renderQuarkProperties()}
-
-               <div>
-                   <h2>{this.props.quark.name}とは</h2>
-	           <div className="related" >
+                <div key="active">
                     <GluonList
 		        quark_id={this.props.quark.id}
-                        quark_property_id="active" />
-                   </div>
-               </div>
-               <div>
-                   <h2>{this.props.quark.name}に関する事項</h2>
-	           <div className="related" >
+                        quark_property_id="active"
+                        quark_property_caption={`${this.props.quark.name}とは`}/>
+		</div>
+                <div key="passive">
                     <GluonList
 		        quark_id={this.props.quark.id}
-                        quark_property_id="passive" />
-                   </div>
-               </div>
+                        quark_property_id="passive"
+	                quark_property_caption={`${this.props.quark.name}に関する事項`}/>
+		</div>
 	    </div>
 	)
     }

@@ -8,7 +8,6 @@ import Gluon from './gluon';
 class GluonList extends Component {
     componentDidMount() {
 	this.props.fetchGluons(this.props.quark_id, this.props.quark_property_id);
-	console.log(1);
 	// if (nextProps.quark) {
 	//     if (!this.props.quark || nextProps.quark.quark_type_id != this.props.quark.quark_type_id) {
 	// 	this.props.fetchQuarkProperties(nextProps.quark.quark_type_id);
@@ -17,20 +16,32 @@ class GluonList extends Component {
     }
 
     render () {
+        const { gluons } = this.props;
+
+	if (gluons) {
+	    console.log(gluons);
+	}
+        if (!gluons || (gluons.gluon.length === 0)) {
+	    return <div>Loading...</div>;
+        }
+
 	return (
-           <div className="well subject-relation white">
-
-              <Gluon />
-
-           </div>
+           <div>
+               <h2>{this.props.quark_property_caption}</h2>
+               <div className="related" >
+                   <div className="well subject-relation white">
+                       <Gluon />
+                   </div>
+               </div>
+	   </div>
 	)
     }
 }
 
-// function mapStateToProps({ quark, quark_properties }, ownProps) {
-//     return { quark, quark_properties };	
-// }
-export default connect(null, { fetchGluons })(GluonList);
+function mapStateToProps({ gluons }, ownProps) {
+    return { gluons };	
+}
+export default connect(mapStateToProps, { fetchGluons })(GluonList);
 
 
 /*

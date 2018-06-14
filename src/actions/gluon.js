@@ -14,7 +14,6 @@ export const fetchGluons = (quark_id, quark_property_id) => {
 		    type: FETCH_GLUONS,
 		    payload: response.data
 		});
-		console.log(response.data);
 	    }).catch((response) => dispatch({
 		type: FETCH_GLUONS_FAILURE,
 		error: response.error
