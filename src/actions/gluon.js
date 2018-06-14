@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 import { FETCH_GLUONS, FETCH_GLUONS_FAILURE } from '../types/gluon';
+import { API_HOST } from '../statics';
 
-const ROOT_URL = 'http://ja.localhost:8765/';
+const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY = '?key=euonymus';
 
 export const fetchGluons = (quark_id, quark_property_id) => {

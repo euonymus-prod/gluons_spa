@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 import { FETCH_QUARK, FETCH_QUARK_FAILURE, FETCH_QUARK_PROPERTIES, FETCH_QUARK_FAILURE_PROPERTIES } from '../types/quark';
+import { API_HOST } from '../statics';
 
-const ROOT_URL = 'http://ja.localhost:8765/';
+const ROOT_URL = 'http://' + API_HOST + '/';
 // const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=euonymus';
 
