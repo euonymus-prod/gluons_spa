@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import axios from 'axios';
 
 import React, {Component} from 'react';
@@ -14,7 +15,6 @@ class SubGluonList extends Component {
         this.state = {
             gluons: [],
         };
-	console.log(this.props.sub_gluon_side);
 	this.fetchSubGluons(this.props.sub_quark.id, this.props.sub_gluon_side);
     }
 
@@ -28,6 +28,16 @@ class SubGluonList extends Component {
 	    });
     }
 
+    renderSubGluon() {
+	return _.map(this.state.gluons, gluon => {
+	    return (
+		<div key={gluon.id}>
+                    <SubGluon sub_quark_id={this.props.sub_quark.id} gluon={gluon} />
+		</div>
+	    );
+	});
+    }
+
     render () {
 	return (
           <div className="subject-relation-sub">
@@ -35,7 +45,7 @@ class SubGluonList extends Component {
                  <h4>{this.props.sub_quark.name}とは</h4>
                  {this.props.sub_quark.description}
                  <ul className="subject-list-relation">
-                    <SubGluon />
+                    {this.renderSubGluon()}
                  </ul>
               </div>
            </div>
