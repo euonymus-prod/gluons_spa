@@ -32,6 +32,7 @@ class SubGluonList extends Component {
 	return _.map(this.state.gluons, gluon => {
 	    return (
 		<div key={gluon.id}>
+		    <hr style={{ margin:'5px'}}/>
                     <SubGluon sub_quark_id={this.props.sub_quark.id} gluon={gluon} />
 		</div>
 	    );
@@ -39,6 +40,10 @@ class SubGluonList extends Component {
     }
 
     render () {
+	if (this.state.gluons.length == 0) {
+	    return '';
+	}
+
 	return (
           <div className="subject-relation-sub">
               <div className="well ">

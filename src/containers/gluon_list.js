@@ -21,17 +21,22 @@ class GluonList extends Component {
     fetchGluons (quark_id, quark_property_id) {
 	const ROOT_URL = 'http://' + API_HOST + '/';
 	const API_KEY = '?key=euonymus';
-	
-	axios.get(`${ROOT_URL}gluons/${quark_id}/${quark_property_id}${API_KEY}`)
+
+	axios.get(`${ROOT_URL}gluons/by_quark_property/${quark_id}/${quark_property_id}${API_KEY}`)
 	    .then((response) => {
 		this.setState({gluons: response.data});
 	    });
     }
 
     renderGluon() {
+	var first = this.state.gluons[0];
 	return _.map(this.state.gluons, gluon => {
 	    return (
 		<div key={gluon.id}>
+                    {(() => {
+                        if (gluon.id != first.id)
+                        return <hr />;
+                    })()}
                     <Gluon gluon = {gluon} />
 		</div>
 	    );

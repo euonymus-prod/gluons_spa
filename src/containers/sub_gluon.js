@@ -23,8 +23,7 @@ class SubGluon extends Component {
               </a>
               <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a>
               {this.props.gluon.relation} {this.props.gluon.suffix}
-              <br />
-              {util.period2str(this.props.gluon.suffix)}
+              <br /> {util.period2str(this.props.gluon)}
            </li>
 	)
     }
