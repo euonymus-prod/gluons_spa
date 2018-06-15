@@ -16,9 +16,15 @@ class Detail extends Component {
 	    sub_gluon_side = this.props.match.params.sub_gluon_side;
 	}
 	this.props.initDetail(sub_gluon_side);
+	this.onLinkClick = this.onLinkClick.bind(this);
+    }
+
+    onLinkClick(event) {
+	console.log(event.target);
     }
 
  render () {
+
   return (
    <div>
       <Navbar />
@@ -31,6 +37,7 @@ class Detail extends Component {
             <div className="col-md-9 subject-relation-list">
                <ul className="nav nav-pills">
                   <li role="presentation" className="active">
+                     <a value="active" onClick={this.onLinkClick} >Active</a>
                      <a href={`/subjects/relations/${this.props.match.params.quark_name}/active`}>Active</a>
                   </li>
                   <li role="presentation">

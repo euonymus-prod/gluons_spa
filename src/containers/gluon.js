@@ -16,6 +16,28 @@ class Gluon extends Component {
 	return '';
     }
 
+    relationText() {
+	this.props.gluon
+	this.gluedQuark();
+
+	if (this.props.quark.id == this.props.gluon.active_id) {
+            return (
+               <h4 className="media-heading">
+                  {this.props.gluon.active.name} は
+                  <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> {this.props.gluon.relation} {this.props.gluon.suffix}
+               </h4>
+	    );
+	} else if (this.props.quark.id == this.props.gluon.passive_id) {
+            return (
+               <h4 className="media-heading">
+                   <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> は
+                   {this.props.gluon.passive.name} {this.props.gluon.relation} {this.props.gluon.suffix}
+               </h4>
+	    );
+	}
+	return '';
+    }
+
     render () {
 	let util = new Util();
 	return (
@@ -26,9 +48,7 @@ class Gluon extends Component {
                             <a href={`/subjects/relations/${this.gluedQuark().name}`}><img src={this.gluedQuark().image_path} width="100px" height="100px" alt=""/></a>
                         </div>
                         <div className="media-body">
-                            <h4 className="media-heading">
-                                <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> {this.props.gluon.relation} {this.props.gluon.suffix}
-                            </h4>
+		            {this.relationText()}
                             <p>{util.period2str(this.props.gluon)}</p>
                         </div>
                     </div>
