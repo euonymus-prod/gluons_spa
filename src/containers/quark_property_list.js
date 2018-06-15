@@ -55,7 +55,7 @@ class GluonTypeList extends Component {
 	)
     }
 }
-// export default connect(state => state)(GluonTypeList);
+
 function mapStateToProps({ quark, quark_properties }, ownProps) {
     return { quark, quark_properties };	
 }
