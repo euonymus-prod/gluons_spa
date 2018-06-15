@@ -1,3 +1,6 @@
+/*
+This action is not used !!!
+*/
 import axios from 'axios';
 
 import { FETCH_GLUONS, FETCH_GLUONS_FAILURE } from '../types/gluon';

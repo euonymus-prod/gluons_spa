@@ -9,7 +9,6 @@ const reducer = combineReducers({
     messageReducer,
     quark:            quarkReducer,
     quark_properties: quarkPropertiesReducer,
-    gluons:           gluonsReducer,
 })
 const store = createStore(
     reducer,
