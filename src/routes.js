@@ -25,6 +25,7 @@ export default () => {
             <Route path='/contacts' component={Contacts}/>
 
             {/* TODO: need to build  */}
+            <Route path='/subjects/relations/:quark_name/:sub_gluon_side' component={Detail}/>
             <Route path='/subjects/relations/:quark_name' component={Detail}/>
             <Route path='/login' component={Login}/>
             <Route path='/signup' component={Signup}/>

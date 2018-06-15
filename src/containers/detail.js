@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {initDetail} from '../actions/detail';
 import {Link} from 'react-router-dom';
 
 import GlobalFooter from '../components/global_footer';
@@ -8,6 +9,15 @@ import MainQuark from './main_quark';
 import QuarkPropertyList from './quark_property_list';
 
 class Detail extends Component {
+    constructor(props) {
+        super(props);
+	let sub_gluon_side = 'active';
+	if ('sub_gluon_side' in this.props.match.params) {
+	    sub_gluon_side = this.props.match.params.sub_gluon_side;
+	}
+	this.props.initDetail(sub_gluon_side);
+    }
+
  render () {
   return (
    <div>
@@ -42,5 +52,7 @@ class Detail extends Component {
   )
  }
 }
-export default connect(state => state)(Detail);
-
+function mapStateToProps(state) {
+    return state;
+}
+export default connect(mapStateToProps, { initDetail })(Detail);
