@@ -33,7 +33,7 @@ class Gluon extends Component {
                         </div>
                     </div>
                 </div>
-                <SubGluonList />
+                <SubGluonList sub_quark={this.gluedQuark()}/>
             </div>
 	)
     }
