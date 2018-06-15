@@ -6,7 +6,7 @@ import SubGluon from './sub_gluon';
 
 class SubGluonList extends Component {
  render () {
-  return (
+     return (
        <div className="subject-relation-sub">
           <div className="well ">
              <h4>イヴァナ・マリエ・トランプとは</h4>
@@ -16,7 +16,7 @@ class SubGluonList extends Component {
              </ul>
           </div>
        </div>
-  )
+     )
  }
 }
 export default connect(state => state)(SubGluonList);
