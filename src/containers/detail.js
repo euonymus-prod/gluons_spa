@@ -17,10 +17,14 @@ class Detail extends Component {
 	}
 	this.props.initDetail(sub_gluon_side);
 	this.onLinkClick = this.onLinkClick.bind(this);
+	this.initDetail = this.props.initDetail.bind(this);
     }
 
     onLinkClick(event) {
-	console.log(event.target);
+	event.preventDefault();
+
+	console.log(event.target.name);
+	this.initDetail(event.target.name);
     }
 
  render () {
@@ -37,14 +41,13 @@ class Detail extends Component {
             <div className="col-md-9 subject-relation-list">
                <ul className="nav nav-pills">
                   <li role="presentation" className="active">
-                     <a value="active" onClick={this.onLinkClick} >Active</a>
-                     <a href={`/subjects/relations/${this.props.match.params.quark_name}/active`}>Active</a>
+                     <a href="#" name="active" onClick={this.onLinkClick} >Active</a>
                   </li>
                   <li role="presentation">
-                     <a href={`/subjects/relations/${this.props.match.params.quark_name}/passive`}>Passive</a>
+                     <a href="#" name="passive" onClick={this.onLinkClick} >Passive</a>
                   </li>
                   <li role="presentation">
-                     <a href={`/subjects/relations/${this.props.match.params.quark_name}/none`}>None</a>
+                     <a href="#" name="none" onClick={this.onLinkClick} >None</a>
                   </li>
                </ul>
 

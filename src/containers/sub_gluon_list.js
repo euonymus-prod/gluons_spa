@@ -18,6 +18,14 @@ class SubGluonList extends Component {
 	this.fetchSubGluons(this.props.sub_quark.id, this.props.sub_gluon_side);
     }
 
+    componentWillReceiveProps(nextProps) {
+	if (nextProps.sub_gluon_side) {
+	    if (!this.props.sub_gluon_side || nextProps.sub_gluon_side != this.props.sub_gluon_side) {
+		this.fetchSubGluons(this.props.sub_quark.id, nextProps.sub_gluon_side);
+	    }
+        }
+    }
+
     fetchSubGluons (quark_id, quark_property_id) {
 	const ROOT_URL = 'http://' + API_HOST + '/';
 	const API_KEY = '?key=euonymus';
