@@ -6,7 +6,7 @@ export default class Terms extends React.Component {
  render () {
    return (
    <div>
-      <Navbar />
+      <Navbar withSearchBar='1' />
 
         <div className="container">
         <div>

@@ -17,9 +17,6 @@ class Gluon extends Component {
     }
 
     relationText() {
-	this.props.gluon
-	this.gluedQuark();
-
 	if (this.props.quark.id == this.props.gluon.active_id) {
             return (
                <h4 className="media-heading">

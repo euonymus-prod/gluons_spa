@@ -9,7 +9,7 @@ class Contacts extends Component {
  render () {
   return (
    <div>
-      <Navbar />
+      <Navbar withSearchBar='1' />
 
       <div className="container">
          <h1>contact us</h1>

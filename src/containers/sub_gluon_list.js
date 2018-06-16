@@ -15,13 +15,18 @@ class SubGluonList extends Component {
         this.state = {
             gluons: [],
         };
-	this.fetchSubGluons(this.props.sub_quark.id, this.props.sub_gluon_side);
+
+	if (['active', 'passive'].includes(this.props.sub_gluon_side)) {
+	    this.fetchSubGluons(this.props.sub_quark.id, this.props.sub_gluon_side);
+	}
     }
 
     componentWillReceiveProps(nextProps) {
 	if (nextProps.sub_gluon_side) {
 	    if (!this.props.sub_gluon_side || nextProps.sub_gluon_side != this.props.sub_gluon_side) {
-		this.fetchSubGluons(this.props.sub_quark.id, nextProps.sub_gluon_side);
+		if (['active', 'passive'].includes(this.props.sub_gluon_side)) {
+		    this.fetchSubGluons(this.props.sub_quark.id, nextProps.sub_gluon_side);
+		}
 	    }
         }
     }

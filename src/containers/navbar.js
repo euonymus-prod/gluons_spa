@@ -3,9 +3,29 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 class Navbar extends Component {
- _onChange = (value) => {
-   this.props.dispatch(setMessage(value))
- }
+    _onChange = (value) => {
+	this.props.dispatch(setMessage(value))
+    }
+
+    renderSearchBar () {
+	if (this.props.withSearchBar) {
+	    return (
+      <form method="get" acceptCharset="utf-8" className="navbar-form navbar-left" role="search" action="/subjects/search">
+         <div style={{display:'none'}}>
+            <input type="hidden" name="_method" value="POST"/>
+         </div>
+         <div className="input-group">
+            <input type="text" name="keywords" placeholder="Search" className="form-control" id="keywords"/>
+            <span className="input-group-btn">
+               <button className="btn btn-default" type="submit">Go</button>
+            </span>
+         </div>
+		    </form>
+	    );
+	}
+	return '';
+    }
+    
  render () {
   const {message} = this.props.messageReducer;
   return (
@@ -20,17 +40,7 @@ class Navbar extends Component {
         <span className="icon-bar"></span>
       </button>
       <Link to="/" className="navbar-brand"><img src="/img/logo.gif" /></Link>
-      <form method="get" acceptCharset="utf-8" className="navbar-form navbar-left" role="search" action="/subjects/search">
-         <div style={{display:'none'}}>
-            <input type="hidden" name="_method" value="POST"/>
-         </div>
-         <div className="input-group">
-            <input type="text" name="keywords" placeholder="Search" className="form-control" id="keywords"/>
-            <span className="input-group-btn">
-               <button className="btn btn-default" type="submit">Go</button>
-            </span>
-         </div>
-      </form>
+	  {this.renderSearchBar()}
     </div>
 
     <div id="navbar" className="navbar-collapse collapse">

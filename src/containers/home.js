@@ -9,12 +9,13 @@ import Navbar from './navbar';
 import TopPickups from './top_pickups';
 
 class Home extends Component {
- _onChange = (value) => {
-   this.props.dispatch(setMessage(value))
- }
- render () {
-  const {message} = this.props.messageReducer;
-  return (
+    _onChange = (value) => {
+	this.props.dispatch(setMessage(value))
+    }
+
+    render () {
+	const {message} = this.props.messageReducer;
+	return (
    <div>
       <Navbar />
 
@@ -48,7 +49,7 @@ class Home extends Component {
 
       <GlobalFooter />
    </div>
-  )
- }
+	)
+    }
 }
 export default connect(state => state)(Home);
