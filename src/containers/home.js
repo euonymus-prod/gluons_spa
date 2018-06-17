@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {setMessage} from '../actions/message';
+import {fetchSuggest} from '../actions/search';
 import {Link} from 'react-router-dom';
 
-import InputPreview from '../components/InputPreview';
+import SearchBar from '../components/search_bar';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import TopPickups from './top_pickups';
 
 class Home extends Component {
     _onChange = (value) => {
-	this.props.dispatch(setMessage(value))
+	this.props.dispatch(fetchSuggest(value))
     }
 
     render () {
-	const {message} = this.props.messageReducer;
+	const {keyword} = this.props.suggest;
 	return (
    <div>
       <Navbar />
@@ -31,12 +31,7 @@ class Home extends Component {
                   <input type="hidden" name="_method" value="POST"/>
                </div>
                <div className="form-group center-block input-container-top">
-                  <div className="input text">
-                     <input type="text" name="keywords" placeholder="人名、組織名、商品名、ブランド名などで検索" className="form-control" id="keywords"/>
-                     <InputPreview
-                        value={message}
-                        onChange={this._onChange} />
-                  </div>
+                  <SearchBar onChange={this._onChange} />
                </div>
                <button className="btn btn-primary" type="submit">Gluons Search</button>
             </form>

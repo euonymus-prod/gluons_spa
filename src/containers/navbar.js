@@ -3,9 +3,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 class Navbar extends Component {
-    _onChange = (value) => {
-	this.props.dispatch(setMessage(value))
-    }
 
     renderSearchBar () {
 	if (this.props.withSearchBar) {
@@ -27,7 +24,6 @@ class Navbar extends Component {
     }
     
  render () {
-  const {message} = this.props.messageReducer;
   return (
 <nav className="navbar navbar-default navbar-static-top">
   <div className="container">
