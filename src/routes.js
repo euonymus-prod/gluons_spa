@@ -28,7 +28,7 @@ export default () => {
             <Route path='/subjects/relations/:quark_name' component={Detail}/>
             <Route path='/login' component={Login}/>
             <Route path='/signup' component={Signup}/>
-            <Route path='/subjects/search' component={SearchResults}/>
+            <Route path='/subjects/search/:keywords' component={SearchResults}/>
 
             {/* conponents  */}
             <Route path='/terms' component={Terms}/>

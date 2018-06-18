@@ -6,63 +6,67 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { API_HOST } from '../statics';
 
-import Gluon from './gluon';
+import GlobalFooter from '../components/global_footer';
+import Navbar from './navbar';
+import QuarkInSearch from '../components/quark_in_search';
 
 class SearchResults extends Component {
-/*
     constructor(props) {
         super(props);
 
         this.state = {
-            gluons: [],
+            quarks: [],
         };
-	this.fetchGluons(this.props.quark_id, this.props.quark_property_id);
+	this.fetchSearch(this.props.match.params.keywords);
     }
 
-    fetchGluons (quark_id, quark_property_id) {
+    fetchSearch (keywords) {
 	const ROOT_URL = 'http://' + API_HOST + '/';
 	const API_KEY = '?key=euonymus';
 
-	axios.get(`${ROOT_URL}gluons/by_quark_property/${quark_id}/${quark_property_id}${API_KEY}`)
+	axios.get(`${ROOT_URL}search?keywords=${keywords}${API_KEY}`)
 	    .then((response) => {
-		this.setState({gluons: response.data});
+		this.setState({quarks: response.data});
 	    });
     }
 
-    renderGluon() {
-	var first = this.state.gluons[0];
-	return _.map(this.state.gluons, gluon => {
+    renderQuarks() {
+	var first = this.state.quarks[0];
+	return _.map(this.state.quarks, quark => {
 	    return (
-		<div key={gluon.id}>
+		<div key={quark.id}>
                     {(() => {
-                        if (gluon.id != first.id)
+                        if (quark.id != first.id)
                         return <hr />;
                     })()}
-                    <Gluon gluon = {gluon} />
+                    <QuarkInSearch quark_in_search={quark} />
 		</div>
 	    );
 	});
     }
-*/
 
     render () {
-/*
-	if (this.state.gluons.length == 0) {
+	if (this.state.quarks.length == 0) {
 	    return '';
 	}
-*/
 
 	return (
+   <div>
+      <Navbar withSearchBar='1' />
+
+      <div className="container">
            <div>
                <h2>{this.props.quark_property_caption}</h2>
                <div className="related" >
                    <div className="well subject-relation white">
-{/*
-                       {this.renderGluon()}
-*/}
+                       {this.renderQuarks()}
                    </div>
                </div>
 	   </div>
+      </div>
+
+      <GlobalFooter />
+   </div>
 	)
     }
 }
