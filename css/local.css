@@ -152,6 +152,9 @@ ul.subject-list-relation > li {
 .react-autosuggest__container {
   position: relative;
 }
+.input-group-on-search-bar {
+  float:left;
+}
 
 .react-autosuggest__suggestions-container {
   display: none;

@@ -1,28 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import SearchBar from '../components/search_bar';
 
 class Navbar extends Component {
 
-    renderSearchBar () {
-	if (this.props.withSearchBar) {
-	    return (
-      <form method="get" acceptCharset="utf-8" className="navbar-form navbar-left" role="search" action="/subjects/search">
-         <div style={{display:'none'}}>
-            <input type="hidden" name="_method" value="POST"/>
-         </div>
-         <div className="input-group">
-            <input type="text" name="keywords" placeholder="Search" className="form-control" id="keywords"/>
-            <span className="input-group-btn">
-               <button className="btn btn-default" type="submit">Go</button>
-            </span>
-         </div>
-		    </form>
-	    );
-	}
-	return '';
-    }
-    
  render () {
   return (
 <nav className="navbar navbar-default navbar-static-top">
@@ -36,7 +18,7 @@ class Navbar extends Component {
         <span className="icon-bar"></span>
       </button>
       <Link to="/" className="navbar-brand"><img src="/img/logo.gif" /></Link>
-	  {this.renderSearchBar()}
+          <SearchBar />
     </div>
 
     <div id="navbar" className="navbar-collapse collapse">
