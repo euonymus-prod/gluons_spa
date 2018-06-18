@@ -1,6 +1,7 @@
 // Thanks to:  react-autosuggest
 // https://github.com/moroshko/react-autosuggest
 import axios from 'axios'
+import _ from 'lodash';
 
 import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
@@ -56,9 +57,9 @@ class SearchBar extends Component {
 
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
-    onSuggestionsFetchRequested = ({ value }) => {
+    onSuggestionsFetchRequested = _.debounce(({ value }) => {
 	this.getInfo(this.state.value);
-    };
+    }, 300);
 
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested = () => {

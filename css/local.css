@@ -31,7 +31,7 @@ ul.subject-list-relation > li {
     }
 }
 @media screen and (min-width: 770px) {
-    .form-control {
+    .navbar-form .form-control {
 	width:300px !important;
     }
 }
