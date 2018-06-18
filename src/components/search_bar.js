@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
 
-const { API_KEY } = 'euonymus'
+const API_KEY = 'euonymus'
 const API_URL = 'http://ja.localhost:8765/search'
 
 // When suggestion is clicked, Autosuggest needs to populate the input
@@ -81,11 +81,12 @@ class SearchBar extends Component {
             className: "form-control",
 	    name:'keywords',
 	    value,
+	    style:{width:'300px'},
 	    onChange: this.handleInputChange
 	};
 
 	return (
-           <form method="get" acceptCharset="utf-8" className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit}>
+        <form method="get" acceptCharset="utf-8" className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit}>
 		{/*
                <div style={{display:'none'}}>
                   <input type="hidden" name="_method" value="POST"/>
