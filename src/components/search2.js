@@ -1,3 +1,9 @@
+import axios from 'axios'
+const { API_KEY } = process.env
+const API_URL = 'http://ja.localhost:8765/search'
+
+
+
 import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
 
@@ -56,12 +62,19 @@ class Example extends React.Component {
     });
   };
 
+  getInfo = () => {
+    axios.get(`${API_URL}?api_key=${API_KEY}&keywords=${this.state.value}&limit=7`)
+      .then(({ data }) => {
+          this.setState({
+          suggestions: data
+        })
+      })
+  }
+
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value)
-    });
+	suggestions: this.getInfo(this.state.value)
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
