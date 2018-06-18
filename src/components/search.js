@@ -15,9 +15,10 @@ const getSuggestionValue = suggestion => suggestion.name;
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.name}
-  </div>
+   <div className="autocomplete-item">
+      <img src={suggestion.image_path} width="40px" height="40px" alt={suggestion.name} />
+      {suggestion.name}
+   </div>
 );
 
 class Search extends Component {
@@ -70,6 +71,7 @@ class Search extends Component {
 	const inputProps = {
 	    placeholder: '人名、組織名、商品名、ブランド名などで検索',
             className: "form-control",
+
 	    value,
 	    onChange: this.handleInputChange
 	};
