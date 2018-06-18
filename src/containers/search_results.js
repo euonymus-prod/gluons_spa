@@ -57,7 +57,9 @@ class SearchResults extends Component {
                <h2>{this.props.quark_property_caption}</h2>
                <div className="related" >
                    <div className="well subject-relation white">
+{/*
                        {this.renderGluon()}
+*/}
                    </div>
                </div>
 	   </div>

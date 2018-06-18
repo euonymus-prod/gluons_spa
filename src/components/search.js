@@ -3,6 +3,7 @@
 import axios from 'axios'
 
 import React, {Component} from 'react';
+import { withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
 
 const { API_KEY } = 'euonymus'
@@ -34,6 +35,8 @@ class Search extends Component {
 	    value: '',
 	    suggestions: []
 	};
+
+	this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange = (event, { newValue }) => {
@@ -64,6 +67,11 @@ class Search extends Component {
 	});
     };
 
+    handleSubmit(event) {
+	event.preventDefault();
+	this.props.history.push('/subjects/search/' + this.state.value);
+    };
+
     render() {
 	const { value, suggestions } = this.state;
 
@@ -77,15 +85,25 @@ class Search extends Component {
 	};
 
 	return (
-           <Autosuggest
-              suggestions={suggestions}
-              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-              getSuggestionValue={getSuggestionValue}
-              renderSuggestion={renderSuggestion}
-              inputProps={inputProps}
-           />
+           <form method="get" acceptCharset="utf-8" className="search_top text-center" onSubmit={this.handleSubmit}>
+		{/*
+               <div style={{display:'none'}}>
+                  <input type="hidden" name="_method" value="POST"/>
+               </div>
+		 */}
+              <div className="form-group center-block input-container-top">
+                 <Autosuggest
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    renderSuggestion={renderSuggestion}
+                    inputProps={inputProps}
+                 />
+              </div>
+              <button className="btn btn-primary" type="submit">Gluons Search</button>
+           </form>
 	);
     }
 }
-export default Search;
+export default withRouter(Search);
