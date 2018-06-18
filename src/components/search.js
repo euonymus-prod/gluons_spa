@@ -16,7 +16,7 @@ const getSuggestionValue = suggestion => suggestion.name;
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
    <div className="autocomplete-item">
-      <img src={suggestion.image_path} width="40px" height="40px" alt={suggestion.name} />
+      <img src={suggestion.image_path} />
       {suggestion.name}
    </div>
 );
