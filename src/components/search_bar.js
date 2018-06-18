@@ -91,7 +91,7 @@ class SearchBar extends Component {
                   <input type="hidden" name="_method" value="POST"/>
                </div>
 		 */}
-              <div className="input-group input-group-on-search-bar">
+              <div className="input-group">
                  <Autosuggest
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -100,10 +100,10 @@ class SearchBar extends Component {
                     renderSuggestion={renderSuggestion}
                     inputProps={inputProps}
                  />
+                 <span className="input-group-btn">
+                    <button className="btn btn-default" type="submit">Go</button>
+                 </span>
               </div>
-              <span className="input-group-btn">
-                 <button className="btn btn-default" type="submit">Go</button>
-              </span>
            </form>
 	);
     }

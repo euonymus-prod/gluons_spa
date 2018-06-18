@@ -5,7 +5,16 @@ import SearchBar from '../components/search_bar';
 
 class Navbar extends Component {
 
- render () {
+    renderSearchBar () {
+       if (this.props.withSearchBar) {
+           return (
+              <SearchBar />
+           );
+       }
+       return '';
+    }
+
+    render () {
   return (
 <nav className="navbar navbar-default navbar-static-top">
   <div className="container">
@@ -18,7 +27,7 @@ class Navbar extends Component {
         <span className="icon-bar"></span>
       </button>
       <Link to="/" className="navbar-brand"><img src="/img/logo.gif" /></Link>
-          <SearchBar />
+	  {this.renderSearchBar()}
     </div>
 
     <div id="navbar" className="navbar-collapse collapse">
