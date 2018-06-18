@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import Search from '../components/search';
+import Search2 from '../components/search2';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import TopPickups from './top_pickups';
@@ -26,6 +27,7 @@ class Home extends Component {
                </div>
                <div className="form-group center-block input-container-top">
                   <Search />
+                  <Search2 />
                </div>
                <button className="btn btn-primary" type="submit">Gluons Search</button>
             </form>
