@@ -30,6 +30,12 @@ ul.subject-list-relation > li {
 	margin-bottom:0;
     }
 }
+@media screen and (min-width: 770px) {
+    .form-control {
+	width:300px !important;
+    }
+}
+
 .navbar-header img {
     height:25px;
 }

@@ -81,7 +81,6 @@ class SearchBar extends Component {
             className: "form-control",
 	    name:'keywords',
 	    value,
-	    style:{width:'300px'},
 	    onChange: this.handleInputChange
 	};
 
