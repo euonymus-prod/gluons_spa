@@ -71,7 +71,7 @@ class Search extends Component {
 	const inputProps = {
 	    placeholder: '人名、組織名、商品名、ブランド名などで検索',
             className: "form-control",
-
+	    name:'keywords',
 	    value,
 	    onChange: this.handleInputChange
 	};

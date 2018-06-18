@@ -11,9 +11,6 @@ import Detail from './containers/detail';
 import Terms from './components/terms';
 import Privacy from './components/privacy';
 
-import App from './containers/app';
-import About from './containers/about';
-
 
 export default () => {
  return (
@@ -34,9 +31,6 @@ export default () => {
             {/* conponents  */}
             <Route path='/terms' component={Terms}/>
             <Route path='/privacy' component={Privacy}/>
-
-            <Route exact path='/app' component={App}/>
-            <Route path='/about' component={About}/>
          </Switch>
       </div>
    </BrowserRouter>
