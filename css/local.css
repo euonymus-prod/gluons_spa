@@ -172,6 +172,9 @@ ul.subject-list-relation > li {
   overflow-y: auto;
   z-index: 2;
 }
+.navbar-form .react-autosuggest__suggestions-container--open {
+  margin-top:30px;
+}
 
 .react-autosuggest__suggestions-list {
   margin: 0;

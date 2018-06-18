@@ -27,7 +27,7 @@ class Navbar extends Component {
         <span className="icon-bar"></span>
       </button>
       <Link to="/" className="navbar-brand"><img src="/img/logo.gif" /></Link>
-	  {this.renderSearchBar()}
+      {this.renderSearchBar()}
     </div>
 
     <div id="navbar" className="navbar-collapse collapse">
