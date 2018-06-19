@@ -8,6 +8,7 @@ import Login from './containers/login';
 import Signup from './containers/signup';
 import Detail from './containers/detail';
 import SearchResults from './containers/search_results';
+import QuarkList from './containers/quarks';
 
 import Terms from './components/terms';
 import Privacy from './components/privacy';
@@ -29,6 +30,8 @@ export default () => {
             <Route path='/login' component={Login}/>
             <Route path='/signup' component={Signup}/>
             <Route path='/subjects/search/:keywords' component={SearchResults}/>
+            <Route exact path='/subjects' component={QuarkList}/>
+
 
             {/* conponents  */}
             <Route path='/terms' component={Terms}/>

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 import Util from '../common';
 
-class QuarkInSearch extends Component {
+class QuarkInList extends Component {
     render () {
 	let util = new Util();
 	return (
@@ -12,17 +12,17 @@ class QuarkInSearch extends Component {
               <div className="subject-relation-main">
                  <div className="media">
                     <div className="media-left subject-image">
-                       <a href={`/subjects/relations/${this.props.quark_in_search.name}`}><img src={this.props.quark_in_search.image_path} width="100px" height="100px" alt=""/></a>
+                       <a href={`/subjects/relations/${this.props.quark_in_list.name}`}><img src={this.props.quark_in_list.image_path} width="100px" height="100px" alt=""/></a>
                     </div>
                     <div className="media-body">
                        <h4>
-                          <a href={`/subjects/relations/${this.props.quark_in_search.name}`}>
-                             {this.props.quark_in_search.name}
+                          <a href={`/subjects/relations/${this.props.quark_in_list.name}`}>
+                             {this.props.quark_in_list.name}
                           </a>
                        </h4>
 
-                       {this.props.quark_in_search.description}
-                       <p>{util.period2str(this.props.quark_in_search)}</p>
+                       {this.props.quark_in_list.description}
+                       <p>{util.period2str(this.props.quark_in_list)}</p>
                     </div>
                  </div>
               </div>
@@ -30,4 +30,4 @@ class QuarkInSearch extends Component {
 	)
     }
 }
-export default connect(state => state)(QuarkInSearch);
+export default connect(state => state)(QuarkInList);

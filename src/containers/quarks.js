@@ -1,38 +1,29 @@
-import _ from 'lodash';
 import axios from 'axios';
-
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import { API_HOST } from '../statics';
 
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import QuarkInList from '../components/quark_in_list';
 
-class SearchResults extends Component {
+import { API_HOST } from '../statics';
+
+class QuarkList extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             quarks: [],
         };
-	this.fetchSearch(this.props.match.params.keywords);
+	this.fetchQuarks();
     }
 
-    componentWillReceiveProps(nextProps) {
-	if (nextProps.search_keyword) {
-	    if (!this.props.search_keyword || nextProps.search_keyword != this.props.search_keyword) {
-		this.fetchSearch(nextProps.search_keyword);
-	    }
-        }
-    }
-
-    fetchSearch (keywords) {
+    fetchQuarks () {
 	const ROOT_URL = 'http://' + API_HOST + '/';
 	const API_KEY = '?key=euonymus';
 
-	axios.get(`${ROOT_URL}search?keywords=${keywords}${API_KEY}`)
+	axios.get(`${ROOT_URL}quarks${API_KEY}`)
 	    .then((response) => {
 		this.setState({quarks: response.data});
 	    });
@@ -79,4 +70,5 @@ class SearchResults extends Component {
     }
 }
 
-export default connect(state => state)(SearchResults);
+export default connect(state => state)(QuarkList);
+
