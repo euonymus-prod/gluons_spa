@@ -83,8 +83,8 @@ class SearchBar extends Component {
 
     handleSubmit(event) {
 	event.preventDefault();
-	this.props.changeSearchKeyword(this.state.value);
 	this.props.history.push(`/subjects/search/${this.state.value}`);
+	this.props.changeSearchKeyword(this.state.value);
     };
 
     render() {
