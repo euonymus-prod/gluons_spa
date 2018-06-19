@@ -43,8 +43,19 @@ class SearchBar extends Component {
     handleInputChange = (event, { newValue }) => {
 	this.setState({
 	    value: newValue
+	}, () => {
+	    if (this.state.value && this.state.value.length > 1) {
+		if (this.state.value.length % 2 === 0) {
+		    this.debouncedGetInfo();
+		}
+	    } else if (!this.state.value) {
+	    }
 	});
     };
+
+    debouncedGetInfo = _.debounce(() => {
+	this.getInfo(this.state.value);
+    }, 300);
 
     getInfo = () => {
 	axios.get(`${API_URL}?api_key=${API_KEY}&keywords=${this.state.value}&limit=7`)
@@ -57,9 +68,9 @@ class SearchBar extends Component {
 
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
-    onSuggestionsFetchRequested = _.debounce(({ value }) => {
-	this.getInfo(this.state.value);
-    }, 300);
+    onSuggestionsFetchRequested = ({ value }) => {
+	// Usually, this method fetch the suggestions data. But this case, class fetches right after api call.
+    };
 
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested = () => {
