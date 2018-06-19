@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { FETCH_QUARK, FETCH_QUARK_FAILURE, FETCH_QUARK_PROPERTIES, FETCH_QUARK_FAILURE_PROPERTIES } from '../types/quark';
+import { FETCH_QUARK, FETCH_QUARK_FAILURE, FETCH_QUARK_PROPERTIES, FETCH_QUARK_PROPERTIES_FAILURE,
+	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE} from '../types/quark';
 import { API_HOST } from '../statics';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
@@ -35,4 +36,11 @@ export const fetchQuarkProperties = (quark_type_id) => {
 		error: response.error
 	    }))
     }
+}
+
+export const changeSearchKeyword = (keyword) => {
+    return {
+	type: CHANGE_SEARCH_KEYWORD,
+	payload: keyword
+    };
 }

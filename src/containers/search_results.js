@@ -20,6 +20,14 @@ class SearchResults extends Component {
 	this.fetchSearch(this.props.match.params.keywords);
     }
 
+    componentWillReceiveProps(nextProps) {
+	if (nextProps.search_keyword) {
+	    if (!this.props.search_keyword || nextProps.search_keyword != this.props.search_keyword) {
+		this.fetchSearch(nextProps.search_keyword);
+	    }
+        }
+    }
+
     fetchSearch (keywords) {
 	const ROOT_URL = 'http://' + API_HOST + '/';
 	const API_KEY = '?key=euonymus';

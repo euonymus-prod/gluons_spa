@@ -4,8 +4,10 @@ import axios from 'axios'
 import _ from 'lodash';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
+import { changeSearchKeyword } from '../actions/quark';
 
 const API_KEY = 'euonymus'
 const API_URL = 'http://ja.localhost:8765/search'
@@ -81,6 +83,7 @@ class SearchBar extends Component {
 
     handleSubmit(event) {
 	event.preventDefault();
+	this.props.changeSearchKeyword(this.state.value);
 	this.props.history.push(`/subjects/search/${this.state.value}`);
     };
 
@@ -120,4 +123,6 @@ class SearchBar extends Component {
 	);
     }
 }
-export default withRouter(SearchBar);
+// export default withRouter(SearchBar);
+export default connect('', { changeSearchKeyword })(withRouter(SearchBar));
+
