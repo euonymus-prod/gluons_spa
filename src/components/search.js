@@ -81,7 +81,7 @@ class Search extends Component {
 
     handleSubmit(event) {
 	event.preventDefault();
-	this.props.history.push('/subjects/search/' + this.state.value);
+	this.props.history.push(`/subjects/search/${this.state.value}`);
     };
 
     render() {
