@@ -1,6 +1,6 @@
 import axios  from 'axios';
 
-import { EXEC_LOGIN, EXEC_LOGIN_FAILURE} from '../types/login';
+import { EXEC_LOGIN, EXEC_LOGIN_FAILURE, EXEC_LOGOUT } from '../types/login';
 import { API_HOST } from '../statics';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
@@ -16,6 +16,7 @@ export const execLogin = (username, password) => {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	})
 	    .then((response) => {
+		localStorage.setItem('logged_in_user', JSON.stringify(response.data));
 		dispatch({
 		    type: EXEC_LOGIN,
 		    payload: response.data
@@ -25,4 +26,12 @@ export const execLogin = (username, password) => {
 		error: response.error
 	    }))
     }
+}
+
+export const execLogout = () => {
+    localStorage.setItem('logged_in_user', null);
+    return {
+	type: EXEC_LOGOUT,
+	payload: null
+    };
 }

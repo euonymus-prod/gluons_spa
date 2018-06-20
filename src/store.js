@@ -7,11 +7,11 @@ import searchKeywordReducer from './reducers/reducer_search_keyword'
 
 import thunk from 'redux-thunk'
 const reducer = combineReducers({
-    loggedin_user:    loginReducer,
+    logged_in_user:   loginReducer,
     sub_gluon_side:   detailReducer,
     quark:            quarkReducer,
     quark_properties: quarkPropertiesReducer,
-    search_keyword: searchKeywordReducer,
+    search_keyword:   searchKeywordReducer,
 })
 const store = createStore(
     reducer,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { FETCH_QUARK, FETCH_QUARK_FAILURE, FETCH_QUARK_PROPERTIES, FETCH_QUARK_PROPERTIES_FAILURE,
-	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE} from '../types/quark';
+	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE} from '../types/quark';
 import { API_HOST } from '../statics';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
@@ -43,4 +43,19 @@ export const changeSearchKeyword = (keyword) => {
 	type: CHANGE_SEARCH_KEYWORD,
 	payload: keyword
     };
+}
+
+export const deleteQuark = (quark_id) => {
+    return dispatch => {
+	axios.get(`${ROOT_URL}quark/delete/${quark_id}${API_KEY}`)
+	    .then((response) => {
+		dispatch({
+		    type: DELETE_QUARK,
+		    payload: response.data
+		});
+	    }).catch((response) => dispatch({
+		type: DELETE_QUARK_FAILURE,
+		error: response.error
+	    }))
+    }
 }
