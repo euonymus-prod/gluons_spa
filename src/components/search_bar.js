@@ -26,8 +26,8 @@ const renderSuggestion = suggestion => (
 );
 
 class SearchBar extends Component {
-    constructor() {
-	super();
+    constructor(props) {
+	super(props);
 
 	// Autosuggest is a controlled component.
 	// This means that you need to provide an input value
@@ -124,5 +124,5 @@ class SearchBar extends Component {
     }
 }
 // export default withRouter(SearchBar);
-export default connect('', { changeSearchKeyword })(withRouter(SearchBar));
+export default connect(state => state, { changeSearchKeyword })(withRouter(SearchBar));
 

@@ -10,11 +10,11 @@ class TopPickupDetail extends Component {
 	}
 	return (
            <div className="pickup-link">
-                <Link to={`/subjects/relations/${this.props.pickup.name}${secondpath}`} >
+                <a href={`/subjects/relations/${this.props.pickup.name}${secondpath}`} >
                    <img src={this.props.pickup.image_path} alt={this.props.pickup.name}/>
-                </Link>
+                </a>
            </div>
-  )
- }
+	)
+    }
 }
 export default connect(state => state)(TopPickupDetail);

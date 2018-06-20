@@ -12,15 +12,15 @@ class QuarkInList extends Component {
               <div className="subject-relation-main">
                  <div className="media">
                     <div className="media-left subject-image">
-                       <Link to={`/subjects/relations/${this.props.quark_in_list.name}`}>
+                       <a href={`/subjects/relations/${this.props.quark_in_list.name}`}>
                           <img src={this.props.quark_in_list.image_path} width="100px" height="100px" alt=""/>
-                       </Link>
+                       </a>
                     </div>
                     <div className="media-body">
                        <h4>
-                          <Link to={`/subjects/relations/${this.props.quark_in_list.name}`}>
+                          <a href={`/subjects/relations/${this.props.quark_in_list.name}`}>
                              {this.props.quark_in_list.name}
-                          </Link>
+                          </a>
                        </h4>
 
                        {this.props.quark_in_list.description}

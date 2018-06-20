@@ -24,8 +24,8 @@ const renderSuggestion = suggestion => (
 );
 
 class Search extends Component {
-    constructor() {
-	super();
+    constructor(props) {
+	super(props);
 
 	// Autosuggest is a controlled component.
 	// This means that you need to provide an input value
@@ -36,7 +36,6 @@ class Search extends Component {
 	    value: '',
 	    suggestions: []
 	};
-
 	this.handleSubmit = this.handleSubmit.bind(this);
     }
 
