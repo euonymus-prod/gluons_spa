@@ -21,13 +21,13 @@ class SubGluon extends Component {
 	if (this.props.sub_quark_id == this.props.gluon.active_id) {
             return (
               <span>
-                  <Link to={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</Link> {this.props.gluon.relation} {this.props.gluon.suffix}
+                  <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> {this.props.gluon.relation} {this.props.gluon.suffix}
               </span>
 	    );
 	} else if (this.props.sub_quark_id == this.props.gluon.passive_id) {
             return (
               <span>
-                   <Link to={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</Link> は
+                   <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> は
                    {this.props.gluon.passive.name} {this.props.gluon.relation} {this.props.gluon.suffix}
               </span>
 	    );
@@ -39,9 +39,9 @@ class SubGluon extends Component {
 	let util = new Util();
 	return (
            <li>
-              <Link to={`/subjects/relations/${this.gluedQuark().name}`} style={{marginRight:'15px'}}>
+              <a href={`/subjects/relations/${this.gluedQuark().name}`} style={{marginRight:'15px'}}>
                  <img src={this.gluedQuark().image_path} width="40px" height="40px" alt=""/>
-              </Link>
+              </a>
               {this.relationText()}
               <br /> {util.period2str(this.props.gluon)}
            </li>
