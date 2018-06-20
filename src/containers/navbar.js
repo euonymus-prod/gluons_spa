@@ -15,6 +15,12 @@ class Navbar extends Component {
     }
 
     render () {
+        const { loggedin_user } = this.props;
+        if (loggedin_user) {
+	    console.log(loggedin_user);
+        }
+
+
   return (
 <nav className="navbar navbar-default navbar-static-top">
   <div className="container">

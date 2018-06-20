@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {fetchQuark} from '../actions/quark';
 
 class MainQuark extends Component {
@@ -28,7 +29,7 @@ class MainQuark extends Component {
                    <h1 className="card-title">{quark.name}</h1>
                    <p>{quark.period_str}</p>
                    <p>{quark.description}</p>
-                   <p><a href={`/relations/add/${quark.id}`} className="btn btn-primary">Add relation</a></p>
+                   <p><Link to={`/relations/add/${quark.id}`} className="btn btn-primary">Add relation</Link></p>
                </div>
            </div>
 	);

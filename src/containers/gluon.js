@@ -21,13 +21,13 @@ class Gluon extends Component {
             return (
                <h4 className="media-heading">
                   {this.props.gluon.active.name} は
-                  <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> {this.props.gluon.relation} {this.props.gluon.suffix}
+                  <Link to={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</Link> {this.props.gluon.relation} {this.props.gluon.suffix}
                </h4>
 	    );
 	} else if (this.props.quark.id == this.props.gluon.passive_id) {
             return (
                <h4 className="media-heading">
-                   <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> は
+                   <Link to={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</Link> は
                    {this.props.gluon.passive.name} {this.props.gluon.relation} {this.props.gluon.suffix}
                </h4>
 	    );
@@ -42,7 +42,7 @@ class Gluon extends Component {
                 <div className="subject-relation-main">
                     <div className="media">
                         <div className="media-left subject-image">
-                            <a href={`/subjects/relations/${this.gluedQuark().name}`}><img src={this.gluedQuark().image_path} width="100px" height="100px" alt=""/></a>
+                            <Link to={`/subjects/relations/${this.gluedQuark().name}`}><img src={this.gluedQuark().image_path} width="100px" height="100px" alt=""/></Link>
                         </div>
                         <div className="media-body">
 		            {this.relationText()}
