@@ -8,6 +8,12 @@ import Navbar from './navbar';
 import MainQuark from './main_quark';
 import QuarkPropertyList from './quark_property_list';
 
+// --------------------------------------------------------
+import { fetchQtypeProperties } from '../actions/qtype_properties';
+import { fetchCurrentQuark } from '../actions/quark';
+// --------------------------------------------------------
+
+
 class Detail extends Component {
     constructor(props) {
         super(props);
@@ -26,9 +32,34 @@ class Detail extends Component {
 
 	this.onLinkClick = this.onLinkClick.bind(this);
 	this.initDetail = props.initDetail.bind(this);
+
+
+
+	// --------------------------------------------------------
+	if (!props.qtype_properties) {
+	    props.fetchQtypeProperties();
+	}
+	// --------------------------------------------------------
     }
 
+    // --------------------------------------------------------
+    componentWillMount() {
+	const { qtype_properties, quarks, quark_name2id } = this.props;
+
+	if (qtype_properties &&
+	    (!quarks.has(this.props.match.params.quark_name) || !quark_name2id.has(this.props.match.params.quark_name)) ) {
+	    this.props.fetchCurrentQuark(this.props.match.params.quark_name);
+	}
+    }
+    // --------------------------------------------------------
+
     componentWillReceiveProps(nextProps) {
+
+	// TODO: setCurrentQuark
+	console.log(this.props.quark_name2id);
+	console.log(this.props.quarks);
+
+	
 	if (nextProps.sub_gluon_side) {
 	    if (!this.props.sub_gluon_side || nextProps.sub_gluon_side != this.props.sub_gluon_side) {
 		if (nextProps.sub_gluon_side == 'active') {
@@ -103,4 +134,6 @@ class Detail extends Component {
 function mapStateToProps(state) {
     return state;
 }
-export default connect(mapStateToProps, { initDetail })(Detail);
+// --------------------------------------------------------
+export default connect(mapStateToProps, { initDetail, fetchQtypeProperties, fetchCurrentQuark })(Detail);
+// --------------------------------------------------------

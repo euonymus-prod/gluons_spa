@@ -5,6 +5,12 @@ import quarkReducer from './reducers/reducer_quark'
 import quarkPropertiesReducer from './reducers/reducer_quark_properties'
 import searchKeywordReducer from './reducers/reducer_search_keyword'
 
+// ------------------------------------------------------------
+import qtypePropertiesReducer from './reducers/reducer_qtype_properties'
+import quarksReducer from './reducers/reducer_quarks'
+import quarkName2Id from './reducers/reducer_quark_name2id'
+// ------------------------------------------------------------
+
 import thunk from 'redux-thunk'
 const reducer = combineReducers({
     logged_in_user:   loginReducer,
@@ -12,6 +18,12 @@ const reducer = combineReducers({
     quark:            quarkReducer,
     quark_properties: quarkPropertiesReducer,
     search_keyword:   searchKeywordReducer,
+
+    // --------------------------------------------------------
+    qtype_properties: qtypePropertiesReducer,
+    quarks:           quarksReducer,
+    quark_name2id:    quarkName2Id,
+    // --------------------------------------------------------
 })
 const store = createStore(
     reducer,

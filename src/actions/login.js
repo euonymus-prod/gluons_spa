@@ -30,6 +30,7 @@ export const execLogin = (username, password) => {
 
 export const execLogout = () => {
     localStorage.setItem('logged_in_user', null);
+    localStorage.setItem('qtype_properties', null);
     return {
 	type: EXEC_LOGOUT,
 	payload: null
