@@ -19,13 +19,13 @@ class Detail extends Component {
         };
 
 	let sub_gluon_side = 'active';
-	if ('sub_gluon_side' in this.props.match.params) {
-	    sub_gluon_side = this.props.match.params.sub_gluon_side;
+	if ('sub_gluon_side' in props.match.params) {
+	    sub_gluon_side = props.match.params.sub_gluon_side;
 	}
-	this.props.initDetail(sub_gluon_side);
+	props.initDetail(sub_gluon_side);
 
 	this.onLinkClick = this.onLinkClick.bind(this);
-	this.initDetail = this.props.initDetail.bind(this);
+	this.initDetail = props.initDetail.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {

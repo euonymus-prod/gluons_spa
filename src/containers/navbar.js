@@ -10,7 +10,7 @@ class Navbar extends Component {
     constructor(props) {
         super(props);
 	this.onLogoutClick = this.onLogoutClick.bind(this);
-	this.execLogout = this.props.execLogout.bind(this);
+	this.execLogout = props.execLogout.bind(this);
     }
 
     onLogoutClick() {

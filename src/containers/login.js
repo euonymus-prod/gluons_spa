@@ -7,8 +7,8 @@ import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 
 class Login extends Component {
-    constructor() {
-	super();
+    constructor(props) {
+	super(props);
 	this.state = {
 	    username: '',
 	    password: []

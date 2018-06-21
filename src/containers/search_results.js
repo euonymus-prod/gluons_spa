@@ -17,7 +17,7 @@ class SearchResults extends Component {
         this.state = {
             quarks: [],
         };
-	this.fetchSearch(this.props.match.params.keywords);
+	this.fetchSearch(props.match.params.keywords);
     }
 
     componentWillReceiveProps(nextProps) {

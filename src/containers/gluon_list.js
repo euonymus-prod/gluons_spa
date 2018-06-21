@@ -15,7 +15,7 @@ class GluonList extends Component {
         this.state = {
             gluons: [],
         };
-	this.fetchGluons(this.props.quark_id, this.props.quark_property_id);
+	this.fetchGluons(props.quark_id, props.quark_property_id);
     }
 
     fetchGluons (quark_id, quark_property_id) {
