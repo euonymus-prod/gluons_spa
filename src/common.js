@@ -1,8 +1,5 @@
 import moment from 'moment'
 class Util {
-    constructor() {
-    }
-
     period2str(quark) {
 	if (!quark.start && !quark.end) return '';
 
