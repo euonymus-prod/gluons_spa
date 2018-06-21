@@ -32,9 +32,3 @@ export default class Privacy extends React.Component {
    )
  }
 }
-
-/*
-
-
-
-*/

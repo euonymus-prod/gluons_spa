@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import Search from '../components/search';
+import Search from './search';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import TopPickups from './top_pickups';

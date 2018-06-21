@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import SearchBar from '../components/search_bar';
+import SearchBar from './search_bar';
 import QuarkNav from './quark_nav';
 import BaryonNav from './baryon_nav';
 import {execLogout} from '../actions/login';

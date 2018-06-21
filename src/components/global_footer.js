@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 class GlobalFooter extends Component {
@@ -17,4 +16,4 @@ class GlobalFooter extends Component {
 	)
     }
 }
-export default connect(state => state)(GlobalFooter);
+export default GlobalFooter;
