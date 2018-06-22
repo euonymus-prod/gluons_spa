@@ -20,51 +20,43 @@ class Detail extends Component {
         super(props);
 
         this.state = {
-	    activeActiveness:  'active',
-	    passiveActiveness: '',
-	    noneActiveness:    '',
+            activeActiveness:  'active',
+            passiveActiveness: '',
+            noneActiveness:    '',
         };
 
-	let sub_gluon_side = 'active';
-	if ('sub_gluon_side' in props.match.params) {
-	    sub_gluon_side = props.match.params.sub_gluon_side;
-	}
-	props.initDetail(sub_gluon_side);
+        let sub_gluon_side = 'active';
+        if ('sub_gluon_side' in props.match.params) {
+            sub_gluon_side = props.match.params.sub_gluon_side;
+        }
+        props.initDetail(sub_gluon_side);
 
-	this.onLinkClick = this.onLinkClick.bind(this);
-	this.initDetail = props.initDetail.bind(this);
+        this.onLinkClick = this.onLinkClick.bind(this);
+        this.initDetail = props.initDetail.bind(this);
 
 
 
-	// --------------------------------------------------------
-	if (!props.qtype_properties) {
-	    props.fetchQtypeProperties();
-	}
-	// --------------------------------------------------------
+        // --------------------------------------------------------
+        if (!props.qtype_properties) {
+            props.fetchQtypeProperties();
+        }
+        // --------------------------------------------------------
     }
-
-    // --------------------------------------------------------
-    componentWillMount() {
-	const { qtype_properties, quarks, quark_name2id } = this.props;
-
-	if (qtype_properties &&
-	    (!quark_name2id[this.props.match.params.quark_name] ||
-	     !quarks[quark_name2id[this.props.match.params.quark_name]]) ) {
-	    this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties);
-	}
-    }
-    // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
-	// --------------------------------------------------------
-	const { quarks, quark_name2id } = this.props;
-	// initialize
-	if (!nextProps.current_quark) {
-	    if (quarks[quark_name2id[this.props.match.params.quark_name]]) {
-		this.props.changeCurrentQuark(quarks[quark_name2id[this.props.match.params.quark_name]]);
+        // --------------------------------------------------------
+        const { qtype_properties, quarks } = this.props;
+        // initialize
+        if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0) && (Object.keys(quarks.list).length == 0)) {
+            this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties);
+        } else if (!nextProps.current_quark) {
+	    let newQuark = nextProps.quarks.list[nextProps.quarks.quark_name2id[this.props.match.params.quark_name]]
+	    if (newQuark) {
+		this.props.changeCurrentQuark(newQuark);
 	    }
 	}
 
+	// constant update
 	if (nextProps.current_quark) {
 	    if (!this.props.current_quark || nextProps.current_quark.id != this.props.current_quark.id) {
 		this.props.changeCurrentQuark(nextProps.current_quark);
@@ -110,19 +102,19 @@ class Detail extends Component {
 
  render () {
      const { current_quark } = this.props;
-     // if (!current_quark) {
-     //     return (
-     //       <div>
-     //          <Navbar withSearchBar='1' />
-     //          <div className="container">
-     //             <div className="row">
-     //                <div>Loading...</div>
-     //             </div>
-     //          </div>
-     //          <GlobalFooter />
-     //       </div>
-     // 	 );
-     // }
+     if (!current_quark) {
+         return (
+           <div>
+              <Navbar withSearchBar='1' />
+              <div className="container">
+                 <div className="row">
+                    <div>Loading...</div>
+                 </div>
+              </div>
+              <GlobalFooter />
+           </div>
+     	 );
+     }
      console.log(current_quark);
   return (
    <div>

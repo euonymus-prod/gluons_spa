@@ -23,7 +23,7 @@ const reducer = combineReducers({
     // --------------------------------------------------------
     qtype_properties: qtypePropertiesReducer,
     quarks:           quarksReducer,
-    quark_name2id:    quarkName2Id,
+    // quark_name2id:    quarkName2Id,
     current_quark:    currentQuarkReducer,
     // --------------------------------------------------------
 })
