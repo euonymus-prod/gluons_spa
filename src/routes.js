@@ -22,8 +22,6 @@ export default () => {
          <Switch>
             {/* containers  */}
             <Route exact path='/' component={Home}/>
-
-            {/* TODO: need to build  */}
             <Route path='/contacts' component={Contacts}/>
             <Route path='/subjects/relations/:quark_name/:sub_gluon_side' component={Detail}/>
             <Route path='/subjects/relations/:quark_name' component={Detail}/>
@@ -31,7 +29,6 @@ export default () => {
             <Route path='/signup' component={Signup}/>
             <Route path='/subjects/search/:keywords' component={SearchResults}/>
             <Route exact path='/subjects' component={QuarkList}/>
-
 
             {/* conponents  */}
             <Route path='/terms' component={Terms}/>
