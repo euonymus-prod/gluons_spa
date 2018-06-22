@@ -11,6 +11,7 @@ import QuarkPropertyList from './quark_property_list';
 // --------------------------------------------------------
 import { fetchQtypeProperties } from '../actions/qtype_properties';
 import { fetchCurrentQuark } from '../actions/quark';
+import { changeCurrentQuark } from '../actions/quark';
 // --------------------------------------------------------
 
 
@@ -44,7 +45,6 @@ class Detail extends Component {
 
     // --------------------------------------------------------
     componentWillMount() {
-	console.log();
 	const { qtype_properties, quarks, quark_name2id } = this.props;
 
 	if (qtype_properties &&
@@ -56,13 +56,21 @@ class Detail extends Component {
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
+	// --------------------------------------------------------
+	const { quarks, quark_name2id } = this.props;
+	// initialize
+	if (!nextProps.current_quark) {
+	    if (quarks[quark_name2id[this.props.match.params.quark_name]]) {
+		this.props.changeCurrentQuark(quarks[quark_name2id[this.props.match.params.quark_name]]);
+	    }
+	}
 
-	// TODO: setCurrentQuark
-	console.log(1);
-	console.log(this.props.quark_name2id[this.props.match.params.quark_name]);
-	console.log(this.props.quarks[this.props.quark_name2id[this.props.match.params.quark_name]]);
-	console.log(2);
-
+	if (nextProps.current_quark) {
+	    if (!this.props.current_quark || nextProps.current_quark.id != this.props.current_quark.id) {
+		this.props.changeCurrentQuark(nextProps.current_quark);
+	    }
+	}
+	// --------------------------------------------------------
 	
 	if (nextProps.sub_gluon_side) {
 	    if (!this.props.sub_gluon_side || nextProps.sub_gluon_side != this.props.sub_gluon_side) {
@@ -101,7 +109,21 @@ class Detail extends Component {
     }
 
  render () {
-
+     const { current_quark } = this.props;
+     // if (!current_quark) {
+     //     return (
+     //       <div>
+     //          <Navbar withSearchBar='1' />
+     //          <div className="container">
+     //             <div className="row">
+     //                <div>Loading...</div>
+     //             </div>
+     //          </div>
+     //          <GlobalFooter />
+     //       </div>
+     // 	 );
+     // }
+     console.log(current_quark);
   return (
    <div>
       <Navbar withSearchBar='1' />
@@ -109,7 +131,7 @@ class Detail extends Component {
       <div className="container">
          <div className="row">
 
-            <MainQuark quark_name={this.props.match.params.quark_name}/>
+            <MainQuark quark={current_quark} quark_name={this.props.match.params.quark_name}/>
 
             <div className="col-md-9 subject-relation-list">
                <ul className="nav nav-pills">
@@ -139,5 +161,5 @@ function mapStateToProps(state) {
     return state;
 }
 // --------------------------------------------------------
-export default connect(mapStateToProps, { initDetail, fetchQtypeProperties, fetchCurrentQuark })(Detail);
+export default connect(mapStateToProps, { initDetail, fetchQtypeProperties, fetchCurrentQuark, changeCurrentQuark })(Detail);
 // --------------------------------------------------------

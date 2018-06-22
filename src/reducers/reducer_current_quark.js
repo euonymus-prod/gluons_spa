@@ -1,18 +1,14 @@
-import { FETCH_ONE_QUARK } from '../types/quark';
+import { CHANGE_CURRENT_QUARK } from '../types/quark';
 import Util from '../common';
 
-const initState = {};
+const initState = null;
 export default (state = initState, action) => {
     switch(action.type) {
-    case FETCH_ONE_QUARK:
+    case CHANGE_CURRENT_QUARK :
 	let util = new Util();
 	action.payload.period_str = util.period2str(action.payload);
-	return { ...state, [action.payload.id]: action.payload };
+	return action.payload;
     default :
 	return state
     }
 }
-
-
-
-

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { FETCH_QUARK, FETCH_QUARK_FAILURE, FETCH_QUARK_PROPERTIES, FETCH_QUARK_PROPERTIES_FAILURE,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
-	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE} from '../types/quark';
+	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
 import { API_HOST } from '../statics';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
@@ -84,5 +84,11 @@ export const fetchCurrentQuark = (quark_name, qtype_properties) => {
 		error: response.error
 	    }))
     }
+}
+export const changeCurrentQuark = (quark) => {
+    return {
+	type: CHANGE_CURRENT_QUARK,
+	payload: quark
+    };
 }
 // --------------------------------------------------------
