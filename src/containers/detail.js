@@ -45,7 +45,7 @@ class Detail extends Component {
 
     componentWillReceiveProps(nextProps) {
         // --------------------------------------------------------
-        const { qtype_properties, quarks } = this.props;
+        const { qtype_properties, quarks, current_quark } = this.props;
         // initialize
         if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0) && (Object.keys(quarks.list).length == 0)) {
             this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties);
@@ -58,7 +58,7 @@ class Detail extends Component {
 
 	// constant update
 	if (nextProps.current_quark) {
-	    if (!this.props.current_quark || nextProps.current_quark.id != this.props.current_quark.id) {
+	    if (!current_quark || nextProps.current_quark.id != current_quark.id) {
 		this.props.changeCurrentQuark(nextProps.current_quark);
 	    }
 	}
