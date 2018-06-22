@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {fetchQuark} from '../actions/quark';
 
 class MainQuark extends Component {
 
@@ -31,4 +30,4 @@ class MainQuark extends Component {
 function mapStateToProps({ current_quark }, ownProps) {
     return { current_quark };	
 }
-export default connect(mapStateToProps, { fetchQuark })(MainQuark);
+export default connect(mapStateToProps)(MainQuark);

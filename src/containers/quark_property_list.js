@@ -2,8 +2,6 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {fetchQuarkProperties} from '../actions/quark';
-
 
 
 // --------------------------------------------------------
@@ -16,22 +14,22 @@ class GluonTypeList extends Component {
 
     // --------------------------------------------------------
     componentWillMount() {
-	const { current_quark } = this.props;
+	const { qtype_properties, current_quark } = this.props;
     	if (!current_quark.is_fetched) {
-            this.props.fetchGluons(current_quark);
+            this.props.fetchGluons(current_quark, qtype_properties);
         }
     }
     // --------------------------------------------------------
 
-    componentWillReceiveProps(nextProps) {
 /*
+    componentWillReceiveProps(nextProps) {
 	if (nextProps.quark) {
 	    if (!this.props.quark || nextProps.quark.quark_type_id != this.props.quark.quark_type_id) {
 		this.props.fetchQuarkProperties(nextProps.quark.quark_type_id);
 	    }
         }
-*/
     }
+*/
 
     renderQuarkProperties() {
 	const { current_quark } = this.props;
@@ -77,9 +75,9 @@ class GluonTypeList extends Component {
     }
 }
 
-function mapStateToProps({ current_quark, gluons,      quark, quark_properties }, ownProps) {
-    return { current_quark, gluons,      quark, quark_properties };	
+function mapStateToProps({ qtype_properties, current_quark, gluons,      quark, quark_properties }, ownProps) {
+    return { qtype_properties, current_quark, gluons,      quark, quark_properties };	
 }
 // --------------------------------------------------------
-export default connect(mapStateToProps, { fetchGluons, fetchQuarkProperties })(GluonTypeList);
+export default connect(mapStateToProps, { fetchGluons })(GluonTypeList);
 // --------------------------------------------------------

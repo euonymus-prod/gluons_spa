@@ -9,6 +9,7 @@ const ROOT_URL = 'http://' + API_HOST + '/';
 // const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=euonymus';
 
+/*
 export const fetchQuark = (quark_name) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY}`)
@@ -38,6 +39,7 @@ export const fetchQuarkProperties = (quark_type_id) => {
 	    }))
     }
 }
+*/
 
 export const changeSearchKeyword = (keyword) => {
     return {

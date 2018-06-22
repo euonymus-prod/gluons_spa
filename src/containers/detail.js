@@ -58,7 +58,8 @@ class Detail extends Component {
 
 	// constant update
 	if (nextProps.current_quark) {
-	    if (!current_quark || nextProps.current_quark.id != current_quark.id) {
+	    if (!current_quark || (nextProps.current_quark.id != current_quark.id))
+	    {
 		this.props.changeCurrentQuark(nextProps.current_quark);
 	    }
 	}
