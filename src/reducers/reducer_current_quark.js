@@ -16,14 +16,17 @@ export default (state = initState, action) => {
 
 
     case FETCH_GLUONS :
-	let quark_properties = action.payload.quark.quark_properties.map(x => {
-	    let gluons = action.payload.response[x.quark_property_id];
-	    if (!gluons) {
-		return null;
-	    }
-	    x.quark_property.gluons = gluons;
-	    return x;
-	});
+	let quark_properties = [];
+	if (action.payload.quark.quark_properties) {
+	    quark_properties = action.payload.quark.quark_properties.map(x => {
+		let gluons = action.payload.response[x.quark_property_id];
+		if (!gluons) {
+		    return null;
+		}
+		x.quark_property.gluons = gluons;
+		return x;
+	    });
+	}
 
 	let active_prop = {id: 'active', quark_type_id: 2, quark_property_id: 'active', is_required: false};
 	active_prop['quark_property'] = {id: 'active', caption_ja: action.payload.quark.name + 'とは',
