@@ -115,7 +115,6 @@ class Detail extends Component {
            </div>
      	 );
      }
-     console.log(current_quark);
   return (
    <div>
       <Navbar withSearchBar='1' />
