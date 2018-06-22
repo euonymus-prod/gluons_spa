@@ -36,7 +36,6 @@ class Gluon extends Component {
     }
 
     render () {
-console.log(this.props.gluon);
 	let util = new Util();
 	return (
             <div className="subject-relation white">
