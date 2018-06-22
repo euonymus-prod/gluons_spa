@@ -2,7 +2,6 @@
 This reducer is not used !!!
 */
 import { FETCH_GLUONS } from '../types/gluon';
-import moment from 'moment'
 
 const initState = null;
 export default (state = initState, action) => {

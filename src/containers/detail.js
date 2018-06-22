@@ -44,11 +44,13 @@ class Detail extends Component {
 
     // --------------------------------------------------------
     componentWillMount() {
+	console.log();
 	const { qtype_properties, quarks, quark_name2id } = this.props;
 
 	if (qtype_properties &&
-	    (!quarks.has(this.props.match.params.quark_name) || !quark_name2id.has(this.props.match.params.quark_name)) ) {
-	    this.props.fetchCurrentQuark(this.props.match.params.quark_name);
+	    (!quark_name2id[this.props.match.params.quark_name] ||
+	     !quarks[quark_name2id[this.props.match.params.quark_name]]) ) {
+	    this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties);
 	}
     }
     // --------------------------------------------------------
@@ -56,8 +58,10 @@ class Detail extends Component {
     componentWillReceiveProps(nextProps) {
 
 	// TODO: setCurrentQuark
-	console.log(this.props.quark_name2id);
-	console.log(this.props.quarks);
+	console.log(1);
+	console.log(this.props.quark_name2id[this.props.match.params.quark_name]);
+	console.log(this.props.quarks[this.props.quark_name2id[this.props.match.params.quark_name]]);
+	console.log(2);
 
 	
 	if (nextProps.sub_gluon_side) {

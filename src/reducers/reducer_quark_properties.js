@@ -1,5 +1,4 @@
 import { FETCH_QUARK_PROPERTIES } from '../types/quark';
-import moment from 'moment'
 
 const initState = null;
 export default (state = initState, action) => {

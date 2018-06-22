@@ -1,12 +1,10 @@
 import { FETCH_ONE_QUARK } from '../types/quark';
 
-const initState = new Map();
+const initState = {};
 export default (state = initState, action) => {
     switch(action.type) {
     case FETCH_ONE_QUARK:
-	let newMap = state;
-	newMap.set(action.payload['id'], action.payload);
-	return newMap;
+	return { ...state, [action.payload.id]: action.payload };
     default :
 	return state
     }

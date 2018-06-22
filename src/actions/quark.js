@@ -64,10 +64,17 @@ export const deleteQuark = (quark_id) => {
 
 
 // --------------------------------------------------------
-export const fetchCurrentQuark = (quark_name) => {
+export const fetchCurrentQuark = (quark_name, qtype_properties) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY}`)
 	    .then((response) => {
+		// Additional initial info on this quark
+		let quark_properties = qtype_properties[response.data.quark_type_id];
+		if (!quark_properties) {
+		    quark_properties = null;
+		}
+		response.data.quark_properties = quark_properties;
+		response.data.is_gluon_fetched = false;
 		dispatch({
 		    type: FETCH_ONE_QUARK,
 		    payload: response.data
