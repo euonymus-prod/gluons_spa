@@ -42,7 +42,12 @@ class SubGluonList extends Component {
     }
 
     renderSubGluon() {
+console.log(this.props.sub_quark);
 console.log(this.state.gluons);
+	const { sub_quark } = this.props;
+	if (!sub_quark.is_gluon_fetched) {
+	    return <div></div>
+	}
 /*
 	return _.map(this.state.gluons, gluon => {
 	    return (
