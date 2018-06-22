@@ -1,3 +1,6 @@
+/*
+This reducer is not used any more.
+*/
 import { FETCH_ONE_QUARK } from '../types/quark';
 
 const initState = {};
