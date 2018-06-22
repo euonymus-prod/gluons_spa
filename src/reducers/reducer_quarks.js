@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import { FETCH_ONE_QUARK } from '../types/quark';
 import { FETCH_GLUONS } from '../types/gluon';
-import Util from '../common';
+import Util from '../utils/common';
+import QuarkUtil from '../utils/quark';
+import GluonUtil from '../utils/gluon';
 
 const initState = {list: {}, quark_name2id: {}};
 export default (state = initState, action) => {
@@ -17,30 +19,8 @@ export default (state = initState, action) => {
 	return newState;
     case FETCH_GLUONS:
 	// add gluons on current quark 
-	let quark_properties = [];
-	if (action.payload.quark.quark_properties) {
-	    quark_properties = action.payload.quark.quark_properties.map(x => {
-		let gluons = action.payload.response[x.quark_property_id];
-		if (!gluons) {
-		    return null;
-		}
-		x.quark_property.gluons = gluons;
-		return x;
-	    });
-	}
-
-	let active_prop = {id: 'active', quark_type_id: 2, quark_property_id: 'active', is_required: false};
-	active_prop['quark_property'] = {id: 'active', caption_ja: action.payload.quark.name + 'とは',
-					 gluons: action.payload.response.active}
-	quark_properties.push(active_prop);
-	let passive_prop = {id: 'passive', quark_type_id: 2, quark_property_id: 'passive', is_required: false};
-	passive_prop['quark_property'] = {id: 'passive', caption_ja: action.payload.quark.name + 'に関する事項',
-					  gluons: action.payload.response.passive}
-	quark_properties.push(passive_prop);
-
-	copiedState.list[action.payload.quark.id].quark_properties = quark_properties;
-	copiedState.list[action.payload.quark.id].is_gluon_fetched = true;
-
+	let quark_util = new QuarkUtil();
+	copiedState.list[action.payload.quark.id] = quark_util.addGluons(copiedState.list[action.payload.quark.id], action.payload.response);
 
 	// quarks on gluons
 	let newQuarks = {};
@@ -48,20 +28,12 @@ export default (state = initState, action) => {
 	Object.keys(action.payload.response).map((value, index) => {
 	    action.payload.response[value].map(x => {
 		let quark = {};
-		if (action.payload.quark.id == x.active_id) {
-		    quark = x.passive;
-		} else if (action.payload.quark.id == x.passive_id) {
-		    quark = x.active;
-		} else {
+		let gluon_util = new GluonUtil();
+		quark = gluon_util.gluedQuark(action.payload.quark, x);
+		if (!quark) {
 		    return false;
 		}
-
-		let quark_properties = action.payload.qtype_properties[quark.quark_type_id];
-		if (!quark_properties) {
-		    quark_properties = null;
-		}
-		quark.quark_properties = quark_properties;
-		quark.is_gluon_fetched = false;
+		quark = quark_util.addExtendedInfo(quark, action.payload.qtype_properties);
 
 		newQuarks[quark.id] = quark;
 		newQuarkName2Id[quark.name] = quark.id;

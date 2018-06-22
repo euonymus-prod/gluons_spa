@@ -4,16 +4,17 @@ import {Link} from 'react-router-dom';
 
 import SubGluonList from './sub_gluon_list';
 
-import Util from '../common';
+import Util from '../utils/common';
+import GluonUtil from '../utils/gluon';
+let gluon_util = new GluonUtil();
 
 class Gluon extends Component {
     gluedQuark() {
-	if (this.props.current_quark.id == this.props.gluon.active_id) {
-	    return this.props.gluon.passive
-	} else if (this.props.current_quark.id == this.props.gluon.passive_id) {
-	    return this.props.gluon.active
+	let res = gluon_util.gluedQuark(this.props.current_quark, this.props.gluon);
+	if (!res) {
+	    return '';
 	}
-	return '';
+	return res;
     }
 
     relationText() {

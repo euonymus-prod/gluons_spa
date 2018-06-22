@@ -1,5 +1,5 @@
 import { FETCH_QUARK } from '../types/quark';
-import Util from '../common';
+import Util from '../utils/common';
 
 const initState = null;
 export default (state = initState, action) => {

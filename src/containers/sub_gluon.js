@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import Util from '../common';
+import Util from '../utils/common';
 
 class SubGluon extends Component {
     gluedQuark() {
