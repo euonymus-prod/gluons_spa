@@ -1,6 +1,3 @@
-/*
-This reducer is not used !!!
-*/
 import { FETCH_GLUONS } from '../types/gluon';
 
 const initState = null;

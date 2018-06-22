@@ -5,19 +5,6 @@ import {fetchQuark} from '../actions/quark';
 
 class MainQuark extends Component {
 
-    componentDidMount() {
-    // 	if (!this.props.quark) {
-    //         // let quark_name = 'シェフにおまかせ!';
-    // 	    // this.props.fetchQuark(quark_name);
-    //         this.props.fetchQuark(this.props.quark_name);
-    //     }
-    // }
-    	if (!this.props.current_quark.is_fetched) {
-console.log('hh');
-            // this.props.fetchQuark(this.props.quark_name);
-        }
-    }
-
     render () {
         const { current_quark } = this.props;
         if (!current_quark) {

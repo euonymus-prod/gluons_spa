@@ -15,50 +15,55 @@ class GluonList extends Component {
         this.state = {
             gluons: [],
         };
-	this.fetchGluons(props.quark_id, props.quark_property_id);
+	// this.fetchGluons(props.quark_id, props.quark_property_id);
     }
 
-    fetchGluons (quark_id, quark_property_id) {
-	const ROOT_URL = 'http://' + API_HOST + '/';
-	const API_KEY = '?key=euonymus';
+    // fetchGluons (quark_id, quark_property_id) {
+    // 	const ROOT_URL = 'http://' + API_HOST + '/';
+    // 	const API_KEY = '?key=euonymus';
 
-	axios.get(`${ROOT_URL}gluons/by_quark_property/${quark_id}/${quark_property_id}${API_KEY}`)
-	    .then((response) => {
-		this.setState({gluons: response.data});
-	    });
-    }
+    // 	axios.get(`${ROOT_URL}gluons/by_quark_property/${quark_id}/${quark_property_id}${API_KEY}`)
+    // 	    .then((response) => {
+    // 		this.setState({gluons: response.data});
+    // 	    });
+    // }
 
-    renderGluon() {
-	var first = this.state.gluons[0];
-	return _.map(this.state.gluons, gluon => {
+    renderGluons() {
+	var first = this.props.quark_property.gluons[0];
+	return _.map(this.props.quark_property.gluons, gluon => {
+	    if (!gluon) {
+		return '';
+	    }
 	    return (
-		<div key={gluon.id}>
+           <div key={gluon.id}>
+               <h2>{this.props.quark_property.caption_ja}</h2>
+               <div className="related" >
+                   <div className="well subject-relation white">
                     {(() => {
                         if (gluon.id != first.id)
                         return <hr />;
                     })()}
                     <Gluon gluon = {gluon} />
-		</div>
+                   </div>
+               </div>
+	   </div>
 	    );
 	});
     }
 
     render () {
-	if (this.state.gluons.length == 0) {
-	    return '';
-	}
-
 	return (
            <div>
-               <h2>{this.props.quark_property_caption}</h2>
-               <div className="related" >
-                   <div className="well subject-relation white">
-                       {this.renderGluon()}
-                   </div>
-               </div>
-	   </div>
+              {this.renderGluons()}
+           </div>
 	)
     }
 }
 
-export default connect(state => state)(GluonList);
+//export default connect(state => state)(GluonList);
+// --------------------------------------------------------
+function mapStateToProps({ current_quark }, ownProps) {
+    return { current_quark };	
+}
+export default connect(mapStateToProps)(GluonList);
+// --------------------------------------------------------

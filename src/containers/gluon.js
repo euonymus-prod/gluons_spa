@@ -8,23 +8,23 @@ import Util from '../common';
 
 class Gluon extends Component {
     gluedQuark() {
-	if (this.props.quark.id == this.props.gluon.active_id) {
+	if (this.props.current_quark.id == this.props.gluon.active_id) {
 	    return this.props.gluon.passive
-	} else if (this.props.quark.id == this.props.gluon.passive_id) {
+	} else if (this.props.current_quark.id == this.props.gluon.passive_id) {
 	    return this.props.gluon.active
 	}
 	return '';
     }
 
     relationText() {
-	if (this.props.quark.id == this.props.gluon.active_id) {
+	if (this.props.current_quark.id == this.props.gluon.active_id) {
             return (
                <h4 className="media-heading">
                   {this.props.gluon.active.name} は
                   <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> {this.props.gluon.relation} {this.props.gluon.suffix}
                </h4>
 	    );
-	} else if (this.props.quark.id == this.props.gluon.passive_id) {
+	} else if (this.props.current_quark.id == this.props.gluon.passive_id) {
             return (
                <h4 className="media-heading">
                    <a href={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</a> は
@@ -36,6 +36,7 @@ class Gluon extends Component {
     }
 
     render () {
+console.log(this.props.gluon);
 	let util = new Util();
 	return (
             <div className="subject-relation white">
@@ -50,7 +51,8 @@ class Gluon extends Component {
                         </div>
                     </div>
                 </div>
-                <SubGluonList sub_quark={this.gluedQuark()}/>
+/*                <SubGluonList sub_quark={this.gluedQuark()}/>
+*/}
             </div>
 	)
     }
