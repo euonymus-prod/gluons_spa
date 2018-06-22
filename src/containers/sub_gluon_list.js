@@ -42,6 +42,8 @@ class SubGluonList extends Component {
     }
 
     renderSubGluon() {
+console.log(this.state.gluons);
+/*
 	return _.map(this.state.gluons, gluon => {
 	    return (
 		<div key={gluon.id}>
@@ -50,6 +52,7 @@ class SubGluonList extends Component {
 		</div>
 	    );
 	});
+*/
     }
 
     render () {

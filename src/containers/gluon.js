@@ -51,8 +51,7 @@ console.log(this.props.gluon);
                         </div>
                     </div>
                 </div>
-{/*                <SubGluonList sub_quark={this.gluedQuark()}/>
-*/}
+                <SubGluonList sub_quark={this.gluedQuark()}/>
             </div>
 	)
     }
