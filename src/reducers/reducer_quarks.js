@@ -22,7 +22,7 @@ export default (state = initState, action) => {
 	// add gluons on current quark 
 	copiedState.list[action.payload.quark.id] = quark_util.addGluons(copiedState.list[action.payload.quark.id], action.payload.response);
 
-	// quarks on gluons
+	// add quarks on gluons
 	let newQuarks = {};
 	let newQuarkName2Id = {};
 	Object.keys(action.payload.response).map((value, index) => {
@@ -31,6 +31,9 @@ export default (state = initState, action) => {
 		let gluon_util = new GluonUtil();
 		quark = gluon_util.gluedQuark(action.payload.quark, x);
 		if (!quark) {
+		    return false;
+		}
+		if (state.list[quark.id] && state.list[quark.id].is_gluon_fetched) {
 		    return false;
 		}
 		quark = quark_util.addExtendedInfo(quark, action.payload.qtype_properties);

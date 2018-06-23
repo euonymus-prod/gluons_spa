@@ -1,9 +1,6 @@
 import Util from '../utils/common';
 class QuarkUtil {
     addExtendedInfo(quark, qtype_properties, is_gluon_fetched = false) {
-	if (quark.is_gluon_fetched) {
-	    return quark;
-	}
 	// Additional initial info on this quark
 
 	let util = new Util();
