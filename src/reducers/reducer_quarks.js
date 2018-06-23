@@ -47,7 +47,8 @@ export default (state = initState, action) => {
 	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
 	};
 console.log('xxxxxxxxxxxx');
-console.log(action.payload.quark.name);
+	console.log(action.payload.quark.name);
+// TODO: state が同時平行で処理中のデータを保持できていない問題がある。
 console.log(state);
 // console.log(newQuarks);
 // console.log(copiedState);
