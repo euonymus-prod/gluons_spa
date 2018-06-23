@@ -24,7 +24,7 @@ class BaryonNav extends Component {
               <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Baryon<span className="caret"></span></a>
               <ul className="dropdown-menu">
                  <li><Link to={'/baryons'}>My Baryons</Link></li>
-                 {this.renderGoToBaryon(this.props.quark.id)}
+                 {this.renderGoToBaryon(this.props.current_quark.id)}
               </ul>
            </li>
 	)

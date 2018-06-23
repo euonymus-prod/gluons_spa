@@ -6,6 +6,9 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { API_HOST } from '../statics';
 
+// --------------------------------------------------------
+import { fetchSubGluons } from '../actions/gluons';
+// --------------------------------------------------------
 import SubGluon from './sub_gluon';
 
 class SubGluonList extends Component {
@@ -17,10 +20,12 @@ class SubGluonList extends Component {
         };
 
 	if (['active', 'passive'].includes(props.sub_gluon_side)) {
-	    this.fetchSubGluons(props.sub_quark.id, props.sub_gluon_side);
+	    // this.fetchSubGluons(props.sub_quark.id, props.sub_gluon_side);
+	    this.props.fetchSubGluons(props.sub_quark, props.qtype_properties);
 	}
     }
 
+/*
     componentWillReceiveProps(nextProps) {
 	if (nextProps.sub_gluon_side) {
 	    if (!this.props.sub_gluon_side || nextProps.sub_gluon_side != this.props.sub_gluon_side) {
@@ -40,10 +45,9 @@ class SubGluonList extends Component {
 		this.setState({gluons: response.data});
 	    });
     }
+*/
 
     renderSubGluon() {
-console.log(this.props.sub_quark);
-console.log(this.state.gluons);
 	const { sub_quark } = this.props;
 	if (!sub_quark.is_gluon_fetched) {
 	    return <div></div>
@@ -61,7 +65,12 @@ console.log(this.state.gluons);
     }
 
     render () {
-	if (this.state.gluons.length == 0) {
+// console.log('xxxxxxxxxxxx');
+// // console.log(this.props.sub_quark);
+// console.log(this.props.sub_quark);
+// console.log(this.props.gluons);
+// console.log('xxxxxxxxxxxx');
+	if (!this.props.sub_quark.is_gluon_fetched) {
 	    return '';
 	}
 
@@ -78,4 +87,4 @@ console.log(this.state.gluons);
 	)
     }
 }
-export default connect(state => state)(SubGluonList);
+export default connect(state => state, { fetchSubGluons })(SubGluonList);

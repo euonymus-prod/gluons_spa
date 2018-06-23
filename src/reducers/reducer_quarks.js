@@ -13,9 +13,6 @@ export default (state = initState, action) => {
     switch(action.type) {
     case FETCH_ONE_QUARK:
 	let quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
-	
-	let util = new Util();
-	quark.period_str = util.period2str(quark);
 	let newState = {
 	    list:          { ...state.list, [quark.id]: quark },
 	    quark_name2id: {...state.quark_name2id, [quark.name]: quark.id }

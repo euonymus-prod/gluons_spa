@@ -6,9 +6,9 @@ import {deleteQuark} from '../actions/quark';
 
 class QuarkNav extends Component {
     onDeleteClick = () => {
-	let r = confirm(`Are you sure you want to delete ${this.props.quark.name}?`);
+	let r = confirm(`Are you sure you want to delete ${this.props.current_quark.name}?`);
 	if (r == true) {
-	    this.props.deleteQuark(this.props.quark.id);
+	    this.props.deleteQuark(this.props.current_quark.id);
 	    this.props.history.push('/subjects');
 	}
     }

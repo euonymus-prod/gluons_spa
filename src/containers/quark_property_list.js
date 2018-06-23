@@ -21,16 +21,6 @@ class GluonTypeList extends Component {
     }
     // --------------------------------------------------------
 
-/*
-    componentWillReceiveProps(nextProps) {
-	if (nextProps.quark) {
-	    if (!this.props.quark || nextProps.quark.quark_type_id != this.props.quark.quark_type_id) {
-		this.props.fetchQuarkProperties(nextProps.quark.quark_type_id);
-	    }
-        }
-    }
-*/
-
     renderQuarkProperties() {
 	const { current_quark } = this.props;
         return _.map(current_quark.quark_properties, quark_property => {
@@ -56,20 +46,6 @@ class GluonTypeList extends Component {
 	return (
             <div>
 		{this.renderQuarkProperties()}
-{/*
-                <div key="active">
-                    <GluonList
-		        quark_id={this.props.quark.id}
-                        quark_property_id="active"
-                        quark_property_caption={`${this.props.quark.name}とは`}/>
-		</div>
-                <div key="passive">
-                    <GluonList
-		        quark_id={this.props.quark.id}
-                        quark_property_id="passive"
-	                quark_property_caption={`${this.props.quark.name}に関する事項`}/>
-		</div>
-*/}
 	    </div>
 	)
     }
