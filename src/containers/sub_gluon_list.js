@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import { API_HOST } from '../statics';
 
 // --------------------------------------------------------
-import { fetchSubGluons } from '../actions/gluons';
+import { fetchGluons } from '../actions/gluons';
 // --------------------------------------------------------
 import SubGluon from './sub_gluon';
 
@@ -21,7 +21,7 @@ class SubGluonList extends Component {
 
 	if (['active', 'passive'].includes(props.sub_gluon_side)) {
 	    // this.fetchSubGluons(props.sub_quark.id, props.sub_gluon_side);
-	    this.props.fetchSubGluons(props.sub_quark, props.qtype_properties);
+	    this.props.fetchGluons(props.sub_quark, props.qtype_properties);
 	}
     }
 
@@ -66,9 +66,8 @@ class SubGluonList extends Component {
 
     render () {
 // console.log('xxxxxxxxxxxx');
-// // console.log(this.props.sub_quark);
 // console.log(this.props.sub_quark);
-// console.log(this.props.gluons);
+// console.log(this.props.quarks);
 // console.log('xxxxxxxxxxxx');
 	if (!this.props.sub_quark.is_gluon_fetched) {
 	    return '';
@@ -87,4 +86,4 @@ class SubGluonList extends Component {
 	)
     }
 }
-export default connect(state => state, { fetchSubGluons })(SubGluonList);
+export default connect(state => state, { fetchGluons })(SubGluonList);

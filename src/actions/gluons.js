@@ -22,6 +22,7 @@ export const fetchGluons = (quark, qtype_properties) => {
     }
 }
 
+// このactionは不要かも
 export const fetchSubGluons = (quark, qtype_properties) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}gluons/${quark.id}/${quark.quark_type_id}/${API_KEY}`)

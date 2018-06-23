@@ -46,6 +46,12 @@ export default (state = initState, action) => {
 	    list:          {...copiedState.list, ...newQuarks },
 	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
 	};
+console.log('xxxxxxxxxxxx');
+console.log(action.payload.quark.name);
+console.log(state);
+// console.log(newQuarks);
+// console.log(copiedState);
+console.log('xxxxxxxxxxxx');
 	return copiedState;
 
     default :

@@ -7,7 +7,7 @@ import searchKeywordReducer from './reducers/reducer_search_keyword'
 import qtypePropertiesReducer from './reducers/reducer_qtype_properties'
 import quarksReducer from './reducers/reducer_quarks'
 import currentQuarkReducer from './reducers/reducer_current_quark'
-import gluonsReducer from './reducers/reducer_gluons'
+// import gluonsReducer from './reducers/reducer_gluons'
 // ------------------------------------------------------------
 
 import thunk from 'redux-thunk'
@@ -20,7 +20,7 @@ const reducer = combineReducers({
     qtype_properties: qtypePropertiesReducer,
     quarks:           quarksReducer,
     current_quark:    currentQuarkReducer,
-    gluons:           gluonsReducer,
+    // gluons:           gluonsReducer,
     // --------------------------------------------------------
 })
 const store = createStore(
