@@ -8,18 +8,21 @@ import GluonUtil from '../utils/gluon';
 const initState = {list: {}, quark_name2id: {}};
 export default (state = initState, action) => {
     let copiedState = JSON.parse(JSON.stringify(state));
+    let quark_util = new QuarkUtil();
+    
     switch(action.type) {
     case FETCH_ONE_QUARK:
+	let quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
+	
 	let util = new Util();
-	action.payload.period_str = util.period2str(action.payload);
+	quark.period_str = util.period2str(quark);
 	let newState = {
-	    list:          { ...state.list, [action.payload.id]: action.payload },
-	    quark_name2id: {...state.quark_name2id, [action.payload.name]: action.payload.id }
+	    list:          { ...state.list, [quark.id]: quark },
+	    quark_name2id: {...state.quark_name2id, [quark.name]: quark.id }
 	};
 	return newState;
     case FETCH_GLUONS:
 	// add gluons on current quark 
-	let quark_util = new QuarkUtil();
 	copiedState.list[action.payload.quark.id] = quark_util.addGluons(copiedState.list[action.payload.quark.id], action.payload.response);
 
 	// quarks on gluons

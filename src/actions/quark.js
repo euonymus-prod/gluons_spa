@@ -71,11 +71,9 @@ export const fetchCurrentQuark = (quark_name, qtype_properties) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY}`)
 	    .then((response) => {
-		let quark_util = new QuarkUtil();
-		let quark = quark_util.addExtendedInfo(response.data, qtype_properties);
 		dispatch({
 		    type: FETCH_ONE_QUARK,
-		    payload: quark
+		    payload: {qtype_properties, response: response.data}
 		});
 	    }).catch((response) => dispatch({
 		type: FETCH_ONE_QUARK_FAILURE,
