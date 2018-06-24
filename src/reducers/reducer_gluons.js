@@ -7,14 +7,14 @@ export default (state = initState, action) => {
     switch(action.type) {
     case FETCH_GLUONS:
 	Object.keys(action.payload.response).map((value, index) => {
-	    newGluons = {...state, ..._.mapKeys(action.payload.response[value], 'id')}
+	    newGluons = {...newGluons, ..._.mapKeys(action.payload.response[value], 'id')}
 	});
 	return newGluons;
 
     // FETCH_SUB_GLUONS はいらないかも
     case FETCH_SUB_GLUONS:
 	Object.keys(action.payload.response).map((value, index) => {
-	    newGluons = {...state, ..._.mapKeys(action.payload.response[value], 'id')}
+	    newGluons = {...newGluons, ..._.mapKeys(action.payload.response[value], 'id')}
 	});
 	return newGluons;
     default :
