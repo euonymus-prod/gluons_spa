@@ -23,7 +23,7 @@ class SubGluonList extends Component {
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
-	console.log(this.props.sub_quark);
+	// console.log(this.props.sub_quark);
     }
 
     renderSubGluon() {
