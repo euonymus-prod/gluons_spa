@@ -16,9 +16,15 @@ class QuarkUtil {
     }
 
     addGluons(quark, response) {
+	if (quark.is_gluon_fetched) {
+		return quark;
+	}
 	let quark_properties = [];
 	if (quark.quark_properties) {
 	    quark_properties = quark.quark_properties.map(x => {
+			if (!x) {
+				return null;
+			}
 		let gluons = response[x.quark_property_id];
 		if (!gluons) {
 		    return null;

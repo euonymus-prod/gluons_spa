@@ -29,7 +29,7 @@ class Navbar extends Component {
     render () {
         const { logged_in_user } = this.props;
         if (logged_in_user) {
-	    console.log(logged_in_user);
+// console.log(logged_in_user);
         }
 
 

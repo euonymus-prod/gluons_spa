@@ -28,7 +28,8 @@ class SubGluonList extends Component {
     componentWillMount() {
 	const { qtype_properties, sub_quark, sub_gluon_side } = this.props;
 	if (['active', 'passive'].includes(sub_gluon_side)) {
-	    this.props.fetchGluons(sub_quark, qtype_properties);
+		//console.log(sub_quark);
+		this.props.fetchGluons(sub_quark, qtype_properties);
 	}
     }
     // --------------------------------------------------------

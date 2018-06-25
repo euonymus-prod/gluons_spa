@@ -19,17 +19,12 @@ export default (state = initState, action) => {
 	};
 	return newState;
     case FETCH_GLUONS:
-console.log('xxxxxxxxxxxx');
-console.log(copiedState.list);
 	// add gluons on current quark 
 	copiedState.list[action.payload.quark.id] = quark_util.addGluons(copiedState.list[action.payload.quark.id], action.payload.response);
-console.log(copiedState.list);
 
 	// add quarks on gluons
 	let newQuarks = {};
 	let newQuarkName2Id = {};
-console.log(1111111111111);
-console.log(newQuarks);
 	Object.keys(action.payload.response).map((value, index) => {
 	    action.payload.response[value].map(x => {
 		let quark = {};
@@ -45,23 +40,15 @@ console.log(newQuarks);
 
 		newQuarks[quark.id] = quark;
 		newQuarkName2Id[quark.name] = quark.id;
-console.log(newQuarks);
 	    });
 	});
 	copiedState = {
 	    list:          {...copiedState.list, ...newQuarks },
 	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
 	};
-console.log(22222222222222);
-console.log(action.payload.quark.name);
-// TODO: state が同時平行で処理中のデータを保持できていない問題がある。
-console.log(state.list);
-console.log(newQuarks);
-console.log(copiedState.list);
-console.log('xxxxxxxxxxxx');
 	return copiedState;
 
     default :
-	return state
+		return state
     }
 }

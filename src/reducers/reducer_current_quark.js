@@ -16,7 +16,9 @@ export default (state = initState, action) => {
 
     case FETCH_GLUONS :
 	let quark_util = new QuarkUtil();
-	copiedState = quark_util.addGluons(copiedState, action.payload.response);
+	if (state.id == action.payload.quark.id) {
+		copiedState = quark_util.addGluons(copiedState, action.payload.response);
+	}	
 	return copiedState;
     default :
 	return state
