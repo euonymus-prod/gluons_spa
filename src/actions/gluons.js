@@ -7,9 +7,9 @@ import { API_HOST } from '../statics';
 const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY = '?key=euonymus';
 
-export const fetchGluons = (quark, qtype_properties) => {
+export const fetchGluons = (quark, qtype_properties, limit = 100) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}gluons/${quark.id}/${quark.quark_type_id}/${API_KEY}`)
+	axios.get(`${ROOT_URL}gluons/${quark.id}/${quark.quark_type_id}/${API_KEY}&limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_GLUONS,
