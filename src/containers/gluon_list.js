@@ -47,7 +47,7 @@ class GluonList extends Component {
     }
 
     render () {
-	if (this.props.quark_property.gluons.length == 0) {
+	if (!this.props.quark_property.gluons || this.props.quark_property.gluons.length == 0) {
 	    return '';
 	}
 	return (

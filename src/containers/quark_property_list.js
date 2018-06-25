@@ -21,6 +21,12 @@ class GluonTypeList extends Component {
     }
     // --------------------------------------------------------
 
+    componentWillReceiveProps(nextProps) {
+	if (!nextProps.current_quark.is_gluon_fetched) {
+            this.props.fetchGluons(nextProps.current_quark, this.props.qtype_properties);
+	}
+    }
+
     renderQuarkProperties() {
 	const { current_quark } = this.props;
         return _.map(current_quark.quark_properties, quark_property => {

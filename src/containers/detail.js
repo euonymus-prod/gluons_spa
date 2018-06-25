@@ -54,13 +54,10 @@ class Detail extends Component {
 	    if (newQuark) {
 		this.props.changeCurrentQuark(newQuark);
 	    }
-	}
-
-	// constant update
-	if (nextProps.current_quark) {
-	    if (!current_quark || (nextProps.current_quark.id != current_quark.id))
-	    {
-		this.props.changeCurrentQuark(nextProps.current_quark);
+	} else if (nextProps.match.params.quark_name != this.props.match.params.quark_name) {
+	    let newQuark = nextProps.quarks.list[nextProps.quarks.quark_name2id[nextProps.match.params.quark_name]]
+	    if (newQuark) {
+	    	this.props.changeCurrentQuark(newQuark);
 	    }
 	}
 	// --------------------------------------------------------
