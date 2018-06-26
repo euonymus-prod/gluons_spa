@@ -8,6 +8,7 @@ import qtypePropertiesReducer from './reducers/reducer_qtype_properties'
 import quarksReducer from './reducers/reducer_quarks'
 import currentQuarkReducer from './reducers/reducer_current_quark'
 import currentQuarksReducer from './reducers/reducer_current_quarks'
+import pickupsReducer from './reducers/reducer_pickups'
 // import gluonsReducer from './reducers/reducer_gluons'
 // ------------------------------------------------------------
 
@@ -22,6 +23,7 @@ const reducer = combineReducers({
     quarks:           quarksReducer,
     current_quark:    currentQuarkReducer,
     current_quarks:   currentQuarksReducer,
+    pickups:          pickupsReducer,
     // gluons:           gluonsReducer,
     // --------------------------------------------------------
 })

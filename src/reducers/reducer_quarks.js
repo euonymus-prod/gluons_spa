@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS } from '../types/quark';
+import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS } from '../types/quark';
 import { FETCH_GLUONS } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
@@ -75,6 +75,19 @@ export default (state = initState, action) => {
 	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
 	};
 
+	return copiedState;
+
+    case FETCH_PICKUPS:
+	action.payload.response.map(quark => {
+	    quark = quark_util.addExtendedInfo(quark, action.payload.qtype_properties);
+
+	    newQuarks[quark.id] = quark;
+	    newQuarkName2Id[quark.name] = quark.id;
+	});
+	copiedState = {
+	    list:          {...copiedState.list, ...newQuarks },
+	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
+	};
 	return copiedState;
 
     default :

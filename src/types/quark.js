@@ -17,4 +17,7 @@ export const FETCH_QUARKS_FAILURE   = 'FETCH_QUARKS_FAILURE';
 export const SEARCH_QUARKS          = 'SEARCH_QUARKS';
 export const SEARCH_QUARKS_FAILURE  = 'SEARCH_QUARKS_FAILURE';
 
+export const FETCH_PICKUPS          = 'FETCH_PICKUPS';
+export const FETCH_PICKUPS_FAILURE  = 'FETCH_PICKUPS_FAILURE';
+
 // --------------------------------------------------------

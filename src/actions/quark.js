@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE,
+import { FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE, FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
 	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
 import { API_HOST } from '../statics';
@@ -80,6 +80,21 @@ export const searchQuarks = (qtype_properties, keywords, limit = 100) => {
 		});
 	    }).catch((response) => dispatch({
 		type: SEARCH_QUARKS_FAILURE,
+		error: response.error
+	    }))
+    }
+}
+
+export const fetchPickups = (qtype_properties) => {
+    return dispatch => {
+	axios.get(`${ROOT_URL}pickups${API_KEY}`)
+	    .then((response) => {
+		dispatch({
+		    type: FETCH_PICKUPS,
+		    payload: {qtype_properties, response: response.data}
+		});
+	    }).catch((response) => dispatch({
+		type: FETCH_PICKUPS_FAILURE,
 		error: response.error
 	    }))
     }
