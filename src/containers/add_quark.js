@@ -171,6 +171,7 @@ class AddQuark extends Component {
 //export default connect(state => state)(AddQuark);
 export default  reduxForm({
   form: 'add_quark', // a unique name for this form
+　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
   warn
 })(connect(state => state, { fetchQuarkTypes })(AddQuark));
