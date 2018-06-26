@@ -1,3 +1,7 @@
+/*
+Thanks to redux-form
+   https://redux-form.com/6.0.5/docs/gettingstarted.md/
+*/
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -5,36 +9,64 @@ import {Link} from 'react-router-dom';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 
+// --------------------------------------------------------
+import { Field, reduxForm } from 'redux-form';
+// --------------------------------------------------------
+
+
 class AddQuark extends Component {
  render () {
+  const { handleSubmit } = this.props;
   return (
    <div>
       <Navbar />
 
       <div className="container">
 
-        <div>
-        <form method="post" acceptCharset="utf-8" action="/subjects/add">
-           <div style={{display:'none'}}><input type="hidden" name="_method" value="POST"/></div>
+        <form onSubmit={handleSubmit} acceptCharset="utf-8">
            <fieldset>
               <legend>Add New Quark</legend>
               <div className="form-group">
                  <div className="input text required">
                     <label htmlFor="name">Name</label>
-                    <input type="text" name="name" className="form-control" required="required" maxLength="255" id="name" value=""/>
+                    {/*  required="required" maxLength="255" id="name" */ }
+                    <Field name="name" component="input" type="text" className="form-control" />
                  </div>
                  <div className="input text">
                     <label htmlFor="image-path">Image Path</label>
-                    <input type="text" name="image_path" className="form-control" maxLength="255" id="image-path"/>
+                    {/*  maxLength="255" id="image-path" */ }
+                    <Field name="image_path" component="input" type="text" className="form-control" />
                  </div>
                  <div className="input checkbox">
-                    <input type="hidden" name="auto_fill" value="0"/>
                     <label htmlFor="auto-fill">
-                       <input type="checkbox" name="auto_fill" value="1" checked="checked" id="auto-fill" onChange={event => {}} />
+                       {/*  value="1" checked="checked" onChange={event => {}} */}
+                       <Field name="auto_fill" id="auto-fill" component="input" type="checkbox" />
                        Auto Fill
                     </label>
                  </div>
               </div>
+
+
+
+
+           </fieldset>
+           <button className="btn btn-primary" type="submit">Submit</button>
+        </form>
+
+      </div>
+
+      <GlobalFooter />
+   </div>
+  )
+ }
+}
+//export default connect(state => state)(AddQuark);
+export default reduxForm({
+  form: 'add_quark' // a unique name for this form
+})(AddQuark);
+
+/*
+
               <div className="form-group">
 
                  <h4>optional</h4>
@@ -99,22 +131,4 @@ class AddQuark extends Component {
                     </label>
                  </div>
               </div>
-
-
-           </fieldset>
-           <button className="btn btn-primary" type="submit">Submit</button>
-        </form>
-        </div>
-
-      </div>
-
-      <GlobalFooter />
-   </div>
-  )
- }
-}
-export default connect(state => state)(AddQuark);
-
-/*
-
 */

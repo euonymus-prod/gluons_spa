@@ -10,6 +10,7 @@ import currentQuarkReducer from './reducers/reducer_current_quark'
 import currentQuarksReducer from './reducers/reducer_current_quarks'
 import pickupsReducer from './reducers/reducer_pickups'
 // import gluonsReducer from './reducers/reducer_gluons'
+import { reducer as formReducer } from 'redux-form'
 // ------------------------------------------------------------
 
 import thunk from 'redux-thunk'
@@ -25,6 +26,7 @@ const reducer = combineReducers({
     current_quarks:   currentQuarksReducer,
     pickups:          pickupsReducer,
     // gluons:           gluonsReducer,
+    form:             formReducer,
     // --------------------------------------------------------
 })
 const store = createStore(
