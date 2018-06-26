@@ -196,3 +196,13 @@ ul.subject-list-relation > li {
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
 }
+
+.validation-error {
+  color: red;
+  font-weight:bold;
+}
+
+.validation-warning {
+  color: orange;
+  font-weight:bold;
+}

@@ -13,8 +13,55 @@ import Navbar from './navbar';
 import { Field, reduxForm } from 'redux-form';
 // --------------------------------------------------------
 
+const validate = values => {
+  const errors = {}
+  if (!values.name) {
+    errors.name = 'Required'
+  } else if (values.name.length > 255) {
+    errors.name = 'Must be less than 255'
+  }
+  if (values.description && values.description.length > 255) {
+    errors.description = 'Must be less than 255'
+  }
+  if (values.start_accuracy && !['year', 'month'].includes(values.start_accuracy)) {
+    errors.start_accuracy = 'Must be either of "year" or "month"'
+  }
+  if (values.end_accuracy && !['year', 'month'].includes(values.end_accuracy)) {
+    errors.end_accuracy = 'Must be either of "year" or "month"'
+  }
+  if (values.url && values.url.length > 255) {
+    errors.url = 'Must be less than 255'
+  }
+  if (values.affiliate && values.affiliate.length > 255) {
+    errors.affiliate = 'Must be less than 255'
+  }
+  return errors
+}
+
+const warn = values => {
+  const warnings = {}
+  if (values.name < 19) {
+    warnings.name = 'Hmm, you seem a bit young...'
+  }
+  return warnings
+}
+
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+  <div className="input text">
+     <label htmlFor={input.id}>{label}</label>
+     {/*  required="required" maxLength="255" id="name" */ }
+     <input {...input} placeholder={label} type={type} className="form-control" />
+     {touched && ((error && <span className="validation-error">{error}</span>) || (warning && <span className="validation-warning">{warning}</span>))}
+  </div>
+)
 
 class AddQuark extends Component {
+    onSubmit = (values) => {
+	console.log(values);
+
+
+    }
+
  render () {
   const { handleSubmit } = this.props;
   return (
@@ -23,20 +70,13 @@ class AddQuark extends Component {
 
       <div className="container">
 
-        <form onSubmit={handleSubmit} acceptCharset="utf-8">
+        <form onSubmit={handleSubmit(this.onSubmit)} acceptCharset="utf-8">
+
            <fieldset>
               <legend>Add New Quark</legend>
               <div className="form-group">
-                 <div className="input text required">
-                    <label htmlFor="name">Name</label>
-                    {/*  required="required" maxLength="255" id="name" */ }
-                    <Field name="name" component="input" type="text" className="form-control" />
-                 </div>
-                 <div className="input text">
-                    <label htmlFor="image-path">Image Path</label>
-                    {/*  maxLength="255" id="image-path" */ }
-                    <Field name="image_path" component="input" type="text" className="form-control" />
-                 </div>
+                 <Field name="name" component={renderField} type="text" id="name" label="Name" />
+                 <Field name="image_path" component={renderField} type="text" id="image_path" label="Image Path" />
                  <div className="input checkbox">
                     <label htmlFor="auto-fill">
                        {/*  value="1" checked="checked" onChange={event => {}} */}
@@ -45,10 +85,55 @@ class AddQuark extends Component {
                     </label>
                  </div>
               </div>
+              <div className="form-group">
+                 <h4>optional</h4>
+                 <Field name="description" component={renderField} type="text" id="description" label="Description" />
+                 <div className="input text">
+                    <label htmlFor="url">Start</label>
+                    <Field type='date' component="input" className="form-control date" name="start" />
+                    <label htmlFor="url">End</label>
+                    <Field type='date' component="input" className="form-control date" name="end" />
+                 </div>
 
+                 <Field name="start_accuracy" component={renderField} type="text" id="start-accuracy" label="Start Accuracy" />
+                 <Field name="end_accuracy" component={renderField} type="text" id="end-accuracy" label="End Accuracy" />
 
+                 <div className="input checkbox">
+                    <label htmlFor="is-momentary">
+                       <Field name="is_momentary" id="is-momentary" component="input" type="checkbox" />
+                       Is Momentary
+                    </label>
+                 </div>
+                 <Field name="url" component={renderField} type="text" id="url" label="URL" />
+                 <Field name="affiliate" component={renderField} type="text" id="affiliate" label="Affiliate" />
+                 <br />
+                 <div className="input select">
+                    <label htmlFor="quark-type-id">Quark Type</label>
 
+                    <Field name="quark_type_id" id="quark-type-id" component="select">
+                       <option />
+                       <option value="1">Thing</option>
+                       <option value="2">Person</option>
+                    </Field>
 
+                 </div>
+
+                 <div className="input checkbox">
+                    <input type="hidden" name="is_private" value="0"/>
+                    <label htmlFor="is-private">
+                       <Field name="is_private" id="is-private" component="input" type="checkbox" />
+                       Is Private
+                    </label>
+                 </div>
+                 <div className="input checkbox">
+                    <input type="hidden" name="is_exclusive" value="0"/>
+                    <label htmlFor="is-exclusive">
+                       <Field name="is_exclusive" id="is-exclusive" component="input" type="checkbox" />
+                       Is Exclusive
+                    </label>
+                 </div>
+
+              </div>
            </fieldset>
            <button className="btn btn-primary" type="submit">Submit</button>
         </form>
@@ -62,50 +147,12 @@ class AddQuark extends Component {
 }
 //export default connect(state => state)(AddQuark);
 export default reduxForm({
-  form: 'add_quark' // a unique name for this form
+  form: 'add_quark', // a unique name for this form
+  validate,
+  warn
 })(AddQuark);
 
 /*
-
-              <div className="form-group">
-
-                 <h4>optional</h4>
-                 <div className="input text">
-                    <label htmlFor="description">Description</label>
-                    <input type="text" name="description" className="form-control" maxLength="255" id="description"/>
-                 </div>
-                 <div className="input text">
-                    <label htmlFor="url">Start</label>
-                    <input type='date' className="form-control date" name="start" />
-                    <label htmlFor="url">End</label>
-                    <input type='date' className="form-control date" name="end" />
-                 </div>
-
-
-
-                 <div className="input text">
-                    <label htmlFor="start-accuracy">Start Accuracy</label>
-                    <input type="text" name="start_accuracy" className="form-control" maxLength="10" id="start-accuracy"/>
-                 </div>
-                 <div className="input text">
-                    <label htmlFor="end-accuracy">End Accuracy</label>
-                    <input type="text" name="end_accuracy" className="form-control" maxLength="10" id="end-accuracy"/>
-                 </div>
-                 <div className="input checkbox">
-                    <input type="hidden" name="is_momentary" value="0"/>
-                    <label htmlFor="is-momentary">
-                       <input type="checkbox" name="is_momentary" value="1" id="is-momentary" />Is Momentary
-                    </label>
-                 </div>
-                 <div className="input text">
-                    <label htmlFor="url">Url</label>
-                    <input type="text" name="url" className="form-control" maxLength="255" id="url"/>
-                 </div>
-                 <div className="input text">
-                    <label htmlFor="affiliate">Affiliate</label>
-                    <input type="text" name="affiliate" className="form-control" maxLength="255" id="affiliate"/>
-                 </div>
-                 <br />
                  <div className="input select">
                     <label htmlFor="quark-type-id">Quark Type</label>
                     <select name="quark_type_id" id="quark-type-id">
@@ -116,19 +163,4 @@ export default reduxForm({
                  </div>
 
 
-                 <div className="input checkbox">
-                    <input type="hidden" name="is_private" value="0"/>
-                    <label htmlFor="is-private">
-                       <input type="checkbox" name="is_private" value="1" id="is-private" onChange={event => {}} />
-                       Is Private
-                    </label>
-                 </div>
-                 <div className="input checkbox">
-                    <input type="hidden" name="is_exclusive" value="0"/>
-                    <label htmlFor="is-exclusive">
-                       <input type="checkbox" name="is_exclusive" value="1" checked="checked" id="is-exclusive"  onChange={event => {}}/>
-                       Is Exclusive
-                    </label>
-                 </div>
-              </div>
 */
