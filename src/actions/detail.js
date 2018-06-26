@@ -2,7 +2,7 @@ import { INIT_DETAIL } from '../types/detail';
 
 export const initDetail = (sub_gluon_side) => {
     return dispatch => {
-	if (!['active', 'passive', 'none'].includes(sub_gluon_side)) {
+	if (!['active', 'none'].includes(sub_gluon_side)) {
             sub_gluon_side = 'active';
 	}
 	dispatch({

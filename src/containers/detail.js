@@ -21,7 +21,6 @@ class Detail extends Component {
 
         this.state = {
             activeActiveness:  'active',
-            passiveActiveness: '',
             noneActiveness:    '',
         };
 
@@ -70,25 +69,16 @@ class Detail extends Component {
 		if (nextProps.sub_gluon_side == 'active') {
 		    this.setState({
 			'activeActiveness':  'active',
-			'passiveActiveness': '',
-			'noneActiveness':    '',
-		    })
-		} else if (nextProps.sub_gluon_side == 'passive') {
-		    this.setState({
-			'activeActiveness':  '',
-			'passiveActiveness': 'active',
 			'noneActiveness':    '',
 		    })
 		} else if (nextProps.sub_gluon_side == 'none') {
 		    this.setState({
 			'activeActiveness':  '',
-			'passiveActiveness': '',
 			'noneActiveness':    'active',
 		    })
 		} else {
 		    this.setState({
 			'activeActiveness':  'active',
-			'passiveActiveness': '',
 			'noneActiveness':    '',
 		    })
 		}
@@ -129,9 +119,6 @@ class Detail extends Component {
                <ul className="nav nav-pills">
                   <li role="presentation" className={this.state.activeActiveness}>
                      <a href="#" name="active" onClick={this.onLinkClick} >Active</a>
-                  </li>
-                  <li role="presentation" className={this.state.passiveActiveness}>
-                     <a href="#" name="passive" onClick={this.onLinkClick} >Passive</a>
                   </li>
                   <li role="presentation" className={this.state.noneActiveness}>
                      <a href="#" name="none" onClick={this.onLinkClick} >None</a>
