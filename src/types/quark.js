@@ -20,4 +20,7 @@ export const SEARCH_QUARKS_FAILURE  = 'SEARCH_QUARKS_FAILURE';
 export const FETCH_PICKUPS          = 'FETCH_PICKUPS';
 export const FETCH_PICKUPS_FAILURE  = 'FETCH_PICKUPS_FAILURE';
 
+export const ADD_QUARK              = 'ADD_QUARK';
+export const ADD_QUARK_FAILURE      = 'ADD_QUARK_FAILURE';
+
 // --------------------------------------------------------

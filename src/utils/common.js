@@ -30,5 +30,17 @@ class Util {
 	}
 	return moment(date).format(format);
     }
+    fCamelToSnake(p) {
+        //大文字を_+小文字にする(例:A を _a)
+        return p.replace(/([A-Z])/g,
+                function(s) {
+                    return '_' + s.charAt(0).toLowerCase();
+                }
+        );
+    }
+    fPascalToSnake(p) {
+	return this.fCamelToSnake(p).replace(/^_/, '');
+    }
+
 }
 export default Util;

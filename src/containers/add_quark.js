@@ -12,6 +12,9 @@ import Navbar from './navbar';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchQuarkTypes } from '../actions/quark_types';
+import { execAddQuark } from '../actions/quark';
+
+import Util from '../utils/common';
 // --------------------------------------------------------
 
 const validate = values => {
@@ -70,7 +73,12 @@ class AddQuark extends Component {
     // --------------------------------------------------------
 
     onSubmit = (values) => {
-	console.log(values);
+	if (!values.image_path && values.auto_fill) {
+	    let util = new Util();
+	    let default_image_name = util.fPascalToSnake(this.props.quark_types[values.quark_type_id]) + '.png';
+	    values.image_path = '/img/' + default_image_name
+	}
+	this.props.execAddQuark(values);
     }
 
     renderSelect = ({ input, label, type, meta: { touched, error, warning } }) => (
@@ -174,5 +182,5 @@ export default  reduxForm({
 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
   warn
-})(connect(state => state, { fetchQuarkTypes })(AddQuark));
+})(connect(state => state, { fetchQuarkTypes, execAddQuark })(AddQuark));
 // --------------------------------------------------------

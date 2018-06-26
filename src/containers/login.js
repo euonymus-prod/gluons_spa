@@ -28,6 +28,7 @@ class Login extends Component {
     };
 
  render () {
+console.log(this.props.logged_in_user);
   return (
    <div>
       <Navbar />
