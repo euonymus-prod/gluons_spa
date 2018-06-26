@@ -11,6 +11,7 @@ import Navbar from './navbar';
 
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
+import { fetchQuarkTypes } from '../actions/quark_types';
 // --------------------------------------------------------
 
 const validate = values => {
@@ -35,6 +36,9 @@ const validate = values => {
   if (values.affiliate && values.affiliate.length > 255) {
     errors.affiliate = 'Must be less than 255'
   }
+  if (!values.quark_type_id) {
+    errors.quark_type_id = 'Must choose Quark Type'
+  }
   return errors
 }
 
@@ -56,10 +60,36 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 )
 
 class AddQuark extends Component {
+    // --------------------------------------------------------
+    componentWillMount() {
+	const { quark_types } = this.props;
+        if (!quark_types) {
+            this.props.fetchQuarkTypes();
+        }
+    }
+    // --------------------------------------------------------
+
     onSubmit = (values) => {
 	console.log(values);
+    }
 
+    renderSelect = ({ input, label, type, meta: { touched, error, warning } }) => (
+  <div className="input select">
+     <label htmlFor={input.id}>{label}</label>
+     <Field name="quark_type_id" id="quark-type-id" component="select">
+        {this.renderQuarkTypes()}
+     </Field>
+     {touched && (error && <span className="validation-error"><br />{error}</span>)}
+  </div>
+    )
 
+    renderQuarkTypes() {
+	const { quark_types } = this.props;
+	return Object.keys(quark_types).map((value, index) => {
+	    return (
+               <option value={value} key={value}>{quark_types[value]}</option>
+	    );
+	});
     }
 
  render () {
@@ -107,16 +137,8 @@ class AddQuark extends Component {
                  <Field name="url" component={renderField} type="text" id="url" label="URL" />
                  <Field name="affiliate" component={renderField} type="text" id="affiliate" label="Affiliate" />
                  <br />
-                 <div className="input select">
-                    <label htmlFor="quark-type-id">Quark Type</label>
 
-                    <Field name="quark_type_id" id="quark-type-id" component="select">
-                       <option />
-                       <option value="1">Thing</option>
-                       <option value="2">Person</option>
-                    </Field>
-
-                 </div>
+                 <Field name="quark_type_id" component={this.renderSelect} type="select" id="quark-type-id" label="Quark Type" />
 
                  <div className="input checkbox">
                     <input type="hidden" name="is_private" value="0"/>
@@ -145,22 +167,11 @@ class AddQuark extends Component {
   )
  }
 }
+// --------------------------------------------------------
 //export default connect(state => state)(AddQuark);
-export default reduxForm({
+export default  reduxForm({
   form: 'add_quark', // a unique name for this form
   validate,
   warn
-})(AddQuark);
-
-/*
-                 <div className="input select">
-                    <label htmlFor="quark-type-id">Quark Type</label>
-                    <select name="quark_type_id" id="quark-type-id">
-                       <option value="1">Thing</option>
-                       <option value="2">Person</option>
-                       <option value="3">CreativeWork</option><option value="4">WebSite</option><option value="5">Book</option><option value="6">PublicationIssue</option><option value="7">Article</option><option value="8">SoftwareApplication</option><option value="9">Game</option><option value="10">Movie</option><option value="11">Painting</option><option value="12">Photograph</option><option value="13">MusicPlaylist</option><option value="14">MusicAlbum</option><option value="15">MusicRecording</option><option value="16">CreativeWorkSeries</option><option value="17">Event</option><option value="18">Intangible</option><option value="19">Brand</option><option value="20">BroadcastChannel</option><option value="21">TelevisionChannel</option><option value="22">Organization</option><option value="23">Corporation</option><option value="24">EducationalOrganization</option><option value="25">CollegeOrUniversity</option><option value="26">ElementarySchool</option><option value="27">HighSchool</option><option value="28">MiddleSchool</option><option value="29">Preschool</option><option value="30">School</option><option value="31">GovernmentOrganization</option><option value="32">LocalBusiness</option><option value="33">Store</option><option value="34">MedicalOrganization</option><option value="35">Hospital</option><option value="36">NGO</option><option value="37">PerformingGroup</option><option value="38">MusicGroup</option><option value="39">SportsOrganization</option><option value="40">SportsTeam</option><option value="41">Place</option><option value="42">Accommodation</option><option value="43">AdministrativeArea</option><option value="44">City</option><option value="45">Country</option><option value="46">State</option><option value="47">CivicStructure</option><option value="48">Landform</option><option value="49">LandmarksOrHistoricalBuildings</option><option value="50">Residence</option><option value="51">TouristAttrcaction</option><option value="52">Product</option>
-                    </select>
-                 </div>
-
-
-*/
+})(connect(state => state, { fetchQuarkTypes })(AddQuark));
+// --------------------------------------------------------
