@@ -4,13 +4,24 @@ import axios from 'axios';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import { API_HOST } from '../statics';
+// import { API_HOST } from '../statics';
 
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import QuarkInList from '../components/quark_in_list';
+// --------------------------------------------------------
+import { searchQuarks } from '../actions/quark';
+// --------------------------------------------------------
 
 class SearchResults extends Component {
+    // --------------------------------------------------------
+    componentWillMount() {
+	const { qtype_properties } = this.props;
+	this.props.searchQuarks(qtype_properties, this.props.match.params.keywords);
+    }
+    // --------------------------------------------------------
+
+/*
     constructor(props) {
         super(props);
 
@@ -37,10 +48,12 @@ class SearchResults extends Component {
 		this.setState({quarks: response.data});
 	    });
     }
+*/
 
     renderQuarks() {
-	var first = this.state.quarks[0];
-	return _.map(this.state.quarks, quark => {
+	const { current_quarks } = this.props;
+	var first = current_quarks[0];
+	return _.map(current_quarks, quark => {
 	    return (
 		<div key={quark.id}>
                     {(() => {
@@ -54,7 +67,9 @@ class SearchResults extends Component {
     }
 
     render () {
-	if (this.state.quarks.length == 0) {
+	const { current_quarks } = this.props;
+
+	if (current_quarks.length == 0) {
 	    return '';
 	}
 
@@ -79,4 +94,4 @@ class SearchResults extends Component {
     }
 }
 
-export default connect(state => state)(SearchResults);
+export default connect(state => state, { searchQuarks })(SearchResults);

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_ONE_QUARK } from '../types/quark';
+import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS } from '../types/quark';
 import { FETCH_GLUONS } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
@@ -10,6 +10,9 @@ export default (state = initState, action) => {
     let copiedState = JSON.parse(JSON.stringify(state));
     let quark_util = new QuarkUtil();
     
+    let newQuarks = {};
+    let newQuarkName2Id = {};
+
     switch(action.type) {
     case FETCH_ONE_QUARK:
 	let quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
@@ -23,8 +26,6 @@ export default (state = initState, action) => {
 	copiedState.list[action.payload.quark.id] = quark_util.addGluons(copiedState.list[action.payload.quark.id], action.payload.response);
 
 	// add quarks on gluons
-	let newQuarks = {};
-	let newQuarkName2Id = {};
 	Object.keys(action.payload.response).map((value, index) => {
 	    action.payload.response[value].map(x => {
 		let quark = {};
@@ -46,6 +47,34 @@ export default (state = initState, action) => {
 	    list:          {...copiedState.list, ...newQuarks },
 	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
 	};
+	return copiedState;
+
+    case FETCH_QUARKS:
+	action.payload.response.map(quark => {
+	    quark = quark_util.addExtendedInfo(quark, action.payload.qtype_properties);
+
+	    newQuarks[quark.id] = quark;
+	    newQuarkName2Id[quark.name] = quark.id;
+	});
+	copiedState = {
+	    list:          {...copiedState.list, ...newQuarks },
+	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
+	};
+
+	return copiedState;
+
+    case SEARCH_QUARKS:
+	action.payload.response.map(quark => {
+	    quark = quark_util.addExtendedInfo(quark, action.payload.qtype_properties);
+
+	    newQuarks[quark.id] = quark;
+	    newQuarkName2Id[quark.name] = quark.id;
+	});
+	copiedState = {
+	    list:          {...copiedState.list, ...newQuarks },
+	    quark_name2id: {...state.quark_name2id, ...newQuarkName2Id }
+	};
+
 	return copiedState;
 
     default :

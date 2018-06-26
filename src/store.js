@@ -7,6 +7,7 @@ import searchKeywordReducer from './reducers/reducer_search_keyword'
 import qtypePropertiesReducer from './reducers/reducer_qtype_properties'
 import quarksReducer from './reducers/reducer_quarks'
 import currentQuarkReducer from './reducers/reducer_current_quark'
+import currentQuarksReducer from './reducers/reducer_current_quarks'
 // import gluonsReducer from './reducers/reducer_gluons'
 // ------------------------------------------------------------
 
@@ -20,6 +21,7 @@ const reducer = combineReducers({
     qtype_properties: qtypePropertiesReducer,
     quarks:           quarksReducer,
     current_quark:    currentQuarkReducer,
+    current_quarks:   currentQuarksReducer,
     // gluons:           gluonsReducer,
     // --------------------------------------------------------
 })

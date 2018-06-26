@@ -6,10 +6,21 @@ import {Link} from 'react-router-dom';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import QuarkInList from '../components/quark_in_list';
+// --------------------------------------------------------
+import { fetchQuarks } from '../actions/quark';
+// --------------------------------------------------------
 
-import { API_HOST } from '../statics';
+// import { API_HOST } from '../statics';
 
 class QuarkList extends Component {
+    // --------------------------------------------------------
+    componentWillMount() {
+	const { qtype_properties } = this.props;
+	this.props.fetchQuarks(qtype_properties);
+    }
+    // --------------------------------------------------------
+
+/*
     constructor(props) {
         super(props);
 
@@ -28,10 +39,12 @@ class QuarkList extends Component {
 		this.setState({quarks: response.data});
 	    });
     }
+*/
 
     renderQuarks() {
-	var first = this.state.quarks[0];
-	return _.map(this.state.quarks, quark => {
+	const { current_quarks } = this.props;
+	var first = current_quarks[0];
+	return _.map(current_quarks, quark => {
 	    return (
 		<div key={quark.id}>
                     {(() => {
@@ -45,7 +58,9 @@ class QuarkList extends Component {
     }
 
     render () {
-	if (this.state.quarks.length == 0) {
+	const { current_quarks } = this.props;
+
+	if (current_quarks.length == 0) {
 	    return '';
 	}
 
@@ -70,5 +85,5 @@ class QuarkList extends Component {
     }
 }
 
-export default connect(state => state)(QuarkList);
+export default connect(state => state, { fetchQuarks })(QuarkList);
 
