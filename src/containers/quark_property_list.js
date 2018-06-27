@@ -29,6 +29,9 @@ class GluonTypeList extends Component {
 
     renderQuarkProperties() {
 	const { current_quark } = this.props;
+	if (!current_quark.quark_properties) {
+	    return '';
+	}
         return _.map(current_quark.quark_properties, quark_property => {
 	    if (!quark_property) {
 		return '';

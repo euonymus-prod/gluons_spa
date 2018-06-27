@@ -13,7 +13,7 @@ import Navbar from './navbar';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchQuarkTypes } from '../actions/quark_types';
-import { execAddQuark } from '../actions/quark';
+import { execAddQuark, removeAddedQuark } from '../actions/quark';
 
 import Util from '../utils/common';
 // --------------------------------------------------------
@@ -79,12 +79,15 @@ class AddQuark extends Component {
 	if (!nextProps.logged_in_user) {
 	    this.props.history.push('/');
 	}
-	if (nextProps.added_quark && 
-	    ( !added_quark ||
-	      (nextProps.added_quark.id != added_quark.id)
-	    )
-	   ) {
-	    this.props.history.push('/subjects/relations/' + nextProps.added_quark.name);
+
+	if (nextProps.added_quark) {
+	    let r = alert(nextProps.added_quark.message);
+
+	    if (nextProps.added_quark.status != 1) {
+		this.props.removeAddedQuark();
+	    } else if ( !added_quark || (nextProps.added_quark.id != added_quark.id) ) {
+		this.props.history.push('/subjects/relations/' + nextProps.added_quark.result.name);
+	    }
 	}
     }
 
@@ -207,5 +210,5 @@ export default  reduxForm({
 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
   warn
-})(withRouter(connect(state => state, { fetchQuarkTypes, execAddQuark })(AddQuark)));
+})(withRouter(connect(state => state, { fetchQuarkTypes, execAddQuark, removeAddedQuark })(AddQuark)));
 // --------------------------------------------------------

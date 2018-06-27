@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ADD_QUARK, ADD_QUARK_FAILURE,
+import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK,
 	 FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE, FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
 	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
@@ -133,5 +133,12 @@ export const execAddQuark = (form) => {
 		error: response.error
 	    }))
     }
+}
+
+export const removeAddedQuark = (form) => {
+    return {
+	type: REMOVE_ADDED_QUARK,
+	payload: null
+    };
 }
 // --------------------------------------------------------
