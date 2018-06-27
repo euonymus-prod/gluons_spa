@@ -19,27 +19,6 @@ class TopPickups extends Component {
     }
     // --------------------------------------------------------
 
-/*
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            pickups: [],
-        };
-	this.fetchPickups();
-    }
-
-    fetchPickups () {
-	const ROOT_URL = 'http://' + API_HOST + '/';
-	const API_KEY = '?key=euonymus';
-
-	axios.get(`${ROOT_URL}pickups${API_KEY}`)
-	    .then((response) => {
-		this.setState({pickups: response.data});
-	    });
-    }
-*/
-
     renderPickups() {
 	const { pickups } = this.props;
 	return _.map(pickups, pickup => {

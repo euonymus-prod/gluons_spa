@@ -10,8 +10,6 @@ import QuarkInList from '../components/quark_in_list';
 import { fetchQuarks } from '../actions/quark';
 // --------------------------------------------------------
 
-// import { API_HOST } from '../statics';
-
 class QuarkList extends Component {
     // --------------------------------------------------------
     componentWillMount() {
@@ -19,27 +17,6 @@ class QuarkList extends Component {
 	this.props.fetchQuarks(qtype_properties);
     }
     // --------------------------------------------------------
-
-/*
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            quarks: [],
-        };
-	this.fetchQuarks();
-    }
-
-    fetchQuarks () {
-	const ROOT_URL = 'http://' + API_HOST + '/';
-	const API_KEY = '?key=euonymus';
-
-	axios.get(`${ROOT_URL}quarks${API_KEY}`)
-	    .then((response) => {
-		this.setState({quarks: response.data});
-	    });
-    }
-*/
 
     renderQuarks() {
 	const { current_quarks } = this.props;
