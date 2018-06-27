@@ -23,7 +23,8 @@ export default (state = initState, action) => {
 	return newState;
     case FETCH_GLUONS:
 	// add gluons on current quark 
-	copiedState.list[action.payload.quark.id] = quark_util.addGluons(copiedState.list[action.payload.quark.id], action.payload.response);
+	let current_quark = JSON.parse(JSON.stringify(quark_util.addExtendedInfo(copiedState.list[action.payload.quark.id], action.payload.qtype_properties)));
+	copiedState.list[action.payload.quark.id] = quark_util.addGluons(current_quark, action.payload.response);
 
 	// add quarks on gluons
 	Object.keys(action.payload.response).map((value, index) => {

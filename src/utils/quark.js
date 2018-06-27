@@ -6,9 +6,12 @@ class QuarkUtil {
 	let util = new Util();
 	quark.period_str = util.period2str(quark);
 	
-	let quark_properties = qtype_properties[quark.quark_type_id];
-	if (!quark_properties) {
-	    quark_properties = null;
+	let quark_properties = null;
+	if (qtype_properties && quark.quark_type_id in qtype_properties){
+	    quark_properties = qtype_properties[quark.quark_type_id];
+	    if (!quark_properties) {
+		quark_properties = null;
+	    }
 	}
 	quark.quark_properties = quark_properties;
 	quark.is_gluon_fetched = is_gluon_fetched;
@@ -19,6 +22,7 @@ class QuarkUtil {
 	if (quark.is_gluon_fetched) {
 		return quark;
 	}
+
 	let quark_properties = [];
 	if (quark.quark_properties) {
 	    quark_properties = quark.quark_properties.map(x => {
