@@ -1,9 +1,6 @@
 export const CHANGE_SEARCH_KEYWORD   = 'CHANGE_SEARCH_KEYWORD';
 export const CHANGE_SEARCH_KEYWORD_FAILURE   = 'CHANGE_SEARCH_KEYWORD_FAILURE';
 
-export const DELETE_QUARK           = 'DELETE_QUARK';
-export const DELETE_QUARK_FAILURE   = 'DELETE_QUARK_FAILURE';
-
 
 // --------------------------------------------------------
 export const FETCH_ONE_QUARK         = 'FETCH_ONE_QUARK';
@@ -24,5 +21,10 @@ export const ADD_QUARK               = 'ADD_QUARK';
 export const ADD_QUARK_FAILURE       = 'ADD_QUARK_FAILURE';
 
 export const REMOVE_ADDED_QUARK      = 'REMOVE_ADDED_QUARK';
+
+export const DELETE_QUARK            = 'DELETE_QUARK';
+export const DELETE_QUARK_FAILURE    = 'DELETE_QUARK_FAILURE';
+
+export const REMOVE_DELETED_QUARK    = 'REMOVE_DELETED_QUARK';
 
 // --------------------------------------------------------

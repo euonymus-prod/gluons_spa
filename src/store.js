@@ -13,6 +13,7 @@ import pickupsReducer from './reducers/reducer_pickups'
 import { reducer as formReducer } from 'redux-form'
 import quarkTypesReducer from './reducers/reducer_quark_types'
 import addedQuarkReducer from './reducers/reducer_added_quark'
+import deletedQuarkReducer from './reducers/reducer_deleted_quark'
 // ------------------------------------------------------------
 
 import thunk from 'redux-thunk'
@@ -31,6 +32,7 @@ const reducer = combineReducers({
     quark_types:      quarkTypesReducer,
     form:             formReducer,
     added_quark:      addedQuarkReducer,
+    deleted_quark:    deletedQuarkReducer,
     // --------------------------------------------------------
 })
 const store = createStore(

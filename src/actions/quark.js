@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK,
+import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK, REMOVE_DELETED_QUARK,
 	 FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE, FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
 	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
@@ -19,7 +19,21 @@ export const changeSearchKeyword = (keyword) => {
 
 export const deleteQuark = (quark_id) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}quark/delete/${quark_id}${API_KEY}`)
+	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+	if (!logged_in_user) {
+	    return {
+		type: DELETE_QUARK_FAILURE,
+		payload: false
+	    };
+	}
+
+	axios.delete(`${ROOT_URL}delete_quark/${quark_id}${API_KEY}`, {
+	    // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
 	    .then((response) => {
 		dispatch({
 		    type: DELETE_QUARK,
@@ -141,4 +155,13 @@ export const removeAddedQuark = (form) => {
 	payload: null
     };
 }
+
+export const removeDeletedQuark = (form) => {
+    return {
+	type: REMOVE_DELETED_QUARK,
+	payload: null
+    };
+}
+
+
 // --------------------------------------------------------
