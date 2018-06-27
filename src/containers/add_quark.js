@@ -74,8 +74,11 @@ class AddQuark extends Component {
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
-        const { added_quark } = this.props;
+        const { logged_in_user, added_quark } = this.props;
         // initialize
+	if (!nextProps.logged_in_user) {
+	    this.props.history.push('/');
+	}
 	if (nextProps.added_quark && 
 	    ( !added_quark ||
 	      (nextProps.added_quark.id != added_quark.id)
