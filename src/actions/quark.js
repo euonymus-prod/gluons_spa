@@ -116,12 +116,6 @@ export const execAddQuark = (form) => {
 	//     params.append(value, form[value]);
 	// });
 	let params = new URLSearchParams(form);
-
-
-
-console.log(logged_in_user.username);
-console.log(logged_in_user.api_key_plain);
-
 	axios.post(`${ROOT_URL}add_quark/${API_KEY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
@@ -130,7 +124,6 @@ console.log(logged_in_user.api_key_plain);
 	    }
 	})
 	    .then((response) => {
-		console.log(response.data);
 		dispatch({
 		    type: ADD_QUARK,
 		    payload: response.data

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS } from '../types/quark';
+import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK } from '../types/quark';
 import { FETCH_GLUONS } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
@@ -12,10 +12,11 @@ export default (state = initState, action) => {
     
     let newQuarks = {};
     let newQuarkName2Id = {};
+    let quark = {};
 
     switch(action.type) {
     case FETCH_ONE_QUARK:
-	let quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
+	quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
 	let newState = {
 	    list:          { ...state.list, [quark.id]: quark },
 	    quark_name2id: {...state.quark_name2id, [quark.name]: quark.id }
@@ -29,7 +30,6 @@ export default (state = initState, action) => {
 	// add quarks on gluons
 	Object.keys(action.payload.response).map((value, index) => {
 	    action.payload.response[value].map(x => {
-		let quark = {};
 		let gluon_util = new GluonUtil();
 		quark = gluon_util.gluedQuark(action.payload.quark, x);
 		if (!quark) {
@@ -91,7 +91,19 @@ export default (state = initState, action) => {
 	};
 	return copiedState;
 
+    case ADD_QUARK:
+	if (action.payload.status == 1) {
+	    quark = quark_util.addExtendedInfo(action.payload.result, null);
+	    let newState = {
+		list:          { ...state.list, [quark.id]: quark },
+		quark_name2id: {...state.quark_name2id, [quark.name]: quark.id }
+	    };
+	    return newState;
+	} else {
+	    return state
+	}
+
     default :
-		return state
+	return state
     }
 }

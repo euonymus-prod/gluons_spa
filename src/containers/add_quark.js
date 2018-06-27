@@ -4,6 +4,7 @@ Thanks to redux-form
 */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { withRouter } from "react-router-dom";
 import {Link} from 'react-router-dom';
 
 import GlobalFooter from '../components/global_footer';
@@ -71,6 +72,18 @@ class AddQuark extends Component {
         }
     }
     // --------------------------------------------------------
+
+    componentWillReceiveProps(nextProps) {
+        const { added_quark } = this.props;
+        // initialize
+	if (nextProps.added_quark && 
+	    ( !added_quark ||
+	      (nextProps.added_quark.id != added_quark.id)
+	    )
+	   ) {
+	    this.props.history.push('/subjects/relations/' + nextProps.added_quark.name);
+	}
+    }
 
     onSubmit = (values) => {
 	if (!values.image_path && values.auto_fill) {
@@ -191,5 +204,5 @@ export default  reduxForm({
 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
   warn
-})(connect(state => state, { fetchQuarkTypes, execAddQuark })(AddQuark));
+})(withRouter(connect(state => state, { fetchQuarkTypes, execAddQuark })(AddQuark)));
 // --------------------------------------------------------
