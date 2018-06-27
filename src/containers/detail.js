@@ -9,7 +9,6 @@ import MainQuark from './main_quark';
 import QuarkPropertyList from './quark_property_list';
 
 // --------------------------------------------------------
-import { fetchQtypeProperties } from '../actions/qtype_properties';
 import { fetchCurrentQuark } from '../actions/quark';
 import { changeCurrentQuark } from '../actions/quark';
 // --------------------------------------------------------
@@ -32,14 +31,6 @@ class Detail extends Component {
 
         this.onLinkClick = this.onLinkClick.bind(this);
         this.initDetail = props.initDetail.bind(this);
-
-
-
-        // --------------------------------------------------------
-        if (!props.qtype_properties) {
-            props.fetchQtypeProperties();
-        }
-        // --------------------------------------------------------
     }
 
     componentWillReceiveProps(nextProps) {
@@ -140,5 +131,5 @@ function mapStateToProps(state) {
     return state;
 }
 // --------------------------------------------------------
-export default connect(mapStateToProps, { initDetail, fetchQtypeProperties, fetchCurrentQuark, changeCurrentQuark })(Detail);
+export default connect(mapStateToProps, { initDetail, fetchCurrentQuark, changeCurrentQuark })(Detail);
 // --------------------------------------------------------

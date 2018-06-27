@@ -5,12 +5,19 @@ import SearchBar from './search_bar';
 import QuarkNav from './quark_nav';
 import BaryonNav from './baryon_nav';
 import {execLogout} from '../actions/login';
+import { fetchQtypeProperties } from '../actions/qtype_properties';
 
 class Navbar extends Component {
     constructor(props) {
         super(props);
 	this.onLogoutClick = this.onLogoutClick.bind(this);
 	this.execLogout = props.execLogout.bind(this);
+    }
+
+    componentWillMount() {
+        if (!this.props.qtype_properties) {
+            this.props.fetchQtypeProperties();
+        }
     }
 
     onLogoutClick() {
@@ -99,4 +106,4 @@ class Navbar extends Component {
   )
  }
 }
-export default connect(state => state, { execLogout })(Navbar);
+export default connect(state => state, { fetchQtypeProperties, execLogout })(Navbar);
