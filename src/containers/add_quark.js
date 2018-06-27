@@ -78,6 +78,15 @@ class AddQuark extends Component {
 	    let default_image_name = util.fPascalToSnake(this.props.quark_types[values.quark_type_id]) + '.png';
 	    values.image_path = '/img/' + default_image_name
 	}
+	if (!values.is_momentary) {
+	    values.is_momentary = 0;
+	}
+	if (!values.is_private) {
+	    values.is_private = 0;
+	}
+	if (!values.is_exclusive) {
+	    values.is_exclusive = 0;
+	}
 	this.props.execAddQuark(values);
     }
 

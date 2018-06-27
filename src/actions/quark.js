@@ -111,10 +111,11 @@ export const execAddQuark = (form) => {
 	    };
 	}
 
-	let params = new URLSearchParams();
-	Object.keys(form).map((value, index) => {
-	    params.append(value, form[value]);
-	});
+	// let params = new URLSearchParams();
+	// Object.keys(form).map((value, index) => {
+	//     params.append(value, form[value]);
+	// });
+	let params = new URLSearchParams(form);
 
 
 
