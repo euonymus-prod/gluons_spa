@@ -38,7 +38,7 @@ class QuarkNav extends Component {
 	    return '';
 	}
 	// authentication check
-	if (!logged_in_user || !!logged_in_user.status || logged_in_user.status != 1) {
+	if (!logged_in_user || !logged_in_user.status || logged_in_user.status != 1) {
 	    return '';
 	}
 	// authorization check
