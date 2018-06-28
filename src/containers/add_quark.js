@@ -14,6 +14,7 @@ import Navbar from './navbar';
 import { Field, reduxForm } from 'redux-form';
 import { fetchQuarkTypes } from '../actions/quark_types';
 import { execAddQuark, removeAddedQuark } from '../actions/quark';
+import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
 // --------------------------------------------------------
@@ -81,7 +82,11 @@ class AddQuark extends Component {
 	}
 
 	if (nextProps.added_quark) {
-	    let r = alert(nextProps.added_quark.message);
+	    if (!nextProps.added_quark.message) {
+		this.props.execLogout();
+	    } else {
+		let r = alert(nextProps.added_quark.message);
+	    }
 
 	    if (nextProps.added_quark.status != 1) {
 		this.props.removeAddedQuark();
@@ -210,5 +215,5 @@ export default  reduxForm({
 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
   warn
-})(withRouter(connect(state => state, { fetchQuarkTypes, execAddQuark, removeAddedQuark })(AddQuark)));
+})(withRouter(connect(state => state, { fetchQuarkTypes, execAddQuark, removeAddedQuark, execLogout })(AddQuark)));
 // --------------------------------------------------------
