@@ -16,6 +16,7 @@ import { execEditQuark, removeEditedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
+import LoginUtil from '../utils/login';
 // --------------------------------------------------------
 
 const validate = values => {
@@ -68,8 +69,10 @@ class EditQuark extends Component {
     componentWillReceiveProps(nextProps) {
         const { logged_in_user, edited_quark } = this.props;
         // initialize
-	if (!nextProps.logged_in_user) {
-	    this.props.history.push('/');
+	const login_util = new LoginUtil();
+	if (!login_util.isAuthorized(nextProps.logged_in_user, edited_quark)) {
+// TODO: for now it is commented out for working purpose.
+	    // this.props.history.push('/');
 	}
 
 	if (nextProps.edited_quark) {

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import {Link} from 'react-router-dom';
 import {deleteQuark, removeDeletedQuark} from '../actions/quark';
 import { execLogout } from '../actions/login';
+import LoginUtil from '../utils/login';
 
 class QuarkNav extends Component {
     componentWillReceiveProps(nextProps) {
@@ -37,15 +38,10 @@ class QuarkNav extends Component {
 	if (!re.test(this.props.location.pathname) || !current_quark) {
 	    return '';
 	}
-	// authentication check
-	if (!logged_in_user || !logged_in_user.status || logged_in_user.status != 1) {
+	const login_util = new LoginUtil();
+	if (!login_util.isAuthorized(logged_in_user, current_quark)) {
 	    return '';
 	}
-	// authorization check
-	if ((logged_in_user.role != 'admin') && current_quark.is_exclusive && (logged_in_user.id != current_quark.user_id)) {
-	    return '';
-	}
-
 	return (
            <li className="dropdown">
               <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quark <span className="caret"></span></a>

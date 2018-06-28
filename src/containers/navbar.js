@@ -6,6 +6,7 @@ import QuarkNav from './quark_nav';
 import BaryonNav from './baryon_nav';
 import {execLogout} from '../actions/login';
 import { fetchQtypeProperties } from '../actions/qtype_properties';
+import LoginUtil from '../utils/login';
 
 class Navbar extends Component {
     constructor(props) {
@@ -35,10 +36,7 @@ class Navbar extends Component {
 
     render () {
         const { logged_in_user } = this.props;
-        if (logged_in_user) {
-// console.log(logged_in_user);
-        }
-
+	const login_util = new LoginUtil();
 
   return (
 <nav className="navbar navbar-default navbar-static-top">
@@ -60,7 +58,7 @@ class Navbar extends Component {
         <li><Link to="/subjects">一覧</Link></li>
       </ul>
 
-      {(() => { if (logged_in_user) { return (
+      {(() => { if (login_util.isLoggedIn(logged_in_user)) { return (
 
 
         <ul className="nav navbar-nav navbar-right">
@@ -76,7 +74,7 @@ class Navbar extends Component {
                  <li role="separator" className="divider"></li>
                  <li className="dropdown-header">Privacy Modes</li>
 
-              {(() => { if (logged_in_user.role == 'admin') { return (
+              {(() => { if (login_util.isAdmin(logged_in_user)) { return (
                  <li><Link to={'/users/privacy/4'}>Admin</Link></li>
               );} })()}
 

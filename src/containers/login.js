@@ -11,6 +11,8 @@ import {execLogin} from '../actions/login';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 
+import LoginUtil from '../utils/login';
+
 class Login extends Component {
     constructor(props) {
 	super(props);
@@ -34,7 +36,9 @@ class Login extends Component {
 
  render () {
      const { logged_in_user, lastLocation } = this.props
-     if (logged_in_user && logged_in_user.status && logged_in_user.status == 1) {
+
+     const login_util = new LoginUtil();
+     if (login_util.isLoggedIn(logged_in_user)) {
 	 let redirectLocation = '/';
 	 if (lastLocation && (lastLocation.pathname != '/login')) {
 	     redirectLocation = lastLocation;

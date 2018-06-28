@@ -5,7 +5,7 @@ import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK, REMOVE_DELETED_QUARK,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
 	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
 import { API_HOST } from '../statics';
-import QuarkUtil from '../utils/quark';
+import LoginUtil from '../utils/login';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY = '?key=euonymus';
@@ -18,9 +18,10 @@ export const changeSearchKeyword = (keyword) => {
 }
 
 export const deleteQuark = (quark_id) => {
+    const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
-	if (!logged_in_user) {
+	if (!login_util.isLoggedIn(logged_in_user)) {
 	    return {
 		type: DELETE_QUARK_FAILURE,
 		payload: false
@@ -118,7 +119,7 @@ export const fetchPickups = (qtype_properties) => {
 export const execAddQuark = (form) => {
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
-	if (!logged_in_user) {
+	if (!login_util.isLoggedIn(logged_in_user)) {
 	    return {
 		type: ADD_QUARK_FAILURE,
 		payload: false

@@ -17,6 +17,7 @@ import { execAddQuark, removeAddedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
+import LoginUtil from '../utils/login';
 // --------------------------------------------------------
 
 const validate = values => {
@@ -77,7 +78,8 @@ class AddQuark extends Component {
     componentWillReceiveProps(nextProps) {
         const { logged_in_user, added_quark } = this.props;
         // initialize
-	if (!nextProps.logged_in_user) {
+	const login_util = new LoginUtil();
+	if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
 	    this.props.history.push('/');
 	}
 

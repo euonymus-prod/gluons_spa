@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
 import {Link} from 'react-router-dom';
+import LoginUtil from '../utils/login';
 
 class BaryonNav extends Component {
     renderGoToBaryon = (quark_id) => {
@@ -12,7 +13,8 @@ class BaryonNav extends Component {
 
     render () {
         const { quark, logged_in_user } = this.props;
-	if (!logged_in_user) {
+	const login_util = new LoginUtil();
+	if (!login_util.isLoggedIn(logged_in_user)) {
 	    return '';
 	}
 	var re = new RegExp("^\/subjects\/relations\/");
