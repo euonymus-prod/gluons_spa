@@ -12,7 +12,7 @@ import Navbar from './navbar';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchQuarkTypes } from '../actions/quark_types';
-import { execEditQuark, removeEditedQuark } from '../actions/quark';
+import { readEditingQuark, execEditQuark, removeEditedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
@@ -59,34 +59,37 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 class EditQuark extends Component {
     // --------------------------------------------------------
     componentWillMount() {
-	const { quark_types } = this.props;
+	const { quark_types, editing_quark, quarks } = this.props;
         if (!quark_types) {
             this.props.fetchQuarkTypes();
         }
+	if (!editing_quark) {
+	    this.props.readEditingQuark(this.props.match.params.id, quarks);
+	}
     }
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
-        const { logged_in_user, edited_quark } = this.props;
+        const { logged_in_user, editing_quark } = this.props;
         // initialize
 	const login_util = new LoginUtil();
-	if (!login_util.isAuthorized(nextProps.logged_in_user, edited_quark)) {
+	if (!login_util.isAuthorized(nextProps.logged_in_user, editing_quark)) {
 // TODO: for now it is commented out for working purpose.
 	    // this.props.history.push('/');
 	}
 
-	if (nextProps.edited_quark) {
-	    if (!nextProps.edited_quark.message) {
+	if (nextProps.editing_quark && (nextProps.editing_quark.status >= 0)) {
+	    if (!nextProps.editing_quark.message) {
 		alert('Please login again');
 		this.props.execLogout();
 	    } else {
-		alert(nextProps.edited_quark.message);
+		alert(nextProps.editing_quark.message);
 	    }
 
-	    if (nextProps.edited_quark.status != 1) {
+	    if (nextProps.editing_quark.status != 1) {
 		this.props.removeEditedQuark();
-	    } else if ( !edited_quark || (nextProps.edited_quark.id != edited_quark.id) ) {
-		this.props.history.push('/subjects/relations/' + nextProps.edited_quark.result.name);
+	    } else if ( !editing_quark || (nextProps.editing_quark.id != editing_quark.id) ) {
+		this.props.history.push('/subjects/relations/' + nextProps.editing_quark.result.name);
 	    }
 	}
     }
@@ -208,5 +211,5 @@ export default  reduxForm({
   form: 'edit_quark', // a unique name for this form
 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
-})(withRouter(connect(state => state, { fetchQuarkTypes, execEditQuark, removeEditedQuark, execLogout })(EditQuark)));
+})(withRouter(connect(state => state, { fetchQuarkTypes, readEditingQuark, execEditQuark, removeEditedQuark, execLogout })(EditQuark)));
 // --------------------------------------------------------
