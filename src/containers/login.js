@@ -1,6 +1,11 @@
+/*
+  Thanks to react-router-last-location
+  github : https://github.com/hinok/react-router-last-location
+*/
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { withLastLocation } from 'react-router-last-location';
 
 import {execLogin} from '../actions/login';
 import GlobalFooter from '../components/global_footer';
@@ -28,6 +33,17 @@ class Login extends Component {
     };
 
  render () {
+     const { logged_in_user, lastLocation } = this.props
+     if (logged_in_user && logged_in_user.status && logged_in_user.status == 1) {
+	 let redirectLocation = '/';
+	 if (lastLocation && (lastLocation.pathname != '/login')) {
+	     redirectLocation = lastLocation;
+	 }
+	 return (
+	    <Redirect to={redirectLocation} />
+	 );
+     }
+
   return (
    <div>
       <Navbar />
@@ -66,4 +82,4 @@ class Login extends Component {
  }
 }
 // export default connect(state => state)(Login);
-export default connect(state => state, { execLogin })(Login);
+export default connect(state => state, { execLogin })(withLastLocation(Login));

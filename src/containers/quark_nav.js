@@ -37,6 +37,11 @@ class QuarkNav extends Component {
 	if (!re.test(this.props.location.pathname) || !current_quark) {
 	    return '';
 	}
+	// authentication check
+	if (!logged_in_user || !!logged_in_user.status || logged_in_user.status != 1) {
+	    return '';
+	}
+	// authorization check
 	if ((logged_in_user.role != 'admin') && current_quark.is_exclusive && (logged_in_user.id != current_quark.user_id)) {
 	    return '';
 	}

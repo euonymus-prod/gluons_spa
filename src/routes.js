@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { LastLocationProvider } from 'react-router-last-location';
 import ScrollMemory from 'react-router-scroll-memory';
 
 import Home          from './containers/home';
@@ -18,6 +19,7 @@ import Privacy       from './components/privacy';
 export default () => {
  return (
    <BrowserRouter>
+     <LastLocationProvider>
       <div>
          <ScrollMemory />
          <Switch>
@@ -41,6 +43,7 @@ export default () => {
             <Route path='/privacy' component={Privacy}/>
          </Switch>
       </div>
+     </LastLocationProvider>
    </BrowserRouter>
  )
 }
