@@ -3,12 +3,18 @@ import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
 import {Link} from 'react-router-dom';
 import {deleteQuark, removeDeletedQuark} from '../actions/quark';
+import { execLogout } from '../actions/login';
 
 class QuarkNav extends Component {
     componentWillReceiveProps(nextProps) {
         const { deleted_quark } = this.props;
 	if (nextProps.deleted_quark) {
-	    let r = alert(nextProps.deleted_quark.message);
+	    if (!nextProps.deleted_quark.message) {
+		this.props.execLogout();
+		alert('Please login again');
+	    } else {
+		alert(nextProps.deleted_quark.message);
+	    }
 	    this.props.removeDeletedQuark();
 
 	    if (nextProps.deleted_quark.status == 1) {
@@ -46,4 +52,4 @@ class QuarkNav extends Component {
 	)
     }
 }
-export default withRouter(connect(state => state, { deleteQuark, removeDeletedQuark })(QuarkNav));
+export default withRouter(connect(state => state, { deleteQuark, removeDeletedQuark, execLogout })(QuarkNav));

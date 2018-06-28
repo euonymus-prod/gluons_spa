@@ -83,9 +83,10 @@ class AddQuark extends Component {
 
 	if (nextProps.added_quark) {
 	    if (!nextProps.added_quark.message) {
+		alert('Please login again');
 		this.props.execLogout();
 	    } else {
-		let r = alert(nextProps.added_quark.message);
+		alert(nextProps.added_quark.message);
 	    }
 
 	    if (nextProps.added_quark.status != 1) {
