@@ -207,9 +207,24 @@ class EditQuark extends Component {
  }
 }
 // --------------------------------------------------------
-export default  reduxForm({
-  form: 'edit_quark', // a unique name for this form
-　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
-  validate,
-})(withRouter(connect(state => state, { fetchQuarkTypes, readEditingQuark, execEditQuark, removeEditedQuark, execLogout })(EditQuark)));
+// export default  reduxForm({
+//   form: 'edit_quark', // a unique name for this form
+// 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
+//   validate,
+// })(withRouter(connect(state => state, { fetchQuarkTypes, readEditingQuark, execEditQuark, removeEditedQuark, execLogout })(EditQuark)));
+
+const EditQuarkForm = reduxForm({
+  form: 'edit_quark',
+  enableReinitialize: true
+})(EditQuark)
+
+export default connect(
+  ({ logged_in_user, quark_types, editing_quark, quarks }, ownProps) => {
+    return { 
+	initialValues: editing_quark,
+	logged_in_user, quark_types, editing_quark, quarks
+    };
+  },
+  { fetchQuarkTypes, readEditingQuark, execEditQuark, removeEditedQuark, execLogout }
+)(withRouter(EditQuarkForm))
 // --------------------------------------------------------
