@@ -10,6 +10,7 @@ import QuarkList     from './containers/quarks';
 import Login         from './containers/login';
 import Signup        from './containers/signup';
 import AddQuark      from './containers/add_quark';
+import EditQuark     from './containers/edit_quark';
 import Contacts      from './containers/contacts';
 
 import Terms         from './components/terms';
@@ -35,6 +36,7 @@ export default () => {
             <Route path='/signup' component={Signup}/>
 
             <Route path='/subjects/add' component={AddQuark}/>
+            <Route path='/subjects/edit/:id' component={EditQuark}/>
 
             <Route path='/contacts' component={Contacts}/>
 
