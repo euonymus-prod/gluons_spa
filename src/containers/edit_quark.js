@@ -12,7 +12,7 @@ import Navbar from './navbar';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchQuarkTypes } from '../actions/quark_types';
-import { readEditingQuark, execEditQuark, removeEditedQuark } from '../actions/quark';
+import { fetchEditingQuark, readEditingQuark, execEditQuark, removeEditedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
@@ -59,25 +59,31 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 class EditQuark extends Component {
     // --------------------------------------------------------
     componentWillMount() {
-	const { quark_types, editing_quark, quarks } = this.props;
+	const { qtype_properties, quark_types, editing_quark, quarks } = this.props;
         if (!quark_types) {
             this.props.fetchQuarkTypes();
         }
-	if (!editing_quark) {
-	    this.props.readEditingQuark(this.props.match.params.id, quarks);
+        // initialize
+        if (qtype_properties && (Object.keys(quarks.list).length == 0)) {
+            this.props.fetchEditingQuark(this.props.match.params.id, qtype_properties);
 	}
     }
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
+	const login_util = new LoginUtil();
+
         const { logged_in_user, editing_quark } = this.props;
         // initialize
-	const login_util = new LoginUtil();
-	if (!login_util.isAuthorized(nextProps.logged_in_user, editing_quark)) {
-// TODO: for now it is commented out for working purpose.
-	    // this.props.history.push('/');
+	if (!editing_quark || (nextProps.match.params.id != this.props.match.params.id) ||
+	    (nextProps.match.params.id != editing_quark.id)) {
+	    this.props.readEditingQuark(nextProps.match.params.id, nextProps.quarks);
+	} else if (!login_util.isAuthorized(nextProps.logged_in_user, editing_quark)) {
+            // !Important: Authorization check. This has to be after initialization of editing_quark
+	    this.props.history.push('/');
 	}
 
+	// after editing post
 	if (nextProps.editing_quark && (nextProps.editing_quark.status >= 0)) {
 	    if (!nextProps.editing_quark.message) {
 		alert('Please login again');
@@ -219,12 +225,16 @@ const EditQuarkForm = reduxForm({
 })(EditQuark)
 
 export default connect(
-  ({ logged_in_user, quark_types, editing_quark, quarks }, ownProps) => {
-    return { 
+  ({ qtype_properties, logged_in_user, quark_types, editing_quark, quarks }, ownProps) => {
+    let ret = { 
 	initialValues: editing_quark,
-	logged_in_user, quark_types, editing_quark, quarks
+	qtype_properties, logged_in_user, quark_types, editing_quark, quarks
     };
+    if (ret.initialValues) {
+	ret.initialValues['auto_fill'] = true
+    }
+    return ret
   },
-  { fetchQuarkTypes, readEditingQuark, execEditQuark, removeEditedQuark, execLogout }
+  { fetchQuarkTypes, fetchEditingQuark, readEditingQuark, execEditQuark, removeEditedQuark, execLogout }
 )(withRouter(EditQuarkForm))
 // --------------------------------------------------------

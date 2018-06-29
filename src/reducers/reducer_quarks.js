@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK } from '../types/quark';
+import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK,
+	 FETCH_EDITING_QUARK } from '../types/quark';
 import { FETCH_GLUONS } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
@@ -17,11 +18,18 @@ export default (state = initState, action) => {
     switch(action.type) {
     case FETCH_ONE_QUARK:
 	quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
-	let newState = {
+	newQuarks = {
 	    list:          { ...state.list, [quark.id]: quark },
 	    quark_name2id: {...state.quark_name2id, [quark.name]: quark.id }
 	};
-	return newState;
+	return newQuarks;
+    case FETCH_EDITING_QUARK:
+	quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
+	newQuarks = {
+	    list:          { ...state.list, [quark.id]: quark },
+	    quark_name2id: {...state.quark_name2id, [quark.name]: quark.id }
+	};
+	return newQuarks;
     case FETCH_GLUONS:
 	// add gluons on current quark 
 	let current_quark = JSON.parse(JSON.stringify(quark_util.addExtendedInfo(copiedState.list[action.payload.quark.id], action.payload.qtype_properties)));

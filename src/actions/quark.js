@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK, REMOVE_DELETED_QUARK,
-	 READ_EDITING_QUARK, READ_EDITING_QUARK_FAILURE,
+	 FETCH_EDITING_QUARK, FETCH_EDITING_QUARK_FAILURE, READ_EDITING_QUARK, READ_EDITING_QUARK_FAILURE,
 	 FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE, FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
 	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
@@ -165,8 +165,22 @@ export const removeDeletedQuark = (form) => {
     };
 }
 
+export const fetchEditingQuark = (quark_id, qtype_properties) => {
+    return dispatch => {
+	axios.get(`${ROOT_URL}quark_by_id/${quark_id}${API_KEY}`)
+	    .then((response) => {
+		dispatch({
+		    type: FETCH_EDITING_QUARK,
+		    payload: {qtype_properties, response: response.data}
+		});
+	    }).catch((response) => dispatch({
+		type: FETCH_EDITING_QUARK_FAILURE,
+		error: response.error
+	    }))
+    }
+}
 export const readEditingQuark = (quark_id, quarks) => {
-    if (!quarks || !quarks.list) {
+    if (!quarks || !quarks.list || Object.keys(quarks.list).length == 0) {
 	return {
 	    type: READ_EDITING_QUARK_FAILURE,
 	    payload: null

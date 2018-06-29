@@ -30,4 +30,6 @@ export const REMOVE_DELETED_QUARK    = 'REMOVE_DELETED_QUARK';
 export const READ_EDITING_QUARK      = 'READ_EDITING_QUARK';
 export const READ_EDITING_QUARK_FAILURE = 'READ_EDITING_QUARK_FAILURE';
 
+export const FETCH_EDITING_QUARK     = 'FETCH_EDITING_QUARK';
+export const FETCH_EDITING_QUARK_FAILURE = 'FETCH_EDITING_QUARK_FAILURE';
 // --------------------------------------------------------
