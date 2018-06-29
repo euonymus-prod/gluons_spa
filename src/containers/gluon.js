@@ -17,10 +17,26 @@ class Gluon extends Component {
 	return res;
     }
 
-    renderGluonEdits() {
+    onDeleteClick(event) {
+console.log(event.target.name);
+/*if (confirm(&quot;Are you sure you want to delete?&quot;)) { document.post_5b35a29c8e92d208113568.submit(); } event.returnValue = false; return false;*/
+	if (confirm('Are you sure you want to delete?')) {
+	    // let doc_name = 'post_delete_gluon_' + gluon_id;
+	    // document.doc_name.submit();
+	}
+	event.returnValue = false;
+	return false;
+    }
+
+    renderGluonEdits(gluon) {
+console.log(gluon);
 	return (
 	   <span>
-<a href="/relations/edit/c86a8d45-70a5-4d26-95fb-39246d98bc66" className="glyphicon glyphicon glyphicon-pencil"></a>                         <form name="post_5b35a29c8e92d208113568" style={{display:"none"}} method="post" action="/relations/delete/c86a8d45-70a5-4d26-95fb-39246d98bc66"><input type="hidden" name="_method" value="POST"/></form><a href="#" className="glyphicon glyphicon-remove-sign" onClick="if (confirm(&quot;Are you sure you want to delete?&quot;)) { document.post_5b35a29c8e92d208113568.submit(); } event.returnValue = false; return false;"></a>
+              <Link to={`/relations/edit/${gluon.id}`} className="glyphicon glyphicon glyphicon-pencil"></Link>
+              <form name={`post_delete_gluon_${gluon.id}`} style={{display:"none"}} method="post" action={`/relations/delete/${gluon.id}`}>
+                 <input type="hidden" name="_method" value="POST"/>
+              </form>
+              <a href="javascript:void(0)" name='hh' className="glyphicon glyphicon-remove-sign" onClick={this.onDeleteClick}></a>
            </span>
 	)
     }
@@ -31,14 +47,15 @@ class Gluon extends Component {
                <h4 className="media-heading">
                   {this.props.gluon.active.name} は
                   <Link to={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</Link> {this.props.gluon.relation} {this.props.gluon.suffix}
-                  {this.renderGluonEdits()}
+                  {this.renderGluonEdits(this.props.gluon)}
                </h4>
 	    );
 	} else if (this.props.current_quark.id == this.props.gluon.passive_id) {
             return (
                <h4 className="media-heading">
-                   <Link to={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</Link> は
-                   {this.props.gluon.passive.name} {this.props.gluon.relation} {this.props.gluon.suffix}
+                  <Link to={`/subjects/relations/${this.gluedQuark().name}`}>{this.gluedQuark().name}</Link> は
+                  {this.props.gluon.passive.name} {this.props.gluon.relation} {this.props.gluon.suffix}
+                  {this.renderGluonEdits(this.props.gluon)}
                </h4>
 	    );
 	}
