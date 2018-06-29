@@ -118,6 +118,7 @@ export const fetchPickups = (qtype_properties) => {
 }
 
 export const execAddQuark = (form) => {
+    const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
 	if (!login_util.isLoggedIn(logged_in_user)) {
