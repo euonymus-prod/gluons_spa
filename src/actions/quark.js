@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK, REMOVE_DELETED_QUARK,
 	 FETCH_EDITING_QUARK, FETCH_EDITING_QUARK_FAILURE, READ_EDITING_QUARK, READ_EDITING_QUARK_FAILURE,
+	 EDIT_QUARK, EDIT_QUARK_FAILURE,
 	 FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE, FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
 	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
@@ -192,6 +193,37 @@ export const readEditingQuark = (quark_id, quarks) => {
 	payload: quarks.list[quark_id]
     };
 }
+export const execEditQuark = (form) => {
+    const login_util = new LoginUtil();
+    return dispatch => {
+	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+	if (!login_util.isLoggedIn(logged_in_user) || !form.id ) {
+	    return {
+		type: EDIT_QUARK_FAILURE,
+		payload: false
+	    };
+	}
+	let params = new URLSearchParams(form);
+	axios.post(`${ROOT_URL}edit_quark/form.id${API_KEY}`, params, {
+	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
+	    .then((response) => {
+console.log(response);
+		dispatch({
+		    type: EDIT_QUARK, 
+		    payload: response.data
+		});
+	    }).catch((response) => dispatch({
+		type: EDIT_QUARK_FAILURE,
+		error: response.error
+	    }))
+    }
+}
+
 
 
 // --------------------------------------------------------

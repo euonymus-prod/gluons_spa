@@ -115,7 +115,6 @@ class EditQuark extends Component {
 	if (!values.is_exclusive) {
 	    values.is_exclusive = 0;
 	}
-console.log(values)
 	this.props.execEditQuark(values);
     }
 

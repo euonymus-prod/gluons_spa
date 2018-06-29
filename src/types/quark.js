@@ -32,4 +32,8 @@ export const READ_EDITING_QUARK_FAILURE = 'READ_EDITING_QUARK_FAILURE';
 
 export const FETCH_EDITING_QUARK     = 'FETCH_EDITING_QUARK';
 export const FETCH_EDITING_QUARK_FAILURE = 'FETCH_EDITING_QUARK_FAILURE';
+
+export const EDIT_QUARK              = 'EDIT_QUARK';
+export const EDIT_QUARK_FAILURE      = 'EDIT_QUARK_FAILURE';
+
 // --------------------------------------------------------
