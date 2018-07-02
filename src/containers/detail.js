@@ -109,10 +109,10 @@ class Detail extends Component {
             <div className="col-md-9 subject-relation-list">
                <ul className="nav nav-pills">
                   <li role="presentation" className={this.state.activeActiveness}>
-                     <a href="#" name="active" onClick={this.onLinkClick} >Active</a>
+                     <a href="javascript:void(0)" name="active" onClick={this.onLinkClick} >Active</a>
                   </li>
                   <li role="presentation" className={this.state.noneActiveness}>
-                     <a href="#" name="none" onClick={this.onLinkClick} >None</a>
+                     <a href="javascript:void(0)" name="none" onClick={this.onLinkClick} >None</a>
                   </li>
                </ul>
 

@@ -3,12 +3,18 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import SubGluonList from './sub_gluon_list';
+import { deleteGluon } from '../actions/gluons';
 
 import Util from '../utils/common';
 import GluonUtil from '../utils/gluon';
 let gluon_util = new GluonUtil();
 
 class Gluon extends Component {
+    constructor(props) {
+        super(props);
+	this.onDeleteClick = this.onDeleteClick.bind(this);
+    }
+
     gluedQuark() {
 	let res = gluon_util.gluedQuark(this.props.current_quark, this.props.gluon);
 	if (!res) {
@@ -18,25 +24,24 @@ class Gluon extends Component {
     }
 
     onDeleteClick(event) {
-console.log(event.target.name);
-/*if (confirm(&quot;Are you sure you want to delete?&quot;)) { document.post_5b35a29c8e92d208113568.submit(); } event.returnValue = false; return false;*/
 	if (confirm('Are you sure you want to delete?')) {
 	    // let doc_name = 'post_delete_gluon_' + gluon_id;
 	    // document.doc_name.submit();
+	    this.props.deleteGluon(this.props.gluon.id)
 	}
-	event.returnValue = false;
 	return false;
     }
 
     renderGluonEdits(gluon) {
-console.log(gluon);
 	return (
 	   <span>
               <Link to={`/relations/edit/${gluon.id}`} className="glyphicon glyphicon glyphicon-pencil"></Link>
+{/*
               <form name={`post_delete_gluon_${gluon.id}`} style={{display:"none"}} method="post" action={`/relations/delete/${gluon.id}`}>
                  <input type="hidden" name="_method" value="POST"/>
               </form>
-              <a href="javascript:void(0)" name='hh' className="glyphicon glyphicon-remove-sign" onClick={this.onDeleteClick}></a>
+*/}
+              <a href="javascript:void(0)" className="glyphicon glyphicon-remove-sign" onClick={this.onDeleteClick}></a>
            </span>
 	)
     }
@@ -82,4 +87,5 @@ console.log(gluon);
 	)
     }
 }
-export default connect(state => state)(Gluon);
+// export default connect(state => state)(Gluon);
+export default connect(state => state, { deleteGluon })(Gluon);

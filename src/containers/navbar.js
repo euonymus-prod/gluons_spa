@@ -68,7 +68,7 @@ class Navbar extends Component {
            <BaryonNav />
 
            <li className="dropdown">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{ logged_in_user.username } <span className="caret"></span></a>
+              <a href="javascript:void(0)" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{ logged_in_user.username } <span className="caret"></span></a>
               <ul className="dropdown-menu">
                  <li><Link to={`/users/edit/${logged_in_user.id}`}>Edit User</Link></li>
                  <li role="separator" className="divider"></li>
@@ -82,7 +82,7 @@ class Navbar extends Component {
                  <li><Link to={'/users/privacy/2'}>Private</Link></li>
                  <li><Link to={'/users/privacy/3'}>All</Link></li>
                  <li role="separator" className="divider"></li>
-                 <li><a href="#" onClick={this.onLogoutClick}>Logout</a></li>
+                 <li><a href="javascript:void(0)" onClick={this.onLogoutClick}>Logout</a></li>
               </ul>
            </li>
         </ul>

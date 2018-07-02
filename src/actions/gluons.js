@@ -1,15 +1,16 @@
 import axios from 'axios';
 
-import { FETCH_GLUONS, FETCH_GLUONS_FAILURE,
-	 FETCH_SUB_GLUONS, FETCH_SUB_GLUONS_FAILURE} from '../types/gluon';
+import { FETCH_GLUONS, FETCH_GLUONS_FAILURE, DELETE_GLUON, DELETE_GLUON_FAILURE,
+	 } from '../types/gluon';
 import { API_HOST } from '../statics';
+import LoginUtil from '../utils/login';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY = '?key=euonymus';
 
 export const fetchGluons = (quark, qtype_properties, limit = 100) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}gluons/${quark.id}/${quark.quark_type_id}/${API_KEY}&limit=${limit}`)
+	axios.get(`${ROOT_URL}gluons/list/${quark.id}/${quark.quark_type_id}/${API_KEY}&limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_GLUONS,
@@ -22,18 +23,33 @@ export const fetchGluons = (quark, qtype_properties, limit = 100) => {
     }
 }
 
-// このactionは不要かも
-export const fetchSubGluons = (quark, qtype_properties) => {
+export const deleteGluon = (gluon_id) => {
+    const login_util = new LoginUtil();
     return dispatch => {
-	axios.get(`${ROOT_URL}gluons/${quark.id}/${quark.quark_type_id}/${API_KEY}`)
+	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+	if (!login_util.isLoggedIn(logged_in_user)) {
+	    return {
+		type: DELETE_GLUON_FAILURE,
+		payload: false
+	    };
+	}
+
+	axios.delete(`${ROOT_URL}gluons/delete/${gluon_id}${API_KEY}`,  {
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
 	    .then((response) => {
+console.log(response)
 		dispatch({
-		    type: FETCH_SUB_GLUONS,
-		    payload: {qtype_properties, quark, response: response.data}
+		    type: DELETE_GLUON,
+		    payload: response.data
 		});
 	    }).catch((response) => dispatch({
-		type: FETCH_SUB_GLUONS_FAILURE,
+		type: DELETE_GLUON_FAILURE,
 		error: response.error
 	    }))
     }
 }
+
