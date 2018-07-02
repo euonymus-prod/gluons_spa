@@ -1,3 +1,6 @@
+/*
+This reducer is not used !!!
+*/
 import _ from 'lodash';
 import { FETCH_GLUONS } from '../types/gluon';
 
