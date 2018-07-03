@@ -11,6 +11,8 @@ import Login         from './containers/login';
 import Signup        from './containers/signup';
 import AddQuark      from './containers/add_quark';
 import EditQuarkForm from './containers/edit_quark';
+import AddGluon      from './containers/add_gluon';
+//import EditGluonForm from './containers/edit_gluon';
 import Contacts      from './containers/contacts';
 
 import Terms         from './components/terms';
@@ -37,6 +39,11 @@ export default () => {
 
             <Route path='/subjects/add' component={AddQuark}/>
             <Route path='/subjects/edit/:id' component={EditQuarkForm}/>
+
+            <Route path='/relations/add' component={AddGluon}/>
+{/*
+            <Route path='/relations/edit/:id' component={EditGluonForm}/>
+*/}
 
             <Route path='/contacts' component={Contacts}/>
 
