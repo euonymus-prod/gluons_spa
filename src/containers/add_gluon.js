@@ -112,7 +112,7 @@ class AddGluon extends Component {
      <Field name="gluon_type_id" id="gluon-type-id" component="select">
         {this.renderGluonTypes()}
      </Field>
-{/* {touched && (error && <span className="validation-error"><br />{error}</span>)} */}
+     {touched && (error && <span className="validation-error"><br />{error}</span>)}
   </div>
     )
 
@@ -145,49 +145,35 @@ class AddGluon extends Component {
                  <legend>Add New Gluon</legend>
                  <div className="form-group">
 
-                   <Field name="gluon_type_id" component={this.renderSelect} type="select" id="gluon-type-id" label="Gluon Type" />
+                    <Field name="gluon_type_id" component={this.renderSelect}
+                           type="select" id="gluon-type-id" label="Gluon Type" />
                     <br />
+                    <Field name="passive" component={renderField} type="text" id="passive" label="Passive" />
+                    <Field name="relation" component={renderField} type="text" id="relation" label="Relation" />
+                    <Field name="suffix" component={renderField} type="text" id="suffix" label="Suffix" />
 
+                    <div className="input text">
+                       <label htmlFor="url">Start</label>
+                       <Field type='date' component="input" className="form-control date" name="start" />
+                       <label htmlFor="url">End</label>
+                       <Field type='date' component="input" className="form-control date" name="end" />
+                    </div>
 
-<div className="input text">
-   <label htmlFor="passive">Passive</label>
-   <input type="text" name="passive" className="form-control" id="passive"/>
-</div>
-<div className="input text required">
-   <label htmlFor="relation">Relation</label>
-   <input type="text" name="relation" className="form-control" required="required" maxLength="255" id="relation" value=""/>
-</div>
-<div className="input text">
-   <label htmlFor="suffix">Suffix</label>
-   <input type="text" name="suffix" className="form-control" maxLength="255" id="suffix" value=""/>
-</div>
-<div className="input text">
-    <label htmlFor="url">Start</label>
-    <input type='date' className="form-control date" name="start" />
-    <label htmlFor="url">End</label>
-    <input type='date' className="form-control date" name="end" />
-</div>
-<div className="input text">
-   <label htmlFor="start-accuracy">Start Accuracy</label>
-   <input type="text" name="start_accuracy" className="form-control" maxLength="10" id="start-accuracy"/>
-</div>
-<div className="input text">
-   <label htmlFor="end-accuracy">End Accuracy</label>
-   <input type="text" name="end_accuracy" className="form-control" maxLength="10" id="end-accuracy"/>
-</div>
-<div className="input checkbox">
-   <input type="hidden" name="is_momentary" value="0"/>
-   <label htmlFor="is-momentary">
-      <input type="checkbox" name="is_momentary" value="1" id="is-momentary" onChange={()=>true} />Is Momentary
-   </label>
-</div>
-<div className="input checkbox">
-   <input type="hidden" name="is_exclusive" value="0"/>
-   <label htmlFor="is-exclusive">
-      <input type="checkbox" name="is_exclusive" value="1" checked="checked" id="is-exclusive" onChange={()=>true} />Is Exclusive
-   </label>
-</div>
+                    <Field name="start_accuracy" component={renderField} type="text" id="start-accuracy" label="Start Accuracy" />
+                    <Field name="end_accuracy" component={renderField} type="text" id="end-accuracy" label="End Accuracy" />
 
+                    <div className="input checkbox">
+                       <label htmlFor="is-momentary">
+                          <Field name="is_momentary" id="is-momentary" component="input" type="checkbox" />
+                          Is Momentary
+                       </label>
+                    </div>
+                    <div className="input checkbox">
+                       <label htmlFor="is-exclusive">
+                          <Field name="is_exclusive" id="is-exclusive" component="input" type="checkbox" />
+                          Is Momentary
+                       </label>
+                    </div>
 
                  </div>
               </fieldset>
