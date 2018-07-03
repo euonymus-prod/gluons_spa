@@ -12,6 +12,7 @@ import pickupsReducer from './reducers/reducer_pickups'
 // import gluonsReducer from './reducers/reducer_gluons'
 import { reducer as formReducer } from 'redux-form'
 import quarkTypesReducer from './reducers/reducer_quark_types'
+import gluonTypesReducer from './reducers/reducer_gluon_types'
 import addedQuarkReducer from './reducers/reducer_added_quark'
 import deletedQuarkReducer from './reducers/reducer_deleted_quark'
 import editingQuarkReducer from './reducers/reducer_editing_quark'
@@ -31,6 +32,7 @@ const reducer = combineReducers({
     pickups:          pickupsReducer,
     // gluons:           gluonsReducer,
     quark_types:      quarkTypesReducer,
+    gluon_types:      gluonTypesReducer,
     form:             formReducer,
     added_quark:      addedQuarkReducer,
     deleted_quark:    deletedQuarkReducer,

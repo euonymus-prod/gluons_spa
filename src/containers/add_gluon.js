@@ -12,7 +12,7 @@ import Navbar from './navbar';
 
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
-// import { fetchQuarkTypes } from '../actions/quark_types';
+import { fetchGluonTypes } from '../actions/gluon_types';
 // import { execAddQuark, removeAddedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
@@ -59,10 +59,10 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 class AddGluon extends Component {
     // --------------------------------------------------------
     componentWillMount() {
-	// const { quark_types } = this.props;
-        // if (!quark_types) {
-        //     this.props.fetchQuarkTypes();
-        // }
+	const { gluon_types } = this.props;
+        if (!gluon_types) {
+            this.props.fetchGluonTypes();
+        }
     }
     // --------------------------------------------------------
 
@@ -108,21 +108,24 @@ class AddGluon extends Component {
 
     renderSelect = ({ input, label, type, meta: { touched, error } }) => (
   <div className="input select">
-     // <label htmlFor={input.id}>{label}</label>
-     // <Field name="quark_type_id" id="quark-type-id" component="select">
-     //    {this.renderQuarkTypes()}
-     // </Field>
-     // {touched && (error && <span className="validation-error"><br />{error}</span>)}
+     <label htmlFor="gluon-type-id">Gluon Type</label>
+     <Field name="gluon_type_id" id="gluon-type-id" component="select">
+        {this.renderGluonTypes()}
+     </Field>
+{/* {touched && (error && <span className="validation-error"><br />{error}</span>)} */}
   </div>
     )
 
-    renderQuarkTypes() {
-	// const { quark_types } = this.props;
-	// return Object.keys(quark_types).map((value, index) => {
-	//     return (
-        //        <option value={value} key={value}>{quark_types[value]}</option>
-	//     );
-	// });
+    renderGluonTypes() {
+	const { gluon_types } = this.props;
+	if (!gluon_types) {
+	    return '';
+	}
+	return Object.keys(gluon_types).map((value, index) => {
+	    return (
+               <option value={value} key={value}>{gluon_types[value]}</option>
+	    );
+	});
     }
 
  render () {
@@ -142,14 +145,7 @@ class AddGluon extends Component {
                  <legend>Add New Gluon</legend>
                  <div className="form-group">
 
-
-                    <div className="input select">
-                       <label htmlFor="gluon-type-id">Gluon Type</label>
-                       <select name="gluon_type_id" id="gluon-type-id">
-                          <option value="">選択してください</option>
-                          <option value="1">nationality</option>
-                       </select>
-                    </div>
+                   <Field name="gluon_type_id" component={this.renderSelect} type="select" id="gluon-type-id" label="Gluon Type" />
                     <br />
 
 
@@ -211,7 +207,7 @@ export default  reduxForm({
 // 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
 // })(withRouter(connect(state => state, { fetchQuarkTypes, execAddQuark, removeAddedQuark, execLogout })(AddGluon)));
-})(withRouter(connect(state => state, { execLogout })(AddGluon)));
+})(withRouter(connect(state => state, { fetchGluonTypes, execLogout })(AddGluon)));
 // --------------------------------------------------------
 
 /*
