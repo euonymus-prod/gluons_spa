@@ -1,5 +1,5 @@
 import { CHANGE_CURRENT_QUARK } from '../types/quark';
-import { FETCH_GLUONS, FETCH_GLUONS_FAILURE, FETCH_ONE_QUARK_NOT_FOUND } from '../types/gluon';
+import { FETCH_GLUONS, FETCH_GLUONS_FAILURE, FETCH_ONE_QUARK_NOT_FOUND, ADD_GLUON } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
 
@@ -24,6 +24,9 @@ export default (state = initState, action) => {
     case FETCH_ONE_QUARK_NOT_FOUND:
 	return action.payload
 	
+    case ADD_GLUON:
+	return initState
+
     default :
 	return state
     }

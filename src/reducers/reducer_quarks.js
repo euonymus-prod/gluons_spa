@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK,
 	 FETCH_EDITING_QUARK } from '../types/quark';
+import { ADD_GLUON } from '../types/gluon';
 import { FETCH_GLUONS } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
@@ -110,6 +111,9 @@ export default (state = initState, action) => {
 	} else {
 	    return state
 	}
+
+    case ADD_GLUON:
+	return initState
 
     default :
 	return state
