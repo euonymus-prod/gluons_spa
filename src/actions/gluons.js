@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FETCH_GLUONS, FETCH_GLUONS_FAILURE, DELETE_GLUON, DELETE_GLUON_FAILURE,
+import { ADD_GLUON, ADD_GLUON_FAILURE, REMOVE_ADDED_GLUON, FETCH_GLUONS, FETCH_GLUONS_FAILURE, DELETE_GLUON, DELETE_GLUON_FAILURE,
 	 } from '../types/gluon';
 import { API_HOST } from '../statics';
 import LoginUtil from '../utils/login';
@@ -21,6 +21,45 @@ export const fetchGluons = (quark, qtype_properties, limit = 100) => {
 		error: response.error
 	    }))
     }
+}
+
+
+export const addGluon = (form) => {
+    const login_util = new LoginUtil();
+    return dispatch => {
+	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+	if (!login_util.isLoggedIn(logged_in_user)) {
+	    return {
+		type: ADD_GLUON_FAILURE,
+		payload: false
+	    };
+	}
+
+	let params = new URLSearchParams(form);
+	axios.post(`${ROOT_URL}gluons/add${API_KEY}`, params, {
+	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
+	    .then((response) => {
+		dispatch({
+		    type: ADD_GLUON,
+		    payload: response.data
+		});
+	    }).catch((response) => dispatch({
+		type: ADD_GLUON_FAILURE,
+		error: response.error
+	    }))
+    }
+}
+
+export const removeAddedGluon = (form) => {
+    return {
+	type: REMOVE_ADDED_GLUON,
+	payload: null
+    };
 }
 
 export const deleteGluon = (gluon_id) => {

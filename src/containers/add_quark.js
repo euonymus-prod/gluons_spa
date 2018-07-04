@@ -13,7 +13,7 @@ import Navbar from './navbar';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchQuarkTypes } from '../actions/quark_types';
-import { execAddQuark, removeAddedQuark } from '../actions/quark';
+import { addQuark, removeAddedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
@@ -114,7 +114,7 @@ class AddQuark extends Component {
 	if (!values.is_exclusive) {
 	    values.is_exclusive = 0;
 	}
-	this.props.execAddQuark(values);
+	this.props.addQuark(values);
     }
 
     renderSelect = ({ input, label, type, meta: { touched, error, warning } }) => (
@@ -218,5 +218,5 @@ export default  reduxForm({
 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
   warn
-})(withRouter(connect(state => state, { fetchQuarkTypes, execAddQuark, removeAddedQuark, execLogout })(AddQuark)));
+})(withRouter(connect(state => state, { fetchQuarkTypes, addQuark, removeAddedQuark, execLogout })(AddQuark)));
 // --------------------------------------------------------
