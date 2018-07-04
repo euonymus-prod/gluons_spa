@@ -2,33 +2,58 @@
 Thanks to redux-form
    https://redux-form.com/6.0.5/docs/gettingstarted.md/
 */
+import axios from 'axios'
+import _ from 'lodash';
+
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
+import Autosuggest from 'react-autosuggest';
 import {Link} from 'react-router-dom';
 
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 
+import { API_HOST } from '../statics';
+
+const ROOT_URL = 'http://' + API_HOST + '/';
+const API_KEY = '?key=euonymus';
+
+
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchGluonTypes } from '../actions/gluon_types';
 import { addGluon, removeAddedGluon } from '../actions/gluons';
+import { fetchEditingQuark, readEditingQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
 import LoginUtil from '../utils/login';
 // --------------------------------------------------------
+
+// When suggestion is clicked, Autosuggest needs to populate the input
+// based on the clicked suggestion. Teach Autosuggest how to calculate the
+// input value for every given suggestion.
+const getSuggestionValue = suggestion => suggestion.name;
+
+// Use your imagination to render suggestions.
+const renderSuggestion = suggestion => (
+   <div className="autocomplete-item">
+      <img src={suggestion.image_path} />
+      {suggestion.name}
+   </div>
+);
 
 const validate = values => {
   const errors = {}
   if (!values.gluon_type_id) {
     errors.gluon_type_id = 'Must choose Gluon Type'
   }
-  if (!values.passive) {
-    errors.passive = 'Required'
-  } else if (values.passive.length > 255) {
-    errors.name = 'Must be less than 255'
-  }
+  // Autosuggested value cannot be validated here
+  // if (!values.passive) {
+  //   errors.passive = 'Required'
+  // } else if (values.passive.length > 255) {
+  //   errors.name = 'Must be less than 255'
+  // }
   if (!values.relation) {
     errors.relation = 'Required'
   } else if (values.relation.length > 255) {
@@ -56,20 +81,86 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 class AddGluon extends Component {
+    constructor(props) {
+	super(props);
+
+	// Autosuggest is a controlled component.
+	// This means that you need to provide an input value
+	// and an onChange handler that updates this value (see below).
+	// Suggestions also need to be provided to the Autosuggest,
+	// and they are initially empty because the Autosuggest is closed.
+	this.state = {
+	    value: '',
+	    suggestions: []
+	};
+	// this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInputChange = (event, { newValue }) => {
+	this.setState({
+	    value: newValue
+	}, () => {
+	    if (this.state.value && this.state.value.length > 1) {
+		if (this.state.value.length % 2 === 0) {
+		    this.debouncedGetInfo();
+		}
+	    } else if (!this.state.value) {
+	    }
+	});
+    };
+
+    debouncedGetInfo = _.debounce(() => {
+	this.getInfo(this.state.value);
+    }, 300);
+
+    getInfo = () => {
+	axios.get(`${ROOT_URL}/search${API_KEY}&keywords=${this.state.value}&limit=7`)
+	    .then(({ data }) => {
+		this.setState({
+		    suggestions: data
+		})
+	    })
+    }
+
+    // Autosuggest will call this function every time you need to update suggestions.
+    // You already implemented this logic above, so just use it.
+    onSuggestionsFetchRequested = ({ value }) => {
+	// Usually, this method fetch the suggestions data. But this case, class fetches right after api call.
+    };
+
+    // Autosuggest will call this function every time you need to clear suggestions.
+    onSuggestionsClearRequested = () => {
+	this.setState({
+	    suggestions: []
+	});
+    };
+
     // --------------------------------------------------------
     componentWillMount() {
-	const { gluon_types } = this.props;
+	const { qtype_properties, quarks, gluon_types } = this.props;
         if (!gluon_types) {
             this.props.fetchGluonTypes();
         }
+        // initialize
+        if (qtype_properties && (Object.keys(quarks.list).length == 0)) {
+            this.props.fetchEditingQuark(this.props.match.params.quark_id, qtype_properties);
+	}
     }
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
-        const { logged_in_user, added_gluon } = this.props;
-        // initialize
 	const login_util = new LoginUtil();
-	if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
+        const { logged_in_user, added_gluon, editing_quark } = this.props;
+        // initialize
+	if (!editing_quark || (nextProps.match.params.quark_id != this.props.match.params.quark_id) ||
+	    (nextProps.match.params.quark_id != editing_quark.id)) {
+console.log(editing_quark);
+console.log(nextProps.match.params.quark_id);
+console.log(this.props.match.params.quark_id);
+console.log(nextProps.quarks);
+	    // this.props.readEditingQuark(nextProps.match.params.quark_id, nextProps.quarks);
+	} else if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
+            // !Important: Authorization check. This has to be after initialization of editing_quark
 	    this.props.history.push('/');
 	}
 
@@ -90,6 +181,15 @@ class AddGluon extends Component {
     }
 
     onSubmit = (values) => {
+	if (!this.state.value) {
+	    alert('Quark to glue is required');
+	    return false;
+	} else if (this.state.value.length > 255) {
+	    alert('Quark to glue must be less than 255');
+	    return false;
+	}
+
+	values.passive = this.state.value;
 	if (!values.is_momentary) {
 	    values.is_momentary = 0;
 	}
@@ -121,7 +221,20 @@ class AddGluon extends Component {
 	});
     }
 
+
+
  render () {
+	const { value, suggestions } = this.state;
+	// Autosuggest will pass through all these props to the input.
+	const inputProps = {
+	    placeholder: 'Search a Quark to glue',
+            className: "form-control",
+	    name:'passive',
+	    value,
+	    onChange: this.handleInputChange
+	};
+
+
   const { handleSubmit } = this.props;
   return (
    <div>
@@ -141,7 +254,22 @@ class AddGluon extends Component {
                     <Field name="gluon_type_id" component={this.renderSelect}
                            type="select" id="gluon-type-id" label="Gluon Type" />
                     <br />
+
+
+                    <div className="input text">
+                       <label htmlFor="passive">Quark you glue</label>
+                       <Autosuggest
+                          suggestions={suggestions}
+                          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                          getSuggestionValue={getSuggestionValue}
+                          renderSuggestion={renderSuggestion}
+                          inputProps={inputProps}
+                       />
+                    </div>
+{/*
                     <Field name="passive" component={renderField} type="text" id="passive" label="Passive" />
+*/}
                     <Field name="relation" component={renderField} type="text" id="relation" label="Relation" />
                     <Field name="suffix" component={renderField} type="text" id="suffix" label="Suffix" />
 
@@ -185,5 +313,5 @@ export default  reduxForm({
   form: 'add_gluon', // a unique name for this form
 　initialValues: {'gluon_type_id':'1', 'is_exclusive': true},
   validate,
-})(withRouter(connect(state => state, { fetchGluonTypes, addGluon, removeAddedGluon, execLogout })(AddGluon)));
+})(withRouter(connect(state => state, { fetchGluonTypes, addGluon, removeAddedGluon, execLogout, fetchEditingQuark, readEditingQuark })(AddGluon)));
 // --------------------------------------------------------

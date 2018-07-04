@@ -40,7 +40,7 @@ export default () => {
             <Route path='/subjects/add' component={AddQuark}/>
             <Route path='/subjects/edit/:id' component={EditQuarkForm}/>
 
-            <Route path='/relations/add' component={AddGluon}/>
+            <Route path='/relations/add/:quark_id' component={AddGluon}/>
 {/*
             <Route path='/relations/edit/:id' component={EditGluonForm}/>
 */}
