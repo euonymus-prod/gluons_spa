@@ -174,7 +174,7 @@ class AddGluon extends Component {
 	    if (nextProps.added_gluon.status != 1) {
 		this.props.removeAddedGluon();
 	    } else if ( !added_gluon || (nextProps.added_gluon.id != added_gluon.id) ) {
-		this.props.history.push('/subjects/relations/' + nextProps.added_gluon.result.active_id);
+		this.props.history.push('/subjects/relations/' + nextProps.editing_quark.name);
 	    }
 	}
     }

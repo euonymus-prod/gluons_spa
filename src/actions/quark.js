@@ -5,7 +5,7 @@ import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK, REMOVE_DELETED_QUARK,
 	 EDIT_QUARK, EDIT_QUARK_FAILURE,
 	 FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE, FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
 	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
-	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, CHANGE_CURRENT_QUARK} from '../types/quark';
+	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, FETCH_ONE_QUARK_NOT_FOUND, CHANGE_CURRENT_QUARK} from '../types/quark';
 import { API_HOST } from '../statics';
 import LoginUtil from '../utils/login';
 
@@ -56,10 +56,17 @@ export const fetchCurrentQuark = (quark_name, qtype_properties) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY}`)
 	    .then((response) => {
-		dispatch({
-		    type: FETCH_ONE_QUARK,
-		    payload: {qtype_properties, response: response.data}
-		});
+		if (response.data.status && response.data.status == 0) {
+		    dispatch({
+			type: FETCH_ONE_QUARK_NOT_FOUND,
+			payload: response.data
+		    });
+		} else {
+		    dispatch({
+			type: FETCH_ONE_QUARK,
+			payload: {qtype_properties, response: response.data}
+		    });
+		}
 	    }).catch((response) => dispatch({
 		type: FETCH_ONE_QUARK_FAILURE,
 		error: response.error

@@ -37,6 +37,14 @@ class Detail extends Component {
         // --------------------------------------------------------
         const { qtype_properties, quarks, current_quark } = this.props;
         // initialize
+
+	if (nextProps.current_quark && nextProps.current_quark.hasOwnProperty('status') && nextProps.current_quark.status == 0) {
+	    if (!current_quark) {
+		alert(nextProps.current_quark.message);
+	    }
+	    return false;
+	}
+	
         if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0) && (Object.keys(quarks.list).length == 0)) {
             this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties);
         } else if (!nextProps.current_quark) {

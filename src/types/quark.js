@@ -5,6 +5,8 @@ export const CHANGE_SEARCH_KEYWORD_FAILURE   = 'CHANGE_SEARCH_KEYWORD_FAILURE';
 // --------------------------------------------------------
 export const FETCH_ONE_QUARK         = 'FETCH_ONE_QUARK';
 export const FETCH_ONE_QUARK_FAILURE = 'FETCH_ONE_QUARK_FAILURE';
+export const FETCH_ONE_QUARK_NOT_FOUND = 'FETCH_ONE_QUARK_NOT_FOUND';
+
 export const CHANGE_CURRENT_QUARK    = 'CHANGE_CURRENT_QUARK';
 
 
