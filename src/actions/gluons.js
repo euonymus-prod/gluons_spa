@@ -24,7 +24,7 @@ export const fetchGluons = (quark, qtype_properties, limit = 100) => {
 }
 
 
-export const addGluon = (form) => {
+export const addGluon = (quark_id, form) => {
     const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
@@ -36,7 +36,7 @@ export const addGluon = (form) => {
 	}
 
 	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}gluons/add${API_KEY}`, params, {
+	axios.post(`${ROOT_URL}gluons/add/${quark_id}${API_KEY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,

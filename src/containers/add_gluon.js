@@ -152,16 +152,14 @@ class AddGluon extends Component {
 	const login_util = new LoginUtil();
         const { logged_in_user, added_gluon, editing_quark } = this.props;
         // initialize
-	if (!editing_quark || (nextProps.match.params.quark_id != this.props.match.params.quark_id) ||
-	    (nextProps.match.params.quark_id != editing_quark.id)) {
-console.log(editing_quark);
-console.log(nextProps.match.params.quark_id);
-console.log(this.props.match.params.quark_id);
-console.log(nextProps.quarks);
-	    // this.props.readEditingQuark(nextProps.match.params.quark_id, nextProps.quarks);
-	} else if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
-            // !Important: Authorization check. This has to be after initialization of editing_quark
-	    this.props.history.push('/');
+	if (Object.keys(nextProps.quarks.list).length > 0) {
+	    if (!editing_quark || (nextProps.match.params.quark_id != this.props.match.params.quark_id) ||
+		(nextProps.match.params.quark_id != editing_quark.id)) {
+		this.props.readEditingQuark(nextProps.match.params.quark_id, nextProps.quarks);
+	    } else if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
+		// !Important: Authorization check. This has to be after initialization of editing_quark
+		this.props.history.push('/');
+	    }
 	}
 
 	if (nextProps.added_gluon) {
@@ -196,7 +194,7 @@ console.log(nextProps.quarks);
 	if (!values.is_exclusive) {
 	    values.is_exclusive = 0;
 	}
-	this.props.addGluon(values);
+	this.props.addGluon(this.props.editing_quark.id, values);
     }
 
     renderSelect = ({ input, label, type, meta: { touched, error } }) => (
@@ -224,7 +222,12 @@ console.log(nextProps.quarks);
 
 
  render () {
-	const { value, suggestions } = this.state;
+     const { value, suggestions } = this.state;
+     const { editing_quark } = this.props;
+     if (!editing_quark) {
+	 return ''
+     }
+
 	// Autosuggest will pass through all these props to the input.
 	const inputProps = {
 	    placeholder: 'Search a Quark to glue',
@@ -242,7 +245,7 @@ console.log(nextProps.quarks);
 
       <div className="container">
         <div className="">
-           <h2>Adding new gluon on 柳瀬唯夫</h2>
+           <h2>Adding new gluon on {editing_quark.name}</h2>
         </div>
 
         <div>
