@@ -152,6 +152,7 @@ class AddGluon extends Component {
 	const login_util = new LoginUtil();
         const { logged_in_user, added_gluon, editing_quark } = this.props;
         // initialize
+	// !! without (Object.keys(nextProps.quarks.list).length > 0) check, componentWillReceiveProps eternally fires
 	if (Object.keys(nextProps.quarks.list).length > 0) {
 	    if (!editing_quark || (nextProps.match.params.quark_id != this.props.match.params.quark_id) ||
 		(nextProps.match.params.quark_id != editing_quark.id)) {
