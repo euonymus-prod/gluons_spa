@@ -219,9 +219,8 @@ export const execEditQuark = (form) => {
 	    }
 	})
 	    .then((response) => {
-console.log(response);
 		dispatch({
-		    type: EDIT_QUARK, 
+		    type: EDIT_QUARK,
 		    payload: response.data
 		});
 	    }).catch((response) => dispatch({

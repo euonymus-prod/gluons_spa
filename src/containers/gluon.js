@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import SubGluonList from './sub_gluon_list';
-import { deleteGluon } from '../actions/gluons';
+import { deleteGluon, removeDeletedGluon } from '../actions/gluons';
+import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
 import GluonUtil from '../utils/gluon';
@@ -13,6 +14,26 @@ class Gluon extends Component {
     constructor(props) {
         super(props);
 	this.onDeleteClick = this.onDeleteClick.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { deleted_gluon, current_quark } = this.props;
+	if (nextProps.deleted_gluon) {
+
+	    if (this.props.gluon.id == nextProps.deleted_gluon.gluon_id) {
+		if (!nextProps.deleted_gluon.message) {
+		    this.props.execLogout();
+		    alert('Please login again');
+		} else {
+		    alert(nextProps.deleted_gluon.message);
+		}
+		this.props.removeDeletedGluon();
+
+		if (nextProps.deleted_gluon.status == 1) {
+		    this.props.history.push('/subjects/relations/' + current_quark.name);
+		}
+	    }
+	}
     }
 
     gluedQuark() {
@@ -88,4 +109,5 @@ class Gluon extends Component {
     }
 }
 // export default connect(state => state)(Gluon);
-export default connect(state => state, { deleteGluon })(Gluon);
+export default withRouter(connect(state => state, { deleteGluon, removeDeletedGluon, execLogout })(Gluon));
+

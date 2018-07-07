@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { ADD_GLUON, ADD_GLUON_FAILURE, REMOVE_ADDED_GLUON, FETCH_GLUONS, FETCH_GLUONS_FAILURE, DELETE_GLUON, DELETE_GLUON_FAILURE,
-	 } from '../types/gluon';
+	 REMOVE_DELETED_GLUON } from '../types/gluon';
 import { API_HOST } from '../statics';
 import LoginUtil from '../utils/login';
 
@@ -62,6 +62,14 @@ export const removeAddedGluon = (form) => {
     };
 }
 
+export const removeDeletedGluon = (form) => {
+console.log('in removedDeletedGluon Action')
+    return {
+	type: REMOVE_DELETED_GLUON,
+	payload: null
+    };
+}
+
 export const deleteGluon = (gluon_id) => {
     const login_util = new LoginUtil();
     return dispatch => {
@@ -83,7 +91,7 @@ export const deleteGluon = (gluon_id) => {
 console.log(response)
 		dispatch({
 		    type: DELETE_GLUON,
-		    payload: response.data
+		    payload: {gluon_id, response: response.data}
 		});
 	    }).catch((response) => dispatch({
 		type: DELETE_GLUON_FAILURE,

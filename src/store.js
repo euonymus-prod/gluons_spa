@@ -16,6 +16,7 @@ import gluonTypesReducer from './reducers/reducer_gluon_types'
 import addedQuarkReducer from './reducers/reducer_added_quark'
 import addedGluonReducer from './reducers/reducer_added_gluon'
 import deletedQuarkReducer from './reducers/reducer_deleted_quark'
+import deletedGluonReducer from './reducers/reducer_deleted_gluon'
 import editingQuarkReducer from './reducers/reducer_editing_quark'
 // ------------------------------------------------------------
 
@@ -38,6 +39,7 @@ const reducer = combineReducers({
     added_quark:      addedQuarkReducer,
     added_gluon:      addedGluonReducer,
     deleted_quark:    deletedQuarkReducer,
+    deleted_gluon:    deletedGluonReducer,
     editing_quark:    editingQuarkReducer,
     // --------------------------------------------------------
 })

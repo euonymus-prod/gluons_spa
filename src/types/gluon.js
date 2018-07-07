@@ -9,3 +9,4 @@ export const ADD_GLUON_FAILURE       = 'ADD_GLUON_FAILURE';
 
 export const REMOVE_ADDED_GLUON      = 'REMOVE_ADDED_GLUON';
 
+export const REMOVE_DELETED_GLUON      = 'REMOVE_DELETED_GLUON';
