@@ -63,7 +63,6 @@ export const removeAddedGluon = (form) => {
 }
 
 export const removeDeletedGluon = (form) => {
-console.log('in removedDeletedGluon Action')
     return {
 	type: REMOVE_DELETED_GLUON,
 	payload: null
@@ -88,7 +87,6 @@ export const deleteGluon = (gluon_id) => {
 	    }
 	})
 	    .then((response) => {
-console.log(response)
 		dispatch({
 		    type: DELETE_GLUON,
 		    payload: {gluon_id, response: response.data}
