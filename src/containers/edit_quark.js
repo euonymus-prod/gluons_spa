@@ -12,7 +12,7 @@ import Navbar from './navbar';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchQuarkTypes } from '../actions/quark_types';
-import { fetchEditingQuark, readEditingQuark, execEditQuark, removeEditedQuark } from '../actions/quark';
+import { fetchEditingQuark, readEditingQuark, editQuark, removeEditedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';
@@ -115,7 +115,7 @@ class EditQuark extends Component {
 	if (!values.is_exclusive) {
 	    values.is_exclusive = 0;
 	}
-	this.props.execEditQuark(values);
+	this.props.editQuark(values);
     }
 
     renderSelect = ({ input, label, type, meta: { touched, error } }) => (
@@ -217,7 +217,7 @@ class EditQuark extends Component {
 //   form: 'edit_quark', // a unique name for this form
 // 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
 //   validate,
-// })(withRouter(connect(state => state, { fetchQuarkTypes, readEditingQuark, execEditQuark, removeEditedQuark, execLogout })(EditQuark)));
+// })(withRouter(connect(state => state, { fetchQuarkTypes, readEditingQuark, editQuark, removeEditedQuark, execLogout })(EditQuark)));
 
 const EditQuarkForm = reduxForm({
   form: 'edit_quark',
@@ -235,6 +235,6 @@ export default connect(
     }
     return ret
   },
-  { fetchQuarkTypes, fetchEditingQuark, readEditingQuark, execEditQuark, removeEditedQuark, execLogout }
+  { fetchQuarkTypes, fetchEditingQuark, readEditingQuark, editQuark, removeEditedQuark, execLogout }
 )(withRouter(EditQuarkForm))
 // --------------------------------------------------------

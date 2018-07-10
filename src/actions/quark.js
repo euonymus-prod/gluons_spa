@@ -200,7 +200,7 @@ export const readEditingQuark = (quark_id, quarks) => {
 	payload: quarks.list[quark_id]
     };
 }
-export const execEditQuark = (form) => {
+export const editQuark = (form) => {
     const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
