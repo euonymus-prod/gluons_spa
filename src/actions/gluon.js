@@ -9,6 +9,7 @@ import {
          // editing
          FETCH_EDITING_GLUON, FETCH_EDITING_GLUON_FAILURE,
          EDIT_GLUON, EDIT_GLUON_FAILURE,
+         REMOVE_EDITED_GLUON,
          // deleting
          DELETE_GLUON, DELETE_GLUON_FAILURE,
          REMOVE_DELETED_GLUON, 
@@ -133,6 +134,12 @@ export const editGluon = (form) => {
     }
 }
 
+export const removeEditedGluon = (form) => {
+    return {
+	type: REMOVE_EDITED_GLUON,
+	payload: null
+    };
+}
 
 
 

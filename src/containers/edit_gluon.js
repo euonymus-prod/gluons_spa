@@ -2,9 +2,6 @@
 Thanks to redux-form
    https://redux-form.com/6.0.5/docs/gettingstarted.md/
 */
-// general
-import axios from 'axios'
-import _ from 'lodash';
 // react
 import React, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
@@ -81,11 +78,11 @@ class EditGluon extends Component {
 		alert(nextProps.editing_gluon.message);
 	    }
 
-	    if (nextProps.editing_gluon.status != 1) {
-		// TODO
-		// this.props.removeEditedGluon();
-	    } else if ( !editing_gluon || (nextProps.editing_gluon.id != editing_gluon.id) ) {
-		this.props.history.push('/subjects/relations/' + nextProps.editing_gluon.active.name);
+	    if (nextProps.editing_gluon.status != -1) {
+		this.props.removeEditedGluon();
+	    }
+	    if (nextProps.editing_gluon.status == 1) {
+	    	this.props.history.push('/subjects/relations/' + nextProps.editing_gluon.result.active.name);
 	    }
 	}
     }
@@ -126,7 +123,7 @@ class EditGluon extends Component {
 
  render () {
      const { editing_gluon } = this.props;
-     if (!editing_gluon) {
+     if (!editing_gluon || (editing_gluon.status != -1)) {
 	 return ''
      }
 

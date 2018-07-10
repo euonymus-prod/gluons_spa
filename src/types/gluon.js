@@ -12,6 +12,8 @@ export const FETCH_EDITING_GLUON_FAILURE = 'FETCH_EDITING_GLUON_FAILURE';
 export const EDIT_GLUON             = 'EDIT_GLUON';
 export const EDIT_GLUON_FAILURE     = 'EDIT_GLUON_FAILURE';
 
+export const REMOVE_EDITED_GLUON    = 'REMOVE_EDITED_GLUON';
+
 export const DELETE_GLUON           = 'DELETE_GLUON';
 export const DELETE_GLUON_FAILURE   = 'DELETE_GLUON_FAILURE';
 

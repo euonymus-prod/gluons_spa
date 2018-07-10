@@ -112,6 +112,7 @@ export default (state = initState, action) => {
 	    return state
 	}
 
+    // This should be optimized to be more presisely configured when reducer should return initState
     case EDIT_QUARK:
     case ADD_GLUON:
     case EDIT_GLUON:

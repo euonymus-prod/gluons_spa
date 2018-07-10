@@ -26,6 +26,7 @@ export default (state = initState, action) => {
     case FETCH_ONE_QUARK_NOT_FOUND:
 	return action.payload
 	
+    // This should be optimized to be more presisely configured when reducer should return initState
     case ADD_GLUON:
     case EDIT_GLUON:
     case REMOVE_DELETED_GLUON:
