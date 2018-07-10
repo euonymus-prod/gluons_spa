@@ -193,7 +193,7 @@ export const editQuark = (form) => {
 	    };
 	}
 	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}edit_quark/form.id${API_KEY}`, params, {
+	axios.post(`${ROOT_URL}edit_quark/${form.id}${API_KEY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,

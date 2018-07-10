@@ -97,8 +97,7 @@ class EditGluon extends Component {
 	if (!values.is_exclusive) {
 	    values.is_exclusive = 0;
 	}
-	// TODO:
-	// this.props.editGluon(this.props.editing_quark.id, values);
+	this.props.editGluon(values);
     }
 
     renderSelect = ({ input, label, type, meta: { touched, error } }) => (
