@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 
 // --------------------------------------------------------
-import { fetchGluons } from '../actions/gluons';
+import { fetchGluons } from '../actions/gluon';
 // --------------------------------------------------------
 
 import GluonList from './gluon_list';

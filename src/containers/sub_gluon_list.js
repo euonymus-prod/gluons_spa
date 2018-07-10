@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import { API_HOST } from '../statics';
 
 // --------------------------------------------------------
-import { fetchGluons } from '../actions/gluons';
+import { fetchGluons } from '../actions/gluon';
 // --------------------------------------------------------
 import SubGluon from './sub_gluon';
 

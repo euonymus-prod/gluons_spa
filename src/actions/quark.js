@@ -1,57 +1,39 @@
 import axios from 'axios';
 
-import { ADD_QUARK, ADD_QUARK_FAILURE, REMOVE_ADDED_QUARK, REMOVE_DELETED_QUARK,
-	 FETCH_EDITING_QUARK, FETCH_EDITING_QUARK_FAILURE, READ_EDITING_QUARK, READ_EDITING_QUARK_FAILURE,
-	 EDIT_QUARK, EDIT_QUARK_FAILURE,
-	 FETCH_QUARKS, FETCH_QUARKS_FAILURE, SEARCH_QUARKS, SEARCH_QUARKS_FAILURE, FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
-	 CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE, DELETE_QUARK, DELETE_QUARK_FAILURE,
-	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, FETCH_ONE_QUARK_NOT_FOUND, CHANGE_CURRENT_QUARK} from '../types/quark';
+import {
+         // preparation for current quark
+	 FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, FETCH_ONE_QUARK_NOT_FOUND,
+	 CHANGE_CURRENT_QUARK,
+         // fetch quark list
+         FETCH_QUARKS, FETCH_QUARKS_FAILURE,
+         FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
+         // search quark
+         SEARCH_QUARKS, SEARCH_QUARKS_FAILURE,
+         CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE,
+         // adding
+         ADD_QUARK, ADD_QUARK_FAILURE,
+         REMOVE_ADDED_QUARK,
+         // editing
+         FETCH_EDITING_QUARK, FETCH_EDITING_QUARK_FAILURE,
+         READ_EDITING_QUARK, READ_EDITING_QUARK_FAILURE,
+         EDIT_QUARK, EDIT_QUARK_FAILURE,
+         // deleting
+         DELETE_QUARK, DELETE_QUARK_FAILURE,
+         REMOVE_DELETED_QUARK,
+} from '../types/quark';
 import { API_HOST } from '../statics';
 import LoginUtil from '../utils/login';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY = '?key=euonymus';
 
-export const changeSearchKeyword = (keyword) => {
-    return {
-	type: CHANGE_SEARCH_KEYWORD,
-	payload: keyword
-    };
-}
 
-export const deleteQuark = (quark_id) => {
-    const login_util = new LoginUtil();
-    return dispatch => {
-	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
-	if (!login_util.isLoggedIn(logged_in_user)) {
-	    return {
-		type: DELETE_QUARK_FAILURE,
-		payload: false
-	    };
-	}
-
-	axios.delete(`${ROOT_URL}delete_quark/${quark_id}${API_KEY}`, {
-	    // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-	    auth: {
-		username: logged_in_user.username,
-		password: logged_in_user.api_key_plain
-	    }
-	})
-	    .then((response) => {
-		dispatch({
-		    type: DELETE_QUARK,
-		    payload: response.data
-		});
-	    }).catch((response) => dispatch({
-		type: DELETE_QUARK_FAILURE,
-		error: response.error
-	    }))
-    }
-}
+////////////////////////////////////////
+// TODO: create removeEditedQuark action
+////////////////////////////////////////
 
 
 
-// --------------------------------------------------------
 export const fetchCurrentQuark = (quark_name, qtype_properties) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY}`)
@@ -95,6 +77,21 @@ export const fetchQuarks = (qtype_properties, limit = 100) => {
     }
 }
 
+export const fetchPickups = (qtype_properties) => {
+    return dispatch => {
+	axios.get(`${ROOT_URL}pickups${API_KEY}`)
+	    .then((response) => {
+		dispatch({
+		    type: FETCH_PICKUPS,
+		    payload: {qtype_properties, response: response.data}
+		});
+	    }).catch((response) => dispatch({
+		type: FETCH_PICKUPS_FAILURE,
+		error: response.error
+	    }))
+    }
+}
+
 export const searchQuarks = (qtype_properties, keywords, limit = 100) => {
     return dispatch => {
 	axios.get(`${ROOT_URL}search${API_KEY}&keywords=${keywords}&limit=${limit}`)
@@ -110,19 +107,11 @@ export const searchQuarks = (qtype_properties, keywords, limit = 100) => {
     }
 }
 
-export const fetchPickups = (qtype_properties) => {
-    return dispatch => {
-	axios.get(`${ROOT_URL}pickups${API_KEY}`)
-	    .then((response) => {
-		dispatch({
-		    type: FETCH_PICKUPS,
-		    payload: {qtype_properties, response: response.data}
-		});
-	    }).catch((response) => dispatch({
-		type: FETCH_PICKUPS_FAILURE,
-		error: response.error
-	    }))
-    }
+export const changeSearchKeyword = (keyword) => {
+    return {
+	type: CHANGE_SEARCH_KEYWORD,
+	payload: keyword
+    };
 }
 
 export const addQuark = (form) => {
@@ -163,13 +152,6 @@ export const addQuark = (form) => {
 export const removeAddedQuark = (form) => {
     return {
 	type: REMOVE_ADDED_QUARK,
-	payload: null
-    };
-}
-
-export const removeDeletedQuark = (form) => {
-    return {
-	type: REMOVE_DELETED_QUARK,
 	payload: null
     };
 }
@@ -230,6 +212,41 @@ export const editQuark = (form) => {
     }
 }
 
+export const deleteQuark = (quark_id) => {
+    const login_util = new LoginUtil();
+    return dispatch => {
+	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+	if (!login_util.isLoggedIn(logged_in_user)) {
+	    return {
+		type: DELETE_QUARK_FAILURE,
+		payload: false
+	    };
+	}
+
+	axios.delete(`${ROOT_URL}delete_quark/${quark_id}${API_KEY}`, {
+	    // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
+	    .then((response) => {
+		dispatch({
+		    type: DELETE_QUARK,
+		    payload: response.data
+		});
+	    }).catch((response) => dispatch({
+		type: DELETE_QUARK_FAILURE,
+		error: response.error
+	    }))
+    }
+}
+
+export const removeDeletedQuark = (form) => {
+    return {
+	type: REMOVE_DELETED_QUARK,
+	payload: null
+    };
+}
 
 
-// --------------------------------------------------------

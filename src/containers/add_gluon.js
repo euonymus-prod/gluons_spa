@@ -23,7 +23,7 @@ const API_KEY = '?key=euonymus';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchGluonTypes } from '../actions/gluon_types';
-import { addGluon, removeAddedGluon } from '../actions/gluons';
+import { addGluon, removeAddedGluon } from '../actions/gluon';
 import { fetchEditingQuark, readEditingQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 

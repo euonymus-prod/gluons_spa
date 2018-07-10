@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import SubGluonList from './sub_gluon_list';
-import { deleteGluon, removeDeletedGluon } from '../actions/gluons';
+import { deleteGluon, removeDeletedGluon } from '../actions/gluon';
 import { execLogout } from '../actions/login';
 
 import Util from '../utils/common';

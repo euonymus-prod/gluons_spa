@@ -16,11 +16,11 @@ import Navbar from './navbar';
 // --------------------------------------------------------
 import { Field, reduxForm } from 'redux-form';
 import { fetchGluonTypes } from '../actions/gluon_types';
-// import { addGluon, removeAddedGluon } from '../actions/gluons';
-import { editGluon, removeEditedGluon } from '../actions/gluons';
+// import { addGluon, removeAddedGluon } from '../actions/gluon';
+import { editGluon, removeEditedGluon } from '../actions/gluon';
 
 import { execLogout } from '../actions/login';
-import { fetchEditingGluon } from '../actions/gluons';
+import { fetchEditingGluon } from '../actions/gluon';
 
 
 import LoginUtil from '../utils/login';
