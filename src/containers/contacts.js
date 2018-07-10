@@ -8,6 +8,8 @@ import { Field, reduxForm } from 'redux-form';
 // component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
+// action
+import { sendContactForm } from '../actions/contact';
 
 
 const validate = values => {
@@ -73,7 +75,7 @@ const renderSelect = ({ input, label, type, meta: { touched, error } }) => (
 class Contacts extends Component {
     onSubmit = (values) => {
 	console.log(values)
-	// this.props.addQuark(values);
+	this.props.sendContactForm(values);
     }
 
  render () {
@@ -117,4 +119,4 @@ class Contacts extends Component {
 export default  reduxForm({
   form: 'contact_form',
   validate,
-})(withRouter(connect(state => state, { })(Contacts)));
+})(withRouter(connect(state => state, { sendContactForm })(Contacts)));
