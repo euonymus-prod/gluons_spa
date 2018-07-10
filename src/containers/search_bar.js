@@ -1,14 +1,19 @@
 // Thanks to:  react-autosuggest
 // https://github.com/moroshko/react-autosuggest
+
+// general
 import axios from 'axios'
 import _ from 'lodash';
-
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+// react
+import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
+// redux
+import { connect } from 'react-redux';
+// component
+// action
 import { changeSearchKeyword } from '../actions/quark';
-
+// common util
 const API_KEY = 'euonymus'
 const API_URL = 'http://ja.localhost:8765/search'
 

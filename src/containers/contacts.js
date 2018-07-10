@@ -1,9 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-
+// general
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
+
 
 class Contacts extends Component {
  render () {

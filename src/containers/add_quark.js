@@ -2,23 +2,24 @@
 Thanks to redux-form
    https://redux-form.com/6.0.5/docs/gettingstarted.md/
 */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { withRouter } from "react-router-dom";
-import {Link} from 'react-router-dom';
-
+// react
+import React, { Component } from 'react';
+import { Link, withRouter } from "react-router-dom";
+// redux
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+// component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
-
-// --------------------------------------------------------
-import { Field, reduxForm } from 'redux-form';
+// action
+import { execLogout } from '../actions/login';
 import { fetchQuarkTypes } from '../actions/quark_types';
 import { addQuark, removeAddedQuark } from '../actions/quark';
-import { execLogout } from '../actions/login';
-
+// common util
 import Util from '../utils/common';
 import LoginUtil from '../utils/login';
-// --------------------------------------------------------
+
+
 
 const validate = values => {
   const errors = {}

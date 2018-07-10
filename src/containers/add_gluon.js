@@ -2,33 +2,28 @@
 Thanks to redux-form
    https://redux-form.com/6.0.5/docs/gettingstarted.md/
 */
+// general
 import axios from 'axios'
 import _ from 'lodash';
-
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { withRouter } from "react-router-dom";
+// react
+import React, { Component } from 'react';
+import { Link, withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
-import {Link} from 'react-router-dom';
-
+// redux
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+// component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
-
-import { API_HOST } from '../statics';
-
-const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY = '?key=euonymus';
-
-
-// --------------------------------------------------------
-import { Field, reduxForm } from 'redux-form';
-import { fetchGluonTypes } from '../actions/gluon_types';
-import { addGluon, removeAddedGluon } from '../actions/gluon';
-import { fetchEditingQuark, readEditingQuark } from '../actions/quark';
+// action
 import { execLogout } from '../actions/login';
-
+import { fetchGluonTypes } from '../actions/gluon_types';
+import { fetchEditingQuark, readEditingQuark } from '../actions/quark';
+import { addGluon, removeAddedGluon } from '../actions/gluon';
+// common util
+import { API_HOST } from '../statics';
 import LoginUtil from '../utils/login';
-// --------------------------------------------------------
+
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the

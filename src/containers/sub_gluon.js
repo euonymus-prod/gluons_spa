@@ -1,8 +1,11 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// common util
 import Util from '../utils/common';
+
 
 class SubGluon extends Component {
     gluedQuark() {

@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+// react
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-
+// redux
+import { connect } from 'react-redux';
+// component
 import SubGluonList from './sub_gluon_list';
+// action
 import { deleteGluon, removeDeletedGluon } from '../actions/gluon';
 import { execLogout } from '../actions/login';
-
+// common util
 import Util from '../utils/common';
 import GluonUtil from '../utils/gluon';
+
 let gluon_util = new GluonUtil();
 
 class Gluon extends Component {

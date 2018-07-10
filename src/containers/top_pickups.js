@@ -1,15 +1,17 @@
+// general
 import _ from 'lodash';
 import axios from 'axios';
-
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-// import { API_HOST } from '../statics';
-// --------------------------------------------------------
-import { fetchPickups } from '../actions/quark';
-// --------------------------------------------------------
-
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// component
 import TopPickupDetail from './top_pickup_detail';
+// action
+import { fetchPickups } from '../actions/quark';
+
+
 
 class TopPickups extends Component {
     // --------------------------------------------------------

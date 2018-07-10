@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {initDetail} from '../actions/detail';
-import {Link} from 'react-router-dom';
-
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import MainQuark from './main_quark';
 import QuarkPropertyList from './quark_property_list';
-
-// --------------------------------------------------------
+// action
+import { initDetail } from '../actions/detail';
 import { fetchCurrentQuark } from '../actions/quark';
 import { changeCurrentQuark } from '../actions/quark';
-// --------------------------------------------------------
 
 
 class Detail extends Component {

@@ -1,16 +1,18 @@
+// general
 import _ from 'lodash';
 import axios from 'axios';
-
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 import QuarkInList from '../components/quark_in_list';
-// --------------------------------------------------------
+// action
 import { searchQuarks } from '../actions/quark';
-// --------------------------------------------------------
+
 
 class SearchResults extends Component {
     // --------------------------------------------------------

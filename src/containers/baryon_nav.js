@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { withRouter } from "react-router-dom";
-import {Link} from 'react-router-dom';
+// react
+import React, { Component } from 'react';
+import { Link, withRouter } from "react-router-dom";
+// redux
+import { connect } from 'react-redux';
+// common util
 import LoginUtil from '../utils/login';
 
 class BaryonNav extends Component {

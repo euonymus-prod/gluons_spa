@@ -1,11 +1,17 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+// general
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// component
 import SearchBar from './search_bar';
 import QuarkNav from './quark_nav';
 import BaryonNav from './baryon_nav';
+// action
 import {execLogout} from '../actions/login';
 import { fetchQtypeProperties } from '../actions/qtype_properties';
+// common util
 import LoginUtil from '../utils/login';
 
 class Navbar extends Component {

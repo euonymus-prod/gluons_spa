@@ -2,16 +2,20 @@
   Thanks to react-router-last-location
   github : https://github.com/hinok/react-router-last-location
 */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+// react
+import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { withLastLocation } from 'react-router-last-location';
-
-import {execLogin} from '../actions/login';
+// redux
+import { connect } from 'react-redux';
+// component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
-
+// action
+import {execLogin} from '../actions/login';
+// common util
 import LoginUtil from '../utils/login';
+
 
 class Login extends Component {
     constructor(props) {

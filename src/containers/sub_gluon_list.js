@@ -1,10 +1,14 @@
+// general
 import _ from 'lodash';
 import axios from 'axios';
-
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// common util
 import { API_HOST } from '../statics';
+
 
 // --------------------------------------------------------
 import { fetchGluons } from '../actions/gluon';

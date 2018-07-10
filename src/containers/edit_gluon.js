@@ -2,29 +2,25 @@
 Thanks to redux-form
    https://redux-form.com/6.0.5/docs/gettingstarted.md/
 */
+// general
 import axios from 'axios'
 import _ from 'lodash';
-
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { withRouter } from "react-router-dom";
-import {Link} from 'react-router-dom';
-
+// react
+import React, { Component } from 'react';
+import { Link, withRouter } from "react-router-dom";
+// redux
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+// component
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
-
-// --------------------------------------------------------
-import { Field, reduxForm } from 'redux-form';
-import { fetchGluonTypes } from '../actions/gluon_types';
-// import { addGluon, removeAddedGluon } from '../actions/gluon';
-import { editGluon, removeEditedGluon } from '../actions/gluon';
-
+// action
 import { execLogout } from '../actions/login';
-import { fetchEditingGluon } from '../actions/gluon';
-
-
+import { fetchGluonTypes } from '../actions/gluon_types';
+import { fetchEditingGluon, editGluon, removeEditedGluon } from '../actions/gluon';
+// common util
 import LoginUtil from '../utils/login';
-// --------------------------------------------------------
+
 
 const validate = values => {
   const errors = {}

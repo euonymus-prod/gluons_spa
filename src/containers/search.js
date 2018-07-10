@@ -1,14 +1,16 @@
 // Thanks to:  react-autosuggest
 // https://github.com/moroshko/react-autosuggest
+// general
 import axios from 'axios'
 import _ from 'lodash';
-
-import React, {Component} from 'react';
+// react
+import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
-
+// common util
 const API_KEY = 'euonymus'
 const API_URL = 'http://ja.localhost:8765/search'
+
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the

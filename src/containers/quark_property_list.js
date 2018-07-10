@@ -1,14 +1,16 @@
+// general
 import _ from 'lodash';
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-
-
-// --------------------------------------------------------
-import { fetchGluons } from '../actions/gluon';
-// --------------------------------------------------------
-
+// react
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+// component
 import GluonList from './gluon_list';
+// action
+import { fetchGluons } from '../actions/gluon';
+
+
 
 class GluonTypeList extends Component {
 
