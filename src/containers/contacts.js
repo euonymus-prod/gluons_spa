@@ -34,6 +34,9 @@ const validate = values => {
   } else if (values.email.length > 255) {
     errors.email = 'Must be less than 255'
   }
+  if (!values.topic) {
+    errors.topic = 'Required'
+  }
   if (!values.body) {
     errors.body = 'Required'
   } else if (values.body.length > 2000) {
@@ -74,7 +77,6 @@ const renderSelect = ({ input, label, type, meta: { touched, error } }) => (
 
 class Contacts extends Component {
     onSubmit = (values) => {
-	console.log(values)
 	this.props.sendContactForm(values);
     }
 
