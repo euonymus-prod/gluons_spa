@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK,
-	 FETCH_EDITING_QUARK } from '../types/quark';
-import { ADD_GLUON } from '../types/gluon';
+	 FETCH_EDITING_QUARK, EDIT_QUARK } from '../types/quark';
+import { ADD_GLUON, EDIT_GLUON, REMOVE_DELETED_GLUON } from '../types/gluon';
 import { FETCH_GLUONS } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
@@ -112,7 +112,10 @@ export default (state = initState, action) => {
 	    return state
 	}
 
+    case EDIT_QUARK:
     case ADD_GLUON:
+    case EDIT_GLUON:
+    case REMOVE_DELETED_GLUON:
 	return initState
 
     default :

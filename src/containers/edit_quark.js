@@ -93,9 +93,10 @@ class EditQuark extends Component {
 		alert(nextProps.editing_quark.message);
 	    }
 
-	    if (nextProps.editing_quark.status != 1) {
+	    if (nextProps.editing_quark.status != -1) {
 		this.props.removeEditedQuark();
-	    } else if ( !editing_quark || (nextProps.editing_quark.id != editing_quark.id) ) {
+	    }
+	    if ( !editing_quark || (nextProps.editing_quark.id != editing_quark.id) ) {
 		this.props.history.push('/subjects/relations/' + nextProps.editing_quark.result.name);
 	    }
 	}

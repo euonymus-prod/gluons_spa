@@ -17,6 +17,7 @@ import {
          FETCH_EDITING_QUARK, FETCH_EDITING_QUARK_FAILURE,
          READ_EDITING_QUARK, READ_EDITING_QUARK_FAILURE,
          EDIT_QUARK, EDIT_QUARK_FAILURE,
+         REMOVE_EDITED_QUARK,
          // deleting
          DELETE_QUARK, DELETE_QUARK_FAILURE,
          REMOVE_DELETED_QUARK,
@@ -26,11 +27,6 @@ import LoginUtil from '../utils/login';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY = '?key=euonymus';
-
-
-////////////////////////////////////////
-// TODO: create removeEditedQuark action
-////////////////////////////////////////
 
 
 
@@ -211,6 +207,14 @@ export const editQuark = (form) => {
 	    }))
     }
 }
+
+export const removeEditedQuark = (form) => {
+    return {
+	type: REMOVE_EDITED_QUARK,
+	payload: null
+    };
+}
+
 
 export const deleteQuark = (quark_id) => {
     const login_util = new LoginUtil();

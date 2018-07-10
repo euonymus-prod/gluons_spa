@@ -1,5 +1,6 @@
-import { CHANGE_CURRENT_QUARK } from '../types/quark';
-import { FETCH_GLUONS, FETCH_GLUONS_FAILURE, FETCH_ONE_QUARK_NOT_FOUND, ADD_GLUON, REMOVE_DELETED_GLUON } from '../types/gluon';
+import { CHANGE_CURRENT_QUARK, EDIT_QUARK } from '../types/quark';
+import { FETCH_GLUONS, FETCH_GLUONS_FAILURE, FETCH_ONE_QUARK_NOT_FOUND,
+	 ADD_GLUON, EDIT_GLUON, REMOVE_DELETED_GLUON } from '../types/gluon';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
 
@@ -9,6 +10,7 @@ export default (state = initState, action) => {
     switch(action.type) {
 
     case CHANGE_CURRENT_QUARK :
+    case EDIT_QUARK:
 	let util = new Util();
 	action.payload.period_str = util.period2str(action.payload);
 	return action.payload;
@@ -25,6 +27,7 @@ export default (state = initState, action) => {
 	return action.payload
 	
     case ADD_GLUON:
+    case EDIT_GLUON:
     case REMOVE_DELETED_GLUON:
 	return initState
 
