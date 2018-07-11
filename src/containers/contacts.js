@@ -9,7 +9,7 @@ import { Field, reduxForm } from 'redux-form';
 import GlobalFooter from '../components/global_footer';
 import Navbar from './navbar';
 // action
-import { sendContactForm } from '../actions/contact';
+import { sendContactForm, removeContactForm } from '../actions/contact';
 
 
 const validate = values => {
@@ -76,6 +76,16 @@ const renderSelect = ({ input, label, type, meta: { touched, error } }) => (
     )
 
 class Contacts extends Component {
+    componentWillReceiveProps(nextProps) {
+	if (nextProps.contact_form) {
+	    if (nextProps.contact_form.message) {
+		alert(nextProps.contact_form.message);
+	    }
+	    this.props.removeContactForm();
+	}
+    }
+
+
     onSubmit = (values) => {
 	this.props.sendContactForm(values);
     }
@@ -121,4 +131,4 @@ class Contacts extends Component {
 export default  reduxForm({
   form: 'contact_form',
   validate,
-})(withRouter(connect(state => state, { sendContactForm })(Contacts)));
+})(withRouter(connect(state => state, { sendContactForm, removeContactForm })(Contacts)));

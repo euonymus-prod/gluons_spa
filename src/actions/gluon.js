@@ -66,7 +66,7 @@ export const addGluon = (quark_id, form) => {
     }
 }
 
-export const removeAddedGluon = (form) => {
+export const removeAddedGluon = () => {
     return {
 	type: REMOVE_ADDED_GLUON,
 	payload: null
@@ -134,7 +134,7 @@ export const editGluon = (form) => {
     }
 }
 
-export const removeEditedGluon = (form) => {
+export const removeEditedGluon = () => {
     return {
 	type: REMOVE_EDITED_GLUON,
 	payload: null
@@ -172,7 +172,7 @@ export const deleteGluon = (gluon_id) => {
     }
 }
 
-export const removeDeletedGluon = (form) => {
+export const removeDeletedGluon = () => {
     return {
 	type: REMOVE_DELETED_GLUON,
 	payload: null

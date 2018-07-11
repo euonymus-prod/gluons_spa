@@ -145,7 +145,7 @@ export const addQuark = (form) => {
     }
 }
 
-export const removeAddedQuark = (form) => {
+export const removeAddedQuark = () => {
     return {
 	type: REMOVE_ADDED_QUARK,
 	payload: null
@@ -208,7 +208,7 @@ export const editQuark = (form) => {
     }
 }
 
-export const removeEditedQuark = (form) => {
+export const removeEditedQuark = () => {
     return {
 	type: REMOVE_EDITED_QUARK,
 	payload: null
@@ -246,7 +246,7 @@ export const deleteQuark = (quark_id) => {
     }
 }
 
-export const removeDeletedQuark = (form) => {
+export const removeDeletedQuark = () => {
     return {
 	type: REMOVE_DELETED_QUARK,
 	payload: null
