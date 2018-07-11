@@ -24,6 +24,8 @@ import { addGluon, removeAddedGluon } from '../actions/gluon';
 import { API_HOST } from '../statics';
 import LoginUtil from '../utils/login';
 
+const ROOT_URL = 'http://' + API_HOST + '/';
+const API_KEY = '?key=euonymus';
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -109,7 +111,7 @@ class AddGluon extends Component {
     }, 300);
 
     getInfo = () => {
-	axios.get(`${ROOT_URL}/search${API_KEY}&keywords=${this.state.value}&limit=7`)
+	axios.get(`${ROOT_URL}search${API_KEY}&keywords=${this.state.value}&limit=7`)
 	    .then(({ data }) => {
 		this.setState({
 		    suggestions: data
