@@ -1,6 +1,7 @@
 // react
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ReactGa from 'react-ga';
 // redux
 import { connect } from 'react-redux';
 // component
@@ -23,6 +24,8 @@ class Detail extends Component {
             noneActiveness:    '',
         };
 
+	ReactGa.initialize('UA-15649807-18');
+
         let sub_gluon_side = 'active';
         if ('sub_gluon_side' in props.match.params) {
             sub_gluon_side = props.match.params.sub_gluon_side;
@@ -33,11 +36,32 @@ class Detail extends Component {
         this.initDetail = props.initDetail.bind(this);
     }
 
+
+    trackPage = page => {
+	ReactGa.set({
+	    page,
+		// ...options,
+	});
+	console.log(page)
+	ReactGa.pageview(page);
+    };
+
     componentDidMount() {
 	document.title = this.props.match.params.quark_name +  " -\nグルーオンズ"
+
+	const page = this.props.location.pathname;
+	this.trackPage(page);
     }
 
     componentWillReceiveProps(nextProps) {
+
+	const currentPage = this.props.location.pathname;
+	const nextPage = nextProps.location.pathname;
+
+	if (currentPage !== nextPage) {
+            this.trackPage(nextPage);
+	}
+
         // --------------------------------------------------------
         const { qtype_properties, quarks, current_quark } = this.props;
         // initialize
