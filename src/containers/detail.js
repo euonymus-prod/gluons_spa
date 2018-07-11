@@ -33,6 +33,10 @@ class Detail extends Component {
         this.initDetail = props.initDetail.bind(this);
     }
 
+    componentDidMount() {
+	document.title = this.props.match.params.quark_name +  " -\nグルーオンズ"
+    }
+
     componentWillReceiveProps(nextProps) {
         // --------------------------------------------------------
         const { qtype_properties, quarks, current_quark } = this.props;
