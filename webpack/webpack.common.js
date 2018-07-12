@@ -20,4 +20,11 @@ module.exports = {
         path: parentDir + '/dist',
         filename: 'bundle.js'
     },
+    // optimization: {
+    //   splitChunks: {
+    //     name: 'vendor',
+    //     chunks: 'initial',
+    //   }
+    // },
+    // performance: { hints: false }
 }
