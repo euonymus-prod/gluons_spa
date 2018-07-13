@@ -26,5 +26,5 @@ module.exports = {
     //     chunks: 'initial',
     //   }
     // },
-    // performance: { hints: false }
+    performance: { hints: false }
 }
