@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 class TopPickupDetail extends Component {
     render () {
 	let secondpath = '';
-	if (this.props.pickup.type == 'passive') {
-	    secondpath = '/passive';
-	}
+	// if (this.props.pickup.type == 'passive') {
+	//     secondpath = '/passive';
+	// }
 	return (
            <div className="pickup-link">
                 <Link to={`/subjects/relations/${this.props.pickup.name}${secondpath}`} >
