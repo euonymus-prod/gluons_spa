@@ -14,8 +14,11 @@ import { connect } from 'react-redux';
 // action
 import { changeSearchKeyword } from '../actions/quark';
 // common util
-const API_KEY = 'euonymus'
-const API_URL = 'http://ja.localhost:8765/search'
+import { API_HOST } from '../statics';
+
+const ROOT_URL = 'http://' + API_HOST + '/';
+const API_KEY = '?key=euonymus';
+
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -65,7 +68,8 @@ class SearchBar extends Component {
     }, 300);
 
     getInfo = () => {
-	axios.get(`${API_URL}?api_key=${API_KEY}&keywords=${this.state.value}&limit=7`)
+	axios.get(`${ROOT_URL}search${API_KEY}&keywords=${this.state.value}&limit=7`)
+
 	    .then(({ data }) => {
 		this.setState({
 		    suggestions: data
