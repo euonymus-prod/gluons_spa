@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { LastLocationProvider } from 'react-router-last-location';
 import ScrollMemory from 'react-router-scroll-memory';
@@ -19,8 +19,9 @@ import Terms         from './components/terms';
 import Privacy       from './components/privacy';
 
 
-export default () => {
- return (
+class AppRoutes extends Component {
+    render () {
+	return (
    <BrowserRouter>
      <LastLocationProvider>
       <div>
@@ -52,5 +53,10 @@ export default () => {
       </div>
      </LastLocationProvider>
    </BrowserRouter>
- )
+	)
+    }
 }
+
+export default AppRoutes;
+
+    
