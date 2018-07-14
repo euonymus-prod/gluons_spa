@@ -22,17 +22,17 @@ import {
          DELETE_QUARK, DELETE_QUARK_FAILURE,
          REMOVE_DELETED_QUARK,
 } from '../types/quark';
-import { API_HOST } from '../statics';
+import { API_HOST, API_KEY } from '../statics';
 import LoginUtil from '../utils/login';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY = '?key=euonymus';
+const API_KEY_QUERY = '?key=' + API_KEY;
 
 
 
 export const fetchCurrentQuark = (quark_name, qtype_properties) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY}`)
+	axios.get(`${ROOT_URL}quark/${quark_name}${API_KEY_QUERY}`)
 	    .then((response) => {
 		if (response.data.status && response.data.status == 0) {
 		    dispatch({
@@ -60,7 +60,7 @@ export const changeCurrentQuark = (quark) => {
 
 export const fetchQuarks = (qtype_properties, limit = 100) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}quarks${API_KEY}&limit=${limit}`)
+	axios.get(`${ROOT_URL}quarks${API_KEY_QUERY}&limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_QUARKS,
@@ -75,7 +75,7 @@ export const fetchQuarks = (qtype_properties, limit = 100) => {
 
 export const fetchPickups = (qtype_properties) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}pickups${API_KEY}`)
+	axios.get(`${ROOT_URL}pickups${API_KEY_QUERY}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_PICKUPS,
@@ -90,7 +90,7 @@ export const fetchPickups = (qtype_properties) => {
 
 export const searchQuarks = (qtype_properties, keywords, limit = 100) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}search${API_KEY}&keywords=${keywords}&limit=${limit}`)
+	axios.get(`${ROOT_URL}search${API_KEY_QUERY}&keywords=${keywords}&limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: SEARCH_QUARKS,
@@ -126,7 +126,7 @@ export const addQuark = (form) => {
 	//     params.append(value, form[value]);
 	// });
 	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}add_quark/${API_KEY}`, params, {
+	axios.post(`${ROOT_URL}add_quark/${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -154,7 +154,7 @@ export const removeAddedQuark = () => {
 
 export const fetchEditingQuark = (quark_id, qtype_properties) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}quark_by_id/${quark_id}${API_KEY}`)
+	axios.get(`${ROOT_URL}quark_by_id/${quark_id}${API_KEY_QUERY}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_EDITING_QUARK,
@@ -189,7 +189,7 @@ export const editQuark = (form) => {
 	    };
 	}
 	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}edit_quark/${form.id}${API_KEY}`, params, {
+	axios.post(`${ROOT_URL}edit_quark/${form.id}${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -227,7 +227,7 @@ export const deleteQuark = (quark_id) => {
 	    };
 	}
 
-	axios.delete(`${ROOT_URL}delete_quark/${quark_id}${API_KEY}`, {
+	axios.delete(`${ROOT_URL}delete_quark/${quark_id}${API_KEY_QUERY}`, {
 	    // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,

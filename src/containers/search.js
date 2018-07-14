@@ -8,10 +8,10 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
 // common util
-import { API_HOST } from '../statics';
+import { API_HOST, API_KEY } from '../statics';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY = '?key=euonymus';
+const API_KEY_QUERY = '?key=' + API_KEY;
 
 
 // When suggestion is clicked, Autosuggest needs to populate the input
@@ -61,7 +61,7 @@ class Search extends Component {
     }, 300);
 
     getInfo = () => {
-	axios.get(`${ROOT_URL}search${API_KEY}&keywords=${this.state.value}&limit=7`)
+	axios.get(`${ROOT_URL}search${API_KEY_QUERY}&keywords=${this.state.value}&limit=7`)
 	    .then(({ data }) => {
 		this.setState({
 		    suggestions: data

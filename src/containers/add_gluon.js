@@ -21,11 +21,11 @@ import { fetchGluonTypes } from '../actions/gluon_types';
 import { fetchEditingQuark, readEditingQuark } from '../actions/quark';
 import { addGluon, removeAddedGluon } from '../actions/gluon';
 // common util
-import { API_HOST } from '../statics';
+import { API_HOST, API_KEY } from '../statics';
 import LoginUtil from '../utils/login';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY = '?key=euonymus';
+const API_KEY_QUERY = '?key=' + API_KEY;
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -111,7 +111,7 @@ class AddGluon extends Component {
     }, 300);
 
     getInfo = () => {
-	axios.get(`${ROOT_URL}search${API_KEY}&keywords=${this.state.value}&limit=7`)
+	axios.get(`${ROOT_URL}search${API_KEY_QUERY}&keywords=${this.state.value}&limit=7`)
 	    .then(({ data }) => {
 		this.setState({
 		    suggestions: data

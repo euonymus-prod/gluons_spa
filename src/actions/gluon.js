@@ -14,15 +14,15 @@ import {
          DELETE_GLUON, DELETE_GLUON_FAILURE,
          REMOVE_DELETED_GLUON, 
 } from '../types/gluon';
-import { API_HOST } from '../statics';
+import { API_HOST, API_KEY } from '../statics';
 import LoginUtil from '../utils/login';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY = '?key=euonymus';
+const API_KEY_QUERY = '?key=' + API_KEY;
 
 export const fetchGluons = (quark, qtype_properties, limit = 100) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}gluons/list/${quark.id}/${quark.quark_type_id}/${API_KEY}&limit=${limit}`)
+	axios.get(`${ROOT_URL}gluons/list/${quark.id}/${quark.quark_type_id}/${API_KEY_QUERY}&limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_GLUONS,
@@ -47,7 +47,7 @@ export const addGluon = (quark_id, form) => {
 	}
 
 	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}gluons/add/${quark_id}${API_KEY}`, params, {
+	axios.post(`${ROOT_URL}gluons/add/${quark_id}${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -83,7 +83,7 @@ export const fetchEditingGluon = (gluon_id) => {
 		payload: false
 	    };
 	}
-	axios.get(`${ROOT_URL}gluons/one/${gluon_id}${API_KEY}`, {
+	axios.get(`${ROOT_URL}gluons/one/${gluon_id}${API_KEY_QUERY}`, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -115,7 +115,7 @@ export const editGluon = (form) => {
 	}
 
 	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}gluons/edit/${form.id}${API_KEY}`, params, {
+	axios.post(`${ROOT_URL}gluons/edit/${form.id}${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -154,7 +154,7 @@ export const deleteGluon = (gluon_id) => {
 	    };
 	}
 
-	axios.delete(`${ROOT_URL}gluons/delete/${gluon_id}${API_KEY}`,  {
+	axios.delete(`${ROOT_URL}gluons/delete/${gluon_id}${API_KEY_QUERY}`,  {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain
