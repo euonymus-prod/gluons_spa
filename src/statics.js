@@ -1,4 +1,4 @@
-let api_host_uri   = 'ja.gluons.link';
+let api_host_uri   = 'ja.api.gluons.link';
 let api_keyword    = 'euonymus';
 if (process.env.NODE_ENV === 'development') {
     api_host_uri   = 'ja.localhost:8765';
