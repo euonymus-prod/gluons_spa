@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 // component
-import GlobalFooter from '../components/global_footer';
-import Navbar from './navbar';
 import QuarkInList from '../components/quark_in_list';
 // action
 import { fetchQuarks } from '../actions/quark';
@@ -46,9 +44,6 @@ class QuarkList extends Component {
 	}
 
 	return (
-   <div>
-      <Navbar withSearchBar='1' />
-
       <div className="container">
            <div>
                <h2>{this.props.quark_property_caption}</h2>
@@ -59,9 +54,6 @@ class QuarkList extends Component {
                </div>
 	   </div>
       </div>
-
-      <GlobalFooter />
-   </div>
 	)
     }
 }

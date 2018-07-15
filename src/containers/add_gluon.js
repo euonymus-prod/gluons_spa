@@ -12,9 +12,6 @@ import Autosuggest from 'react-autosuggest';
 // redux
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-// component
-import GlobalFooter from '../components/global_footer';
-import Navbar from './navbar';
 // action
 import { execLogout } from '../actions/login';
 import { fetchGluonTypes } from '../actions/gluon_types';
@@ -238,9 +235,6 @@ class AddGluon extends Component {
 
   const { handleSubmit } = this.props;
   return (
-   <div>
-      <Navbar />
-
       <div className="container">
         <div className="">
            <h2>Adding new gluon on {editing_quark.name}</h2>
@@ -303,9 +297,6 @@ class AddGluon extends Component {
            </form>
         </div>
       </div>
-
-      <GlobalFooter />
-   </div>
   )
  }
 }

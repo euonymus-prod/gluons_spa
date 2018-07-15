@@ -8,9 +8,6 @@ import { Redirect, Link } from 'react-router-dom';
 import { withLastLocation } from 'react-router-last-location';
 // redux
 import { connect } from 'react-redux';
-// component
-import GlobalFooter from '../components/global_footer';
-import Navbar from './navbar';
 // action
 import {execLogin} from '../actions/login';
 // common util
@@ -53,9 +50,6 @@ class Login extends Component {
      }
 
   return (
-   <div>
-      <Navbar />
-
       <div className="container">
          <div className="logo-top">
             <h1>Login</h1>
@@ -83,9 +77,6 @@ class Login extends Component {
             </form>
          </div>
       </div>
-
-      <GlobalFooter />
-   </div>
   )
  }
 }

@@ -1,7 +1,7 @@
 // general
 // react
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 // component
@@ -32,7 +32,18 @@ class Navbar extends Component {
     }
 
     renderSearchBar () {
-       if (this.props.withSearchBar) {
+	//console.log(this.props.location.pathname)
+	let patterns = ['^\/(?!\/)$', '^\/login\/?', '^\/signup\/?',
+			'^\/subjects\/add\/?', '^\/subjects\/edit\/', '^\/relations\/add\/?', '^\/relations\/edit\/']
+
+	let withSearchBar = true
+	patterns.map(x => {
+	    if (this.props.location.pathname.match(x)) {
+		withSearchBar = false
+	    }
+	});
+
+       if (withSearchBar) {
            return (
               <SearchBar />
            );
@@ -110,4 +121,4 @@ class Navbar extends Component {
   )
  }
 }
-export default connect(state => state, { fetchQtypeProperties, execLogout })(Navbar);
+export default withRouter(connect(state => state, { fetchQtypeProperties, execLogout })(Navbar));

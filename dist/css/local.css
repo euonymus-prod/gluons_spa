@@ -32,7 +32,7 @@ ul.subject-list-relation > li {
 }
 @media screen and (min-width: 770px) {
     .navbar-form .form-control {
-	width:300px !important;
+	width:172px !important;
     }
 }
 

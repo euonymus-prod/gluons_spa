@@ -5,8 +5,6 @@ import ReactGa from 'react-ga';
 // redux
 import { connect } from 'react-redux';
 // component
-import GlobalFooter from '../components/global_footer';
-import Navbar from './navbar';
 import MainQuark from './main_quark';
 import QuarkPropertyList from './quark_property_list';
 // action
@@ -42,7 +40,6 @@ class Detail extends Component {
 	    page,
 		// ...options,
 	});
-	console.log(page)
 	ReactGa.pageview(page);
     };
 
@@ -122,21 +119,14 @@ class Detail extends Component {
      const { current_quark } = this.props;
      if (!current_quark) {
          return (
-           <div>
-              <Navbar withSearchBar='1' />
               <div className="container">
                  <div className="row">
                     <div>Loading...</div>
                  </div>
               </div>
-              <GlobalFooter />
-           </div>
      	 );
      }
   return (
-   <div>
-      <Navbar withSearchBar='1' />
-
       <div className="container">
          <div className="row">
 
@@ -157,9 +147,6 @@ class Detail extends Component {
 
          </div>
       </div>
-
-      <GlobalFooter />
-   </div>
   )
  }
 }

@@ -5,9 +5,6 @@ import { Link, withRouter } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-// component
-import GlobalFooter from '../components/global_footer';
-import Navbar from './navbar';
 // action
 import { sendContactForm, removeContactForm } from '../actions/contact';
 
@@ -93,9 +90,6 @@ class Contacts extends Component {
  render () {
   const { handleSubmit } = this.props;
   return (
-   <div>
-      <Navbar withSearchBar='1' />
-
       <div className="container">
          <h1>contact us</h1>
          <div className="jumbotron contact-us">
@@ -122,9 +116,6 @@ class Contacts extends Component {
          </div>
          <p>'gluons' is a database of relations among anything in the universe.</p>
       </div>
-
-      <GlobalFooter />
-   </div>
   )
  }
 }

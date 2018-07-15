@@ -1,13 +1,8 @@
 import React from 'react';
-import Navbar from '../containers/navbar';
-import GlobalFooter from './global_footer';
 
 export default class Privacy extends React.Component {
  render () {
    return (
-   <div>
-      <Navbar withSearchBar='1' />
-
         <div className="container">
         <div>
 <h1>Privacy Policy</h1>
@@ -26,9 +21,6 @@ export default class Privacy extends React.Component {
 </div>
             </div>
 
-
-      <GlobalFooter />
-   </div>
    )
  }
 }

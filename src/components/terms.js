@@ -1,13 +1,8 @@
 import React from 'react';
-import Navbar from '../containers/navbar';
-import GlobalFooter from './global_footer';
 
 export default class Terms extends React.Component {
  render () {
    return (
-   <div>
-      <Navbar withSearchBar='1' />
-
         <div className="container">
         <div>
 <h1>Terms of Service</h1>
@@ -55,8 +50,6 @@ export default class Terms extends React.Component {
 </div>            </div>
 
 
-      <GlobalFooter />
-   </div>
    )
  }
 }

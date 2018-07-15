@@ -3,6 +3,10 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { LastLocationProvider } from 'react-router-last-location';
 import ScrollMemory from 'react-router-scroll-memory';
 
+// component
+import GlobalFooter from './components/global_footer';
+import Navbar from './containers/navbar';
+
 import Home          from './containers/home';
 import Detail        from './containers/detail';
 import SearchResults from './containers/search_results';
@@ -21,10 +25,14 @@ import Privacy       from './components/privacy';
 
 class AppRoutes extends Component {
     render () {
+
 	return (
    <BrowserRouter>
      <LastLocationProvider>
       <div>
+
+         <Navbar />
+
          <ScrollMemory />
          <Switch>
             {/* containers  */}
@@ -50,6 +58,9 @@ class AppRoutes extends Component {
             <Route path='/terms' component={Terms}/>
             <Route path='/privacy' component={Privacy}/>
          </Switch>
+
+         <GlobalFooter />
+
       </div>
      </LastLocationProvider>
    </BrowserRouter>
