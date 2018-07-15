@@ -6,8 +6,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
-// common util
-import { API_HOST } from '../statics';
 
 
 // --------------------------------------------------------
