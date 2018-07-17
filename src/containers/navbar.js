@@ -11,6 +11,8 @@ import BaryonNav from './baryon_nav';
 // action
 import {execLogout} from '../actions/login';
 import { fetchQtypeProperties } from '../actions/qtype_properties';
+import { changePrivacyTo } from '../actions/privacy';
+
 // common util
 import LoginUtil from '../utils/login';
 
@@ -19,6 +21,12 @@ class Navbar extends Component {
         super(props);
 	this.onLogoutClick = this.onLogoutClick.bind(this);
 	this.execLogout = props.execLogout.bind(this);
+
+	this.changePrivacyTo = this.changePrivacyTo.bind(this);
+	this.onPrivacyPublicClick = this.onPrivacyPublicClick.bind(this);
+	this.onPrivacyPrivateClick = this.onPrivacyPrivateClick.bind(this);
+	this.onPrivacyAllClick = this.onPrivacyAllClick.bind(this);
+	this.onPrivacyAdminClick = this.onPrivacyAdminClick.bind(this);
     }
 
     componentWillMount() {
@@ -29,6 +37,22 @@ class Navbar extends Component {
 
     onLogoutClick() {
 	this.execLogout();
+    }
+
+    onPrivacyPublicClick() {
+	this.changePrivacyTo(1);
+    }
+    onPrivacyPrivateClick() {
+	this.changePrivacyTo(2);
+    }
+    onPrivacyAllClick() {
+	this.changePrivacyTo(3);
+    }
+    onPrivacyAdminClick() {
+	this.changePrivacyTo(4);
+    }
+    changePrivacyTo(privacy_id) {
+	this.props.changePrivacyTo(privacy_id)
     }
 
     renderSearchBar () {
@@ -92,12 +116,13 @@ class Navbar extends Component {
                  <li className="dropdown-header">Privacy Modes</li>
 
               {(() => { if (login_util.isAdmin(logged_in_user)) { return (
-                 <li><Link to={'/users/privacy/4'}>Admin</Link></li>
+                 <li><a href="javascript:void(0)" name="privacy_4" onClick={this.onPrivacyAdminClick} >Admin</a></li>
               );} })()}
 
-                 <li><Link to={'/users/privacy/1'}>Public</Link></li>
-                 <li><Link to={'/users/privacy/2'}>Private</Link></li>
-                 <li><Link to={'/users/privacy/3'}>All</Link></li>
+                 <li><a href="javascript:void(0)" name="privacy_1" onClick={this.onPrivacyPublicClick} >Public</a></li>
+                 <li><a href="javascript:void(0)" name="privacy_2" onClick={this.onPrivacyPrivateClick} >Private</a></li>
+                 <li><a href="javascript:void(0)" name="privacy_3" onClick={this.onPrivacyAllClick} >All</a></li>
+
                  <li role="separator" className="divider"></li>
                  <li><a href="javascript:void(0)" onClick={this.onLogoutClick}>Logout</a></li>
               </ul>
@@ -121,4 +146,4 @@ class Navbar extends Component {
   )
  }
 }
-export default withRouter(connect(state => state, { fetchQtypeProperties, execLogout })(Navbar));
+export default withRouter(connect(state => state, { fetchQtypeProperties, execLogout, changePrivacyTo })(Navbar));

@@ -20,6 +20,7 @@ import deletedGluonReducer from './reducers/reducer_deleted_gluon'
 import editingQuarkReducer from './reducers/reducer_editing_quark'
 import editingGluonReducer from './reducers/reducer_editing_gluon'
 import contactFormReducer from './reducers/reducer_contact_form'
+import privacyReducer from './reducers/reducer_privacy'
 // ------------------------------------------------------------
 
 import thunk from 'redux-thunk'
@@ -45,6 +46,7 @@ const reducer = combineReducers({
     editing_quark:    editingQuarkReducer,
     editing_gluon:    editingGluonReducer,
     contact_form:     contactFormReducer,
+    privacy:          privacyReducer,
     // --------------------------------------------------------
 })
 const store = createStore(
