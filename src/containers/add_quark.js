@@ -89,9 +89,13 @@ class AddQuark extends Component {
 		alert(nextProps.added_quark.message);
 	    }
 
-	    if (nextProps.added_quark.status != 1) {
-		this.props.removeAddedQuark();
-	    } else if ( !added_quark || (nextProps.added_quark.id != added_quark.id) ) {
+	    // if (nextProps.added_quark.status != 1) {
+	    // 	this.props.removeAddedQuark();
+	    // } else if ( !added_quark || (nextProps.added_quark.id != added_quark.id) ) {
+	    // 	this.props.history.push('/subjects/relations/' + nextProps.added_quark.result.name);
+	    // }
+	    this.props.removeAddedQuark();
+	    if (nextProps.added_quark.status == 1) {
 		this.props.history.push('/subjects/relations/' + nextProps.added_quark.result.name);
 	    }
 	}
