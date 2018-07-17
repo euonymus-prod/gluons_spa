@@ -60,7 +60,7 @@ class Detail extends Component {
 	}
 
         // --------------------------------------------------------
-        const { qtype_properties, quarks, current_quark } = this.props;
+        const { qtype_properties, quarks, current_quark, privacy } = this.props;
         // initialize
 
 	if (nextProps.current_quark && nextProps.current_quark.hasOwnProperty('status') && nextProps.current_quark.status == 0) {
@@ -70,8 +70,10 @@ class Detail extends Component {
 	    return false;
 	}
 	
-        if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0) && (Object.keys(quarks.list).length == 0)) {
-            this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties);
+	// Note: 以下ちょっと様子見。Object.keys(quarks.list).length == 0 のチェックがなぜ必要だったのか。
+        // if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0) && (Object.keys(quarks.list).length == 0)) {
+        if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0)) {
+            this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties, privacy);
         } else if (!nextProps.current_quark) {
 	    let newQuark = nextProps.quarks.list[nextProps.quarks.quark_name2id[this.props.match.params.quark_name]]
 	    if (newQuark) {

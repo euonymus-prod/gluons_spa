@@ -3,6 +3,7 @@ import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK,
 	 FETCH_EDITING_QUARK, EDIT_QUARK } from '../types/quark';
 import { ADD_GLUON, EDIT_GLUON, REMOVE_DELETED_GLUON } from '../types/gluon';
 import { FETCH_GLUONS } from '../types/gluon';
+import { CHANGE_PRIVACY } from '../types/privacy';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
 import GluonUtil from '../utils/gluon';
@@ -113,6 +114,7 @@ export default (state = initState, action) => {
 	}
 
     // This should be optimized to be more presisely configured when reducer should return initState
+    case CHANGE_PRIVACY:
     case EDIT_QUARK:
     case ADD_GLUON:
     case EDIT_GLUON:
@@ -123,3 +125,4 @@ export default (state = initState, action) => {
 	return state
     }
 }
+
