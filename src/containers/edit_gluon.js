@@ -61,7 +61,7 @@ class EditGluon extends Component {
 
     componentWillReceiveProps(nextProps) {
 	const login_util = new LoginUtil();
-        const { logged_in_user, editing_gluon } = this.props;
+        const { logged_in_user } = this.props;
         // initialize
 	if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
 	    this.props.history.push('/');
@@ -75,9 +75,7 @@ class EditGluon extends Component {
 		alert(nextProps.editing_gluon.message);
 	    }
 
-	    if (nextProps.editing_gluon.status != -1) {
-		this.props.removeEditedGluon();
-	    }
+	    this.props.removeEditedGluon();
 	    if (nextProps.editing_gluon.status == 1) {
 	    	this.props.history.push('/subjects/relations/' + nextProps.editing_gluon.result.active.name);
 	    }

@@ -7,7 +7,11 @@ export default (state = initState, action) => {
     switch(action.type) {
 
     case FETCH_EDITING_GLUON:
-	action.payload['status'] = -1;
+	if (action.payload['status'] == 0) {
+	    action.payload['message'] = 'Please login';
+	} else {
+	    action.payload['status'] = -1;
+	}
 	action.payload['start'] = util.date2str(action.payload['start'], 'day');
 	action.payload['end'] = util.date2str(action.payload['end'], 'day');
 	return action.payload;
