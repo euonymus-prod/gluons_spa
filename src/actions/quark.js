@@ -154,8 +154,22 @@ export const removeAddedQuark = () => {
 }
 
 export const fetchEditingQuark = (quark_id, qtype_properties) => {
+    const login_util = new LoginUtil();
     return dispatch => {
-	axios.get(`${ROOT_URL}quarks/one/${quark_id}${API_KEY_QUERY}`)
+	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+	if (!login_util.isLoggedIn(logged_in_user) ) {
+	    return {
+		type: FETCH_EDITING_QUARK_FAILURE,
+		payload: false
+	    };
+	}
+
+	axios.get(`${ROOT_URL}quarks/one/${quark_id}${API_KEY_QUERY}`, {
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_EDITING_QUARK,

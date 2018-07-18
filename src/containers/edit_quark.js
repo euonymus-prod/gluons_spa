@@ -62,9 +62,7 @@ class EditQuark extends Component {
             this.props.fetchQuarkTypes();
         }
         // initialize
-        if (qtype_properties && (Object.keys(quarks.list).length == 0)) {
-            this.props.fetchEditingQuark(this.props.match.params.id, qtype_properties);
-	}
+        this.props.fetchEditingQuark(this.props.match.params.id, qtype_properties);
     }
     // --------------------------------------------------------
 
@@ -73,10 +71,13 @@ class EditQuark extends Component {
 
         const { logged_in_user, editing_quark } = this.props;
         // initialize
-	if (!editing_quark || (nextProps.match.params.id != this.props.match.params.id) ||
-	    (nextProps.match.params.id != editing_quark.id)) {
+	if (!nextProps.editing_quark ||
+	    (nextProps.match.params.id != nextProps.editing_quark.id)) {
+	// if (!editing_quark ||
+	//     (nextProps.match.params.id != this.props.match.params.id) ||
+	//     (nextProps.match.params.id != editing_quark.id)) {
 	    this.props.readEditingQuark(nextProps.match.params.id, nextProps.quarks);
-	} else if (!login_util.isAuthorized(nextProps.logged_in_user, editing_quark)) {
+	} else if (!login_util.isAuthorized(nextProps.logged_in_user, nextProps.editing_quark)) {
             // !Important: Authorization check. This has to be after initialization of editing_quark
 	    this.props.history.push('/');
 	}
@@ -90,10 +91,9 @@ class EditQuark extends Component {
 		alert(nextProps.editing_quark.message);
 	    }
 
-	    if (nextProps.editing_quark.status != -1) {
-		this.props.removeEditedQuark();
-	    }
-	    if ( !editing_quark || (nextProps.editing_quark.id != editing_quark.id) ) {
+	    this.props.removeEditedQuark();
+	    if (nextProps.editing_quark.status == 1) {
+	    // if ( !editing_quark || (nextProps.editing_quark.id != editing_quark.id) ) {
 		this.props.history.push('/subjects/relations/' + nextProps.editing_quark.result.name);
 	    }
 	}
