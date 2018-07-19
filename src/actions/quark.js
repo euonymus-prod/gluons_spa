@@ -31,7 +31,6 @@ const API_KEY_QUERY = '?key=' + API_KEY;
 
 
 export const fetchCurrentQuark = (quark_name, qtype_properties, privacy) => {
-    console.log(privacy)
     return dispatch => {
 	axios.get(`${ROOT_URL}quarks/name/${quark_name}${API_KEY_QUERY}`)
 	    .then((response) => {
