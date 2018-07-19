@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { FETCH_QUARK_TYPES, FETCH_QUARK_TYPES_FAILURE } from '../types/quark_types';
-import { API_HOST, API_KEY } from '../statics';
-
-const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY_QUERY = '?key=' + API_KEY;
+import { API_URI } from '../statics';
 
 export const fetchQuarkTypes = () => {
     return dispatch => {
-	axios.get(`${ROOT_URL}quark_types/${API_KEY_QUERY}`)
+	axios.get(`${API_URI}/quark_types`)
 	    .then((response) => {
 		localStorage.setItem('quark_types', JSON.stringify(response.data));
 		dispatch({

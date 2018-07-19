@@ -1,10 +1,7 @@
 import axios  from 'axios';
 
 import { EXEC_LOGIN, EXEC_LOGIN_FAILURE, EXEC_LOGOUT } from '../types/login';
-import { API_HOST, API_KEY } from '../statics';
-
-const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY_QUERY = '?key=' + API_KEY;
+import { API_URI } from '../statics';
 
 export const execLogin = (username, password) => {
     return dispatch => {
@@ -12,7 +9,7 @@ export const execLogin = (username, password) => {
 	params.append('username', username);
 	params.append('password', password);
 
-	axios.post(`${ROOT_URL}users/login${API_KEY_QUERY}`, params, {
+	axios.post(`${API_URI}/users/login`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	})
 	    .then((response) => {

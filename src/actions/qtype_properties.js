@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { FETCH_QTYPE_PROPERTIES, FETCH_QTYPE_PROPERTIES_FAILURE } from '../types/qtype_property';
-import { API_HOST, API_KEY } from '../statics';
-
-const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY_QUERY = '?key=' + API_KEY;
+import { API_URI } from '../statics';
 
 export const fetchQtypeProperties = () => {
     return dispatch => {
-	axios.get(`${ROOT_URL}qtype_properties/${API_KEY_QUERY}`)
+	axios.get(`${API_URI}/qtype_properties`)
 	    .then((response) => {
 		localStorage.setItem('qtype_properties', JSON.stringify(response.data));
 		dispatch({

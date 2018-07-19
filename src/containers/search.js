@@ -8,11 +8,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
 // common util
-import { API_HOST, API_KEY } from '../statics';
-
-const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY_QUERY = '?key=' + API_KEY;
-
+import { API_URI } from '../statics';
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -61,7 +57,7 @@ class Search extends Component {
     }, 300);
 
     getInfo = () => {
-	axios.get(`${ROOT_URL}search${API_KEY_QUERY}&keywords=${this.state.value}&limit=7`)
+	axios.get(`${API_URI}/search?keywords=${this.state.value}&limit=7`)
 	    .then(({ data }) => {
 		this.setState({
 		    suggestions: data

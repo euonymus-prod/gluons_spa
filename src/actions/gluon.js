@@ -14,16 +14,13 @@ import {
          DELETE_GLUON, DELETE_GLUON_FAILURE,
          REMOVE_DELETED_GLUON, 
 } from '../types/gluon';
-import { API_HOST, API_KEY } from '../statics';
+import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
 import GluonUtil from '../utils/gluon';
 
-const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY_QUERY = '?key=' + API_KEY;
-
 export const fetchGluons = (quark, qtype_properties, limit = 100) => {
     return dispatch => {
-	axios.get(`${ROOT_URL}gluons/list/${quark.id}/${quark.quark_type_id}/${API_KEY_QUERY}&limit=${limit}`)
+	axios.get(`${API_URI}/gluons/list/${quark.id}/${quark.quark_type_id}/?limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_GLUONS,
@@ -50,7 +47,7 @@ export const addGluon = (quark_id, form) => {
 
 	let sendingForm = gluon_util.sanitizeFormData(form);
 	let params = new URLSearchParams(sendingForm);
-	axios.post(`${ROOT_URL}gluons/add/${quark_id}${API_KEY_QUERY}`, params, {
+	axios.post(`${API_URI}/gluons/add/${quark_id}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -86,7 +83,7 @@ export const fetchEditingGluon = (gluon_id) => {
 		payload: false
 	    };
 	}
-	axios.get(`${ROOT_URL}gluons/one/${gluon_id}${API_KEY_QUERY}`, {
+	axios.get(`${API_URI}/gluons/one/${gluon_id}`, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -120,7 +117,7 @@ export const editGluon = (form) => {
 
 	let sendingForm = gluon_util.sanitizeFormData(form);
 	let params = new URLSearchParams(sendingForm);
-	axios.post(`${ROOT_URL}gluons/edit/${form.id}${API_KEY_QUERY}`, params, {
+	axios.post(`${API_URI}/gluons/edit/${form.id}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -159,7 +156,7 @@ export const deleteGluon = (gluon_id) => {
 	    };
 	}
 
-	axios.delete(`${ROOT_URL}gluons/delete/${gluon_id}${API_KEY_QUERY}`,  {
+	axios.delete(`${API_URI}/gluons/delete/${gluon_id}`,  {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain

@@ -2,16 +2,13 @@ import axios from 'axios';
 
 import { SEND_CONTACT_FORM, SEND_CONTACT_FORM_FAILURE,
 	 REMOVE_CONTACT_FORM, REMOVE_CONTACT_FORM_FAILURE } from '../types/contact';
-import { API_HOST, API_KEY } from '../statics';
+import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
-
-const ROOT_URL = 'http://' + API_HOST + '/';
-const API_KEY_QUERY = '?key=' + API_KEY;
 
 export const sendContactForm = (form) => {
     return dispatch => {
 	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}contacts/send${API_KEY_QUERY}`, params, {
+	axios.post(`${API_URI}/contacts/send`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	})
 	    .then((response) => {
