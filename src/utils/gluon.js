@@ -15,6 +15,7 @@ class GluonUtil {
 	'gluon_type_id',
 	'active_id',
 	'passive_id',
+	'passive',
 	'relation',
 	'suffix',
 	'start',
