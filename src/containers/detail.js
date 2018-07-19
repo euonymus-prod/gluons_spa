@@ -73,7 +73,7 @@ class Detail extends Component {
 	// Note: 以下ちょっと様子見。Object.keys(quarks.list).length == 0 のチェックがなぜ必要だったのか。
         // if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0) && (Object.keys(quarks.list).length == 0)) {
         if (qtype_properties && (Object.keys(nextProps.quarks.list).length == 0)) {
-            this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties, privacy);
+            this.props.fetchCurrentQuark(this.props.match.params.quark_name, qtype_properties, nextProps.privacy);
         } else if (!nextProps.current_quark) {
 	    let newQuark = nextProps.quarks.list[nextProps.quarks.quark_name2id[this.props.match.params.quark_name]]
 	    if (newQuark) {
