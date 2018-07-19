@@ -16,6 +16,7 @@ import {
 } from '../types/gluon';
 import { API_HOST, API_KEY } from '../statics';
 import LoginUtil from '../utils/login';
+import GluonUtil from '../utils/gluon';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY_QUERY = '?key=' + API_KEY;
@@ -36,6 +37,7 @@ export const fetchGluons = (quark, qtype_properties, limit = 100) => {
 }
 
 export const addGluon = (quark_id, form) => {
+    const gluon_util = new GluonUtil();
     const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
@@ -46,7 +48,8 @@ export const addGluon = (quark_id, form) => {
 	    };
 	}
 
-	let params = new URLSearchParams(form);
+	let sendingForm = gluon_util.sanitizeFormData(form);
+	let params = new URLSearchParams(sendingForm);
 	axios.post(`${ROOT_URL}gluons/add/${quark_id}${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
@@ -104,6 +107,7 @@ export const fetchEditingGluon = (gluon_id) => {
 }
 
 export const editGluon = (form) => {
+    const gluon_util = new GluonUtil();
     const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
@@ -114,7 +118,8 @@ export const editGluon = (form) => {
 	    };
 	}
 
-	let params = new URLSearchParams(form);
+	let sendingForm = gluon_util.sanitizeFormData(form);
+	let params = new URLSearchParams(sendingForm);
 	axios.post(`${ROOT_URL}gluons/edit/${form.id}${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {

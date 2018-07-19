@@ -52,5 +52,36 @@ class QuarkUtil {
 	quark.is_gluon_fetched = true;
 	return quark;
     }
+
+    form_keys = [
+	'id',
+	'name',
+	'image_path',
+	'auto_fill',
+	'description',
+	'start',
+	'end',
+	'start_accuracy',
+	'end_accuracy',
+	'is_momentary',
+	'url',
+	'affiliate',
+	'quark_type_id',
+	'is_private',
+	'is_exclusive',
+    ];
+    sanitizeFormData(form) {
+	let util = new Util();
+	let sanitized = util.sanitizeFormData(form);
+
+	let ret = {};
+	Object.keys(sanitized).map((value, index) => {
+	    if (this.form_keys.indexOf(value) >= 0) {
+		ret[value] = sanitized[value];
+	    }
+	});
+	return ret;
+    }
+
 }
 export default QuarkUtil;

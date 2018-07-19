@@ -42,5 +42,20 @@ class Util {
 	return this.fCamelToSnake(p).replace(/^_/, '');
     }
 
+    sanitizeFormData(form) {
+	let ret = {};
+	Object.keys(form).map((value, index) => {
+	    if ( (form[value] == null) || (typeof form[value] == 'undefined')) {
+		return;
+	    }
+
+	    if (typeof form[value] == 'boolean') {
+		ret[value] = form[value] ? 1 : 0;
+	    } else {
+		ret[value] = form[value];
+	    }
+	});
+	return ret;
+    }
 }
 export default Util;

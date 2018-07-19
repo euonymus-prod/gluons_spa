@@ -24,6 +24,7 @@ import {
 } from '../types/quark';
 import { API_HOST, API_KEY } from '../statics';
 import LoginUtil from '../utils/login';
+import QuarkUtil from '../utils/quark';
 
 const ROOT_URL = 'http://' + API_HOST + '/';
 const API_KEY_QUERY = '?key=' + API_KEY;
@@ -111,6 +112,7 @@ export const changeSearchKeyword = (keyword) => {
 }
 
 export const addQuark = (form) => {
+    const quark_util = new QuarkUtil();
     const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
@@ -125,7 +127,8 @@ export const addQuark = (form) => {
 	// Object.keys(form).map((value, index) => {
 	//     params.append(value, form[value]);
 	// });
-	let params = new URLSearchParams(form);
+	let sendingForm = quark_util.sanitizeFormData(form);
+	let params = new URLSearchParams(sendingForm);
 	axios.post(`${ROOT_URL}quarks/add/${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
@@ -193,6 +196,7 @@ export const readEditingQuark = (quark_id, quarks) => {
     };
 }
 export const editQuark = (form) => {
+    const quark_util = new QuarkUtil();
     const login_util = new LoginUtil();
     return dispatch => {
 	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
@@ -202,8 +206,10 @@ export const editQuark = (form) => {
 		payload: false
 	    };
 	}
-	let params = new URLSearchParams(form);
-	axios.post(`${ROOT_URL}quark/edit/${form.id}${API_KEY_QUERY}`, params, {
+
+	let sendingForm = quark_util.sanitizeFormData(form);
+	let params = new URLSearchParams(sendingForm);
+	axios.post(`${ROOT_URL}quarks/edit/${form.id}${API_KEY_QUERY}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -241,7 +247,7 @@ export const deleteQuark = (quark_id) => {
 	    };
 	}
 
-	axios.delete(`${ROOT_URL}quark/delete/${quark_id}${API_KEY_QUERY}`, {
+	axios.delete(`${ROOT_URL}quarks/delete/${quark_id}${API_KEY_QUERY}`, {
 	    // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
