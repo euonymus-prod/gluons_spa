@@ -9,7 +9,6 @@ class GluonUtil {
 	return false;
     }
 
-    // TODO
     form_keys = [
 	'id',
 	'gluon_type_id',
