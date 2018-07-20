@@ -27,8 +27,15 @@ import LoginUtil from '../utils/login';
 import QuarkUtil from '../utils/quark';
 
 export const fetchCurrentQuark = (quark_name, qtype_properties, privacy) => {
+    let endpoint = 'quarks'
+    let privacy_level = ''
+    if (privacy !== 1) {
+	endpoint = 'private_quarks'
+	privacy_level = privacy
+    }
+
     return dispatch => {
-	axios.get(`${API_URI}/quarks/name/${quark_name}`)
+	axios.get(`${API_URI}/${endpoint}/name/${quark_name}/${privacy_level}`)
 	    .then((response) => {
 		if (response.data.status && response.data.status == 0) {
 		    dispatch({

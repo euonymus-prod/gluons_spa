@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_ONE_QUARK, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK,
+import { FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK,
 	 FETCH_EDITING_QUARK, EDIT_QUARK } from '../types/quark';
 import { ADD_GLUON, EDIT_GLUON, REMOVE_DELETED_GLUON } from '../types/gluon';
 import { FETCH_GLUONS } from '../types/gluon';
@@ -25,6 +25,14 @@ export default (state = initState, action) => {
 	    quark_name2id: {...state.quark_name2id, [quark.name]: quark.id }
 	};
 	return newQuarks;
+    case FETCH_ONE_QUARK_FAILURE:
+	newQuarks = {
+	    list:          state.list,
+	    quark_name2id: state.quark_name2id,
+	    error_message: 'failed to fetch'
+	};
+	return newQuarks;
+
     case FETCH_EDITING_QUARK:
 	quark = quark_util.addExtendedInfo(action.payload.response, action.payload.qtype_properties);
 	newQuarks = {
