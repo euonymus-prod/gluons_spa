@@ -15,8 +15,8 @@ import { fetchQuarks } from '../actions/quark';
 class QuarkList extends Component {
     // --------------------------------------------------------
     componentWillMount() {
-	const { qtype_properties } = this.props;
-	this.props.fetchQuarks(qtype_properties);
+	const { qtype_properties, privacy } = this.props;
+	this.props.fetchQuarks(qtype_properties, privacy);
     }
     // --------------------------------------------------------
 

@@ -57,7 +57,7 @@ class Search extends Component {
     }, 300);
 
     getInfo = () => {
-	axios.get(`${API_URI}/search?keywords=${this.state.value}&limit=7`)
+	axios.get(`${API_URI}/quarks/search?keywords=${this.state.value}&limit=7`)
 	    .then(({ data }) => {
 		this.setState({
 		    suggestions: data

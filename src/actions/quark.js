@@ -61,9 +61,16 @@ export const changeCurrentQuark = (quark) => {
     };
 }
 
-export const fetchQuarks = (qtype_properties, limit = 100) => {
+export const fetchQuarks = (qtype_properties, privacy, limit = 100) => {
+    let endpoint = 'quarks'
+    let privacy_level = ''
+    if (privacy !== 1) {
+	endpoint = 'private_quarks'
+	privacy_level = privacy
+    }
+
     return dispatch => {
-	axios.get(`${API_URI}/quarks/list/?limit=${limit}`)
+	axios.get(`${API_URI}/${endpoint}/list/${privacy_level}?limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_QUARKS,
@@ -91,9 +98,16 @@ export const fetchPickups = (qtype_properties) => {
     }
 }
 
-export const searchQuarks = (qtype_properties, keywords, limit = 100) => {
+export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100) => {
+    let endpoint = 'quarks'
+    let privacy_level = ''
+    if (privacy !== 1) {
+	endpoint = 'private_quarks'
+	privacy_level = privacy
+    }
+
     return dispatch => {
-	axios.get(`${API_URI}/quarks/search/?keywords=${keywords}&limit=${limit}`)
+	axios.get(`${API_URI}/${endpoint}/search/${privacy_level}?keywords=${keywords}&limit=${limit}`)
 	    .then((response) => {
 		dispatch({
 		    type: SEARCH_QUARKS,
