@@ -27,6 +27,13 @@ import LoginUtil from '../utils/login';
 import QuarkUtil from '../utils/quark';
 
 export const fetchCurrentQuark = (quark_name, qtype_properties, privacy) => {
+    const login_util = new LoginUtil();
+    let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+    if (!login_util.isLoggedIn(logged_in_user)) {
+	logged_in_user.username = 'dummy';
+	logged_in_user.api_key_plain = 'dummy';
+    }
+
     let endpoint = 'quarks'
     let privacy_level = ''
     if (privacy !== 1) {
@@ -35,7 +42,12 @@ export const fetchCurrentQuark = (quark_name, qtype_properties, privacy) => {
     }
 
     return dispatch => {
-	axios.get(`${API_URI}/${endpoint}/name/${quark_name}/${privacy_level}`)
+	axios.get(`${API_URI}/${endpoint}/name/${quark_name}/${privacy_level}`, {
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
 	    .then((response) => {
 		if (response.data.status && response.data.status == 0) {
 		    dispatch({
@@ -62,6 +74,13 @@ export const changeCurrentQuark = (quark) => {
 }
 
 export const fetchQuarks = (qtype_properties, privacy, limit = 100) => {
+    const login_util = new LoginUtil();
+    let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+    if (!login_util.isLoggedIn(logged_in_user)) {
+	logged_in_user.username = 'dummy';
+	logged_in_user.api_key_plain = 'dummy';
+    }
+
     let endpoint = 'quarks'
     let privacy_level = ''
     if (privacy !== 1) {
@@ -70,7 +89,12 @@ export const fetchQuarks = (qtype_properties, privacy, limit = 100) => {
     }
 
     return dispatch => {
-	axios.get(`${API_URI}/${endpoint}/list/${privacy_level}?limit=${limit}`)
+	axios.get(`${API_URI}/${endpoint}/list/${privacy_level}?limit=${limit}`, {
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_QUARKS,
@@ -99,6 +123,13 @@ export const fetchPickups = (qtype_properties) => {
 }
 
 export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100) => {
+    const login_util = new LoginUtil();
+    let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+    if (!login_util.isLoggedIn(logged_in_user)) {
+	logged_in_user.username = 'dummy';
+	logged_in_user.api_key_plain = 'dummy';
+    }
+
     let endpoint = 'quarks'
     let privacy_level = ''
     if (privacy !== 1) {
@@ -107,7 +138,12 @@ export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100) =
     }
 
     return dispatch => {
-	axios.get(`${API_URI}/${endpoint}/search/${privacy_level}?keywords=${keywords}&limit=${limit}`)
+	axios.get(`${API_URI}/${endpoint}/search/${privacy_level}?keywords=${keywords}&limit=${limit}`, {
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
 	    .then((response) => {
 		dispatch({
 		    type: SEARCH_QUARKS,

@@ -20,9 +20,19 @@ class SearchResults extends Component {
     }
     // --------------------------------------------------------
 
+    componentWillReceiveProps(nextProps) {
+	if (nextProps.current_quarks.length === 0) {
+	    this.props.searchQuarks(nextProps.qtype_properties, nextProps.match.params.keywords, nextProps.privacy);
+	}
+    }
+
     renderQuarks() {
 	const { current_quarks } = this.props;
 	var first = current_quarks[0];
+	if (!first.id) {
+	    return 'failed to fetch';
+	}
+
 	return _.map(current_quarks, quark => {
 	    return (
 		<div key={quark.id}>
