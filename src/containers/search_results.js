@@ -21,7 +21,7 @@ class SearchResults extends Component {
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
-	if (nextProps.current_quarks.length === 0) {
+	if ((nextProps.current_quarks.length === 0) || (nextProps.match.params.keywords !== this.props.match.params.keywords)) {
 	    this.props.searchQuarks(nextProps.qtype_properties, nextProps.match.params.keywords, nextProps.privacy);
 	}
     }

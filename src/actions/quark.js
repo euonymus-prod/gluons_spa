@@ -9,7 +9,6 @@ import {
          FETCH_PICKUPS, FETCH_PICKUPS_FAILURE,
          // search quark
          SEARCH_QUARKS, SEARCH_QUARKS_FAILURE,
-         CHANGE_SEARCH_KEYWORD, CHANGE_SEARCH_KEYWORD_FAILURE,
          // adding
          ADD_QUARK, ADD_QUARK_FAILURE,
          REMOVE_ADDED_QUARK,
@@ -157,13 +156,6 @@ export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100) =
 		error: response.error
 	    }))
     }
-}
-
-export const changeSearchKeyword = (keyword) => {
-    return {
-	type: CHANGE_SEARCH_KEYWORD,
-	payload: keyword
-    };
 }
 
 export const addQuark = (form) => {

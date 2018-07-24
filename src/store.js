@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import loginReducer from './reducers/reducer_login'
 import detailReducer from './reducers/reducer_detail'
-import searchKeywordReducer from './reducers/reducer_search_keyword'
 
 // ------------------------------------------------------------
 import qtypePropertiesReducer from './reducers/reducer_qtype_properties'
@@ -27,7 +26,6 @@ import thunk from 'redux-thunk'
 const reducer = combineReducers({
     logged_in_user:   loginReducer,
     sub_gluon_side:   detailReducer,
-    search_keyword:   searchKeywordReducer,
 
     // --------------------------------------------------------
     qtype_properties: qtypePropertiesReducer,
