@@ -30,6 +30,7 @@ export const fetchCurrentQuark = (quark_name, qtype_properties, privacy) => {
     const login_util = new LoginUtil();
     let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
     if (!login_util.isLoggedIn(logged_in_user)) {
+	logged_in_user = {}
 	logged_in_user.username = 'dummy';
 	logged_in_user.api_key_plain = 'dummy';
     }
@@ -77,6 +78,7 @@ export const fetchQuarks = (qtype_properties, privacy, limit = 100) => {
     const login_util = new LoginUtil();
     let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
     if (!login_util.isLoggedIn(logged_in_user)) {
+	logged_in_user = {}
 	logged_in_user.username = 'dummy';
 	logged_in_user.api_key_plain = 'dummy';
     }
@@ -126,6 +128,7 @@ export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100) =
     const login_util = new LoginUtil();
     let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
     if (!login_util.isLoggedIn(logged_in_user)) {
+	logged_in_user = {}
 	logged_in_user.username = 'dummy';
 	logged_in_user.api_key_plain = 'dummy';
     }
