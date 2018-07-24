@@ -1,7 +1,8 @@
-/*
-Thanks to redux-form
-   https://redux-form.com/6.0.5/docs/gettingstarted.md/
-*/
+// Thanks to:  react-autosuggest
+//   https://github.com/moroshko/react-autosuggest
+//
+//Thanks to redux-form
+//   https://redux-form.com/6.0.5/docs/gettingstarted.md/
 // general
 import axios from 'axios'
 import _ from 'lodash';
