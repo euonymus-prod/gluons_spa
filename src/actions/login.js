@@ -28,6 +28,7 @@ export const execLogin = (username, password) => {
 export const execLogout = () => {
     localStorage.setItem('logged_in_user', null);
     localStorage.setItem('qtype_properties', null);
+    localStorage.setItem('privacy_mode', null);
     return {
 	type: EXEC_LOGOUT,
 	payload: null
