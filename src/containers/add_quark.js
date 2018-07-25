@@ -64,14 +64,12 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 )
 
 class AddQuark extends Component {
-    // --------------------------------------------------------
     componentWillMount() {
 	const { quark_types } = this.props;
         if (!quark_types) {
             this.props.fetchQuarkTypes();
         }
     }
-    // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
         const { logged_in_user, added_quark } = this.props;
@@ -207,7 +205,6 @@ class AddQuark extends Component {
   )
  }
 }
-// --------------------------------------------------------
 //export default connect(state => state)(AddQuark);
 export default  reduxForm({
   form: 'add_quark', // a unique name for this form
@@ -215,4 +212,3 @@ export default  reduxForm({
   validate,
   warn
 })(withRouter(connect(state => state, { fetchQuarkTypes, addQuark, removeAddedQuark, execLogout })(AddQuark)));
-// --------------------------------------------------------

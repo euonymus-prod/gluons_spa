@@ -10,24 +10,19 @@ import GluonList from '../components/gluon_list';
 // action
 import { fetchGluons } from '../actions/gluon';
 
-
-
 class QuarkPropertyList extends Component {
-
-    // --------------------------------------------------------
     componentWillMount() {
 	const { qtype_properties, current_quark } = this.props;
     	if (!current_quark.is_fetched) {
-            this.props.fetchGluons(current_quark, qtype_properties);
+            this.props.fetchGluons(current_quark, qtype_properties, this.props.privacy);
         }
     }
-    // --------------------------------------------------------
 
-    componentWillReceiveProps(nextProps) {
-	if (!nextProps.current_quark.is_gluon_fetched) {
-            this.props.fetchGluons(nextProps.current_quark, this.props.qtype_properties);
-	}
-    }
+    // componentWillReceiveProps(nextProps) {
+    // 	if (nextProps.privacy !== this.props.privacy) {
+    //         this.props.fetchGluons(nextProps.current_quark, nextProps.qtype_properties, nextProps.privacy);
+    // 	}
+    // }
 
     renderQuarkProperties() {
 	const { current_quark } = this.props;
@@ -62,9 +57,7 @@ class QuarkPropertyList extends Component {
     }
 }
 
-function mapStateToProps({ qtype_properties, current_quark, gluons, quark_properties }, ownProps) {
-    return { qtype_properties, current_quark, gluons, quark_properties };	
+function mapStateToProps({ gluons, quark_properties }, ownProps) {
+    return { gluons, quark_properties };
 }
-// --------------------------------------------------------
 export default connect(mapStateToProps, { fetchGluons })(QuarkPropertyList);
-// --------------------------------------------------------

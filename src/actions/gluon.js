@@ -18,9 +18,29 @@ import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
 import GluonUtil from '../utils/gluon';
 
-export const fetchGluons = (quark, qtype_properties, limit = 100) => {
+export const fetchGluons = (quark, qtype_properties, privacy, limit = 100) => {
+    const login_util = new LoginUtil();
+    let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+    if (!login_util.isLoggedIn(logged_in_user)) {
+	logged_in_user = {}
+	logged_in_user.username = 'dummy';
+	logged_in_user.api_key_plain = 'dummy';
+    }
+
+    let endpoint = 'gluons'
+    let privacy_level = ''
+    if (privacy !== 1) {
+	endpoint = 'private_gluons'
+	privacy_level = privacy
+    }
+
     return dispatch => {
-	axios.get(`${API_URI}/gluons/list/${quark.id}/${quark.quark_type_id}/?limit=${limit}`)
+	axios.get(`${API_URI}/${endpoint}/list/${quark.id}/${quark.quark_type_id}/${privacy_level}&limit=${limit}`, {
+	    auth: {
+		username: logged_in_user.username,
+		password: logged_in_user.api_key_plain
+	    }
+	})
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_GLUONS,

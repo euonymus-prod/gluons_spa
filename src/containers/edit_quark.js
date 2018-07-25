@@ -55,7 +55,6 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 class EditQuark extends Component {
-    // --------------------------------------------------------
     componentWillMount() {
 	const { qtype_properties, quark_types, editing_quark, quarks } = this.props;
         if (!quark_types) {
@@ -64,7 +63,6 @@ class EditQuark extends Component {
         // initialize
         this.props.fetchEditingQuark(this.props.match.params.id, qtype_properties);
     }
-    // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
 	const login_util = new LoginUtil();
@@ -205,7 +203,6 @@ class EditQuark extends Component {
   )
  }
 }
-// --------------------------------------------------------
 // export default  reduxForm({
 //   form: 'edit_quark', // a unique name for this form
 // 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
@@ -230,4 +227,3 @@ export default connect(
   },
   { fetchQuarkTypes, fetchEditingQuark, readEditingQuark, editQuark, removeEditedQuark, execLogout }
 )(withRouter(EditQuarkForm))
-// --------------------------------------------------------

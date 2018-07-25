@@ -6,22 +6,24 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
-
-
-// --------------------------------------------------------
-import { fetchGluons } from '../actions/gluon';
-// --------------------------------------------------------
+// component
 import SubGluon from './sub_gluon';
+// action
+import { fetchGluons } from '../actions/gluon';
 
 class SubGluonList extends Component {
-    // --------------------------------------------------------
     componentWillMount() {
 	const { qtype_properties, sub_quark, sub_gluon_side } = this.props;
 	if (['active'].includes(sub_gluon_side)) {
-	    this.props.fetchGluons(sub_quark, qtype_properties);
+	    this.props.fetchGluons(sub_quark, qtype_properties, this.props.privacy);
 	}
     }
-    // --------------------------------------------------------
+
+    // componentWillReceiveProps(nextProps) {
+    // 	if (nextProps.privacy !== this.props.privacy) {
+    //         this.props.fetchGluons(nextProps.sub_quark, nextProps.qtype_properties, nextProps.privacy);
+    // 	}
+    // }
 
     renderSubGluon() {
 	const { quarks, sub_quark } = this.props;

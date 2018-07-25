@@ -11,12 +11,10 @@ import { searchQuarks } from '../actions/quark';
 
 
 class SearchResults extends Component {
-    // --------------------------------------------------------
     componentWillMount() {
 	const { qtype_properties, privacy } = this.props;
 	this.props.searchQuarks(qtype_properties, this.props.match.params.keywords, privacy);
     }
-    // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
 	if ((nextProps.current_quarks.length === 0) || (nextProps.match.params.keywords !== this.props.match.params.keywords)) {

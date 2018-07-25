@@ -48,7 +48,6 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 class EditGluon extends Component {
-    // --------------------------------------------------------
     componentWillMount() {
 	const { gluon_types } = this.props;
         if (!gluon_types) {
@@ -57,7 +56,6 @@ class EditGluon extends Component {
         // initialize
         this.props.fetchEditingGluon(this.props.match.params.id);
     }
-    // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
 	const login_util = new LoginUtil();
@@ -175,7 +173,6 @@ class EditGluon extends Component {
   )
  }
 }
-// --------------------------------------------------------
 const EditGluonForm = reduxForm({
   form: 'edit_gluon',
   enableReinitialize: true
@@ -191,4 +188,3 @@ export default connect(
   },
     { fetchGluonTypes, fetchEditingGluon, editGluon, removeEditedGluon, execLogout }
 )(withRouter(EditGluonForm))
-// --------------------------------------------------------

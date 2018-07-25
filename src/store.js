@@ -2,7 +2,6 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import loginReducer from './reducers/reducer_login'
 import detailReducer from './reducers/reducer_detail'
 
-// ------------------------------------------------------------
 import qtypePropertiesReducer from './reducers/reducer_qtype_properties'
 import quarksReducer from './reducers/reducer_quarks'
 import currentQuarkReducer from './reducers/reducer_current_quark'
@@ -20,14 +19,12 @@ import editingQuarkReducer from './reducers/reducer_editing_quark'
 import editingGluonReducer from './reducers/reducer_editing_gluon'
 import contactFormReducer from './reducers/reducer_contact_form'
 import privacyReducer from './reducers/reducer_privacy'
-// ------------------------------------------------------------
 
 import thunk from 'redux-thunk'
 const reducer = combineReducers({
     logged_in_user:   loginReducer,
     sub_gluon_side:   detailReducer,
 
-    // --------------------------------------------------------
     qtype_properties: qtypePropertiesReducer,
     quarks:           quarksReducer,
     current_quark:    currentQuarkReducer,
@@ -45,7 +42,6 @@ const reducer = combineReducers({
     editing_gluon:    editingGluonReducer,
     contact_form:     contactFormReducer,
     privacy:          privacyReducer,
-    // --------------------------------------------------------
 })
 const store = createStore(
     reducer,

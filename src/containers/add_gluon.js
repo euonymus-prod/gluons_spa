@@ -116,7 +116,6 @@ class AddGluon extends Component {
 	});
     };
 
-    // --------------------------------------------------------
     componentWillMount() {
 	const { qtype_properties, quarks, gluon_types } = this.props;
         if (!gluon_types) {
@@ -127,7 +126,6 @@ class AddGluon extends Component {
             this.props.fetchEditingQuark(this.props.match.params.quark_id, qtype_properties);
 	}
     }
-    // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
 	const login_util = new LoginUtil();
@@ -294,10 +292,8 @@ class AddGluon extends Component {
   )
  }
 }
-// --------------------------------------------------------
 export default  reduxForm({
   form: 'add_gluon', // a unique name for this form
 　initialValues: {'gluon_type_id':'1', 'is_exclusive': true},
   validate,
 })(withRouter(connect(state => state, { fetchGluonTypes, addGluon, removeAddedGluon, execLogout, fetchEditingQuark, readEditingQuark, searchQuarks })(AddGluon)));
-// --------------------------------------------------------

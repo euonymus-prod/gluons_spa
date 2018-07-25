@@ -148,7 +148,10 @@ class Detail extends Component {
                   </li>
                </ul>
 
-               <QuarkPropertyList />
+               <QuarkPropertyList
+                  qtype_properties = {this.props.qtype_properties}
+                  current_quark = {this.props.current_quark}
+                  privacy = {this.props.privacy} />
             </div>
 
          </div>
@@ -159,6 +162,4 @@ class Detail extends Component {
 function mapStateToProps(state) {
     return state;
 }
-// --------------------------------------------------------
 export default connect(mapStateToProps, { initDetail, fetchCurrentQuark, changeCurrentQuark })(Detail);
-// --------------------------------------------------------
