@@ -1,4 +1,7 @@
+// react
 import React, { Component } from 'react';
+// redux
+import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { LastLocationProvider } from 'react-router-last-location';
 import ScrollMemory from 'react-router-scroll-memory';
@@ -25,6 +28,10 @@ import { initPrivacy } from './actions/privacy';
 
 
 class AppRoutes extends Component {
+    componentWillMount() {
+        this.props.initPrivacy();
+    }
+
     render () {
 
 	return (
@@ -67,6 +74,6 @@ class AppRoutes extends Component {
     }
 }
 
-export default AppRoutes;
+export default connect(state => state, { initPrivacy })(AppRoutes);
 
     
