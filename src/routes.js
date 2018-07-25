@@ -31,7 +31,10 @@ import { fetchQtypeProperties } from './actions/qtype_properties';
 class AppRoutes extends Component {
     componentWillMount() {
         this.props.initPrivacy();
-        this.props.fetchQtypeProperties();
+
+        if (!this.props.qtype_properties) {
+            this.props.fetchQtypeProperties();
+        }
     }
 
     render () {
