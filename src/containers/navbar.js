@@ -10,19 +10,12 @@ import QuarkNav from './quark_nav';
 import BaryonNav from './baryon_nav';
 // action
 import {execLogout} from '../actions/login';
-import { fetchQtypeProperties } from '../actions/qtype_properties';
 import { changePrivacyTo } from '../actions/privacy';
 
 // common util
 import LoginUtil from '../utils/login';
 
 class Navbar extends Component {
-    componentWillMount() {
-        if (!this.props.qtype_properties) {
-            this.props.fetchQtypeProperties();
-        }
-    }
-
     onLogoutClick = () => {
 	this.props.execLogout();
     }
@@ -122,4 +115,4 @@ class Navbar extends Component {
   )
  }
 }
-export default withRouter(connect(state => state, { fetchQtypeProperties, execLogout, changePrivacyTo })(Navbar));
+export default withRouter(connect(state => state, { execLogout, changePrivacyTo })(Navbar));

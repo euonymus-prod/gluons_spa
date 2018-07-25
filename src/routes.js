@@ -25,11 +25,13 @@ import Terms         from './components/terms';
 import Privacy       from './components/privacy';
 // action
 import { initPrivacy } from './actions/privacy';
+import { fetchQtypeProperties } from './actions/qtype_properties';
 
 
 class AppRoutes extends Component {
     componentWillMount() {
         this.props.initPrivacy();
+        this.props.fetchQtypeProperties();
     }
 
     render () {
@@ -74,6 +76,6 @@ class AppRoutes extends Component {
     }
 }
 
-export default connect(state => state, { initPrivacy })(AppRoutes);
+export default connect(state => state, { initPrivacy, fetchQtypeProperties })(AppRoutes);
 
     
