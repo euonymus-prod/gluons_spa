@@ -120,7 +120,7 @@ class Detail extends Component {
     }
 
  render () {
-     const { current_quark } = this.props;
+     const { current_quark, qtype_properties } = this.props;
      if (!current_quark) {
          return (
               <div className="container">
@@ -149,8 +149,8 @@ class Detail extends Component {
                </ul>
 
                <QuarkPropertyList
-                  qtype_properties = {this.props.qtype_properties}
-                  current_quark = {this.props.current_quark} />
+                  qtype_properties = {qtype_properties}
+                  current_quark = {current_quark} />
             </div>
 
          </div>
