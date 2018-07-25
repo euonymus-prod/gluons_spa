@@ -1,8 +1,6 @@
 // react
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// redux
-import { connect } from 'react-redux';
 // component
 import Navbar from '../containers/navbar';
 import SearchBar from './search_bar';
@@ -30,4 +28,4 @@ class Home extends Component {
 	)
     }
 }
-export default connect(state => state)(Home);
+export default Home;
