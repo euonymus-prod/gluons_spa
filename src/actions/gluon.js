@@ -35,7 +35,7 @@ export const fetchGluons = (quark, qtype_properties, privacy, limit = 100) => {
     }
 
     return dispatch => {
-	axios.get(`${API_URI}/${endpoint}/list/${quark.id}/${quark.quark_type_id}/${privacy_level}&limit=${limit}`, {
+	axios.get(`${API_URI}/${endpoint}/list/${quark.id}/${quark.quark_type_id}/${privacy_level}?limit=${limit}`, {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain
