@@ -20,6 +20,8 @@ import Contacts      from './containers/contacts';
 
 import Terms         from './components/terms';
 import Privacy       from './components/privacy';
+// action
+import { initPrivacy } from './actions/privacy';
 
 
 class AppRoutes extends Component {
