@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 // component
-import GluonList from './gluon_list';
+import GluonList from '../components/gluon_list';
 // action
 import { fetchGluons } from '../actions/gluon';
 
@@ -62,8 +62,8 @@ class GluonTypeList extends Component {
     }
 }
 
-function mapStateToProps({ qtype_properties, current_quark, gluons,      quark, quark_properties }, ownProps) {
-    return { qtype_properties, current_quark, gluons,      quark, quark_properties };	
+function mapStateToProps({ qtype_properties, current_quark, gluons, quark_properties }, ownProps) {
+    return { qtype_properties, current_quark, gluons, quark_properties };	
 }
 // --------------------------------------------------------
 export default connect(mapStateToProps, { fetchGluons })(GluonTypeList);

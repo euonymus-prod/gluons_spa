@@ -1,13 +1,9 @@
 // general
 import _ from 'lodash';
-import axios from 'axios';
 // react
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-// redux
-import { connect } from 'react-redux';
 // component
-import Gluon from './gluon';
+import Gluon from '../containers/gluon';
 
 
 class GluonList extends Component {
@@ -45,11 +41,4 @@ class GluonList extends Component {
 	)
     }
 }
-
-//export default connect(state => state)(GluonList);
-// --------------------------------------------------------
-function mapStateToProps({ current_quark }, ownProps) {
-    return { current_quark };	
-}
-export default connect(mapStateToProps)(GluonList);
-// --------------------------------------------------------
+export default GluonList;

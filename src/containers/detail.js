@@ -5,7 +5,7 @@ import ReactGa from 'react-ga';
 // redux
 import { connect } from 'react-redux';
 // component
-import MainQuark from './main_quark';
+import MainQuark from '../components/main_quark';
 import QuarkPropertyList from './quark_property_list';
 // action
 import { initDetail } from '../actions/detail';
