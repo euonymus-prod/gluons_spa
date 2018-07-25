@@ -5,6 +5,7 @@ import ReactGa from 'react-ga';
 // redux
 import { connect } from 'react-redux';
 // component
+import Navbar from './navbar';
 import MainQuark from '../components/main_quark';
 import QuarkPropertyList from './quark_property_list';
 // action
@@ -130,6 +131,8 @@ class Detail extends Component {
      	 );
      }
   return (
+      <div>
+         <Navbar />
       <div className="container">
          <div className="row">
 
@@ -151,6 +154,7 @@ class Detail extends Component {
             </div>
 
          </div>
+      </div>
       </div>
   )
  }

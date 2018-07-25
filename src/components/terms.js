@@ -1,8 +1,11 @@
 import React from 'react';
+import Navbar from '../containers/navbar';
 
 export default class Terms extends React.Component {
  render () {
    return (
+      <div>
+         <Navbar />
         <div className="container">
         <div>
 <h1>Terms of Service</h1>
@@ -48,7 +51,7 @@ export default class Terms extends React.Component {
 <h2>Eligibility</h2>
 <p>You must be 18 years of age or over, or the legal age to form a binding contract in your jurisdiction if that age is greater than 18 years of age, to register with us or use the Site and the Services. If you are between the ages of 13 and 18 or the applicable legal age in your jurisdiction, you can use the Site or Services only in conjunction with, and under the supervision of, your parent or guardian who has agreed to the Terms of Use. If you are under the age of 13, you may not use the Site or Services, in compliance with the Children's Online Privacy Protection Act. If you are the parent or legal guardian of a child under the age of 18, you may use the Site or Services on behalf of such minor child. By using the Site or Services on behalf of a minor child, you represent and warrant that you are the parent or legal guardian of such child and that all references in these Terms of Use to “you” shall refer to such child or such other individual for whom you have authorization to enter into these Terms of Use on their behalf, and you in your capacity as the parent or legal guardian of such child or as the authorized party of such individual. If you do not qualify under these terms, do not use the Site or Services. Membership in the Services is void where prohibited by applicable law, and the right to access the Site is revoked in such jurisdictions. By using the Site and/or the Services, you represent and warrant that you have the right, authority, and capacity to enter into these Terms of Use and to abide by all of the terms and conditions set forth herein.</p>
 </div>            </div>
-
+</div>
 
    )
  }

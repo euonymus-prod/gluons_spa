@@ -8,6 +8,8 @@ import { Link, withRouter } from "react-router-dom";
 // redux
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+// component
+import Navbar from './navbar';
 // action
 import { execLogout } from '../actions/login';
 import { fetchQuarkTypes } from '../actions/quark_types';
@@ -137,6 +139,8 @@ class EditQuark extends Component {
  render () {
   const { handleSubmit } = this.props;
   return (
+      <div>
+         <Navbar />
       <div className="container">
 
         <form onSubmit={handleSubmit(this.onSubmit)} acceptCharset="utf-8">
@@ -199,6 +203,7 @@ class EditQuark extends Component {
            <button className="btn btn-primary" type="submit">Submit</button>
         </form>
 
+      </div>
       </div>
   )
  }

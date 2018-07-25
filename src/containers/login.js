@@ -10,6 +10,8 @@ import { withLastLocation } from 'react-router-last-location';
 import { connect } from 'react-redux';
 // action
 import {execLogin} from '../actions/login';
+// component
+import Navbar from './navbar';
 // common util
 import LoginUtil from '../utils/login';
 
@@ -49,6 +51,8 @@ class Login extends Component {
      }
 
   return (
+      <div>
+         <Navbar />
       <div className="container">
          <div className="logo-top">
             <h1>Login</h1>
@@ -75,6 +79,7 @@ class Login extends Component {
                </div>
             </form>
          </div>
+      </div>
       </div>
   )
  }

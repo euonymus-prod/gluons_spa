@@ -5,7 +5,6 @@ import ScrollMemory from 'react-router-scroll-memory';
 
 // component
 import GlobalFooter from './components/global_footer';
-import Navbar from './containers/navbar';
 
 import Home          from './containers/home';
 import Detail        from './containers/detail';
@@ -30,8 +29,6 @@ class AppRoutes extends Component {
    <BrowserRouter>
      <LastLocationProvider>
       <div>
-
-         <Navbar />
 
          <ScrollMemory />
          <Switch>

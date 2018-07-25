@@ -4,11 +4,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
-
+// component
+import Navbar from './navbar';
 
 class Signup extends Component {
  render () {
   return (
+      <div>
+         <Navbar />
       <div className="container">
          <div className="logo-top">
             <h1>Sign up</h1>
@@ -30,6 +33,7 @@ class Signup extends Component {
                </div>
             </form>
          </div>
+      </div>
       </div>
   )
  }

@@ -8,6 +8,8 @@ import { Link, withRouter } from "react-router-dom";
 // redux
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+// component
+import Navbar from './navbar';
 // action
 import { execLogout } from '../actions/login';
 import { fetchGluonTypes } from '../actions/gluon_types';
@@ -122,6 +124,8 @@ class EditGluon extends Component {
 
   const { handleSubmit } = this.props;
   return (
+      <div>
+         <Navbar />
       <div className="container">
         <div className="">
            <h2>"{editing_gluon.active.name}" と "{editing_gluon.passive.name}" の関係</h2>
@@ -169,6 +173,7 @@ class EditGluon extends Component {
               <button className="btn btn-primary" type="submit">Submit</button>
            </form>
         </div>
+      </div>
       </div>
   )
  }

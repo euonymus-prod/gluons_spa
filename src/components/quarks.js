@@ -3,6 +3,7 @@ import _ from 'lodash';
 // react
 import React, { Component } from 'react';
 // component
+import Navbar from '../containers/navbar';
 import QuarkInList from './quark_in_list';
 
 class Quarks extends Component {
@@ -35,6 +36,8 @@ class Quarks extends Component {
 	}
 
 	return (
+      <div>
+         <Navbar />
       <div className="container">
            <div>
                <h2>{quark_property_caption}</h2>
@@ -44,6 +47,7 @@ class Quarks extends Component {
                    </div>
                </div>
 	   </div>
+      </div>
       </div>
 	)
     }
