@@ -15,11 +15,6 @@ import GluonUtil from '../utils/gluon';
 let gluon_util = new GluonUtil();
 
 class Gluon extends Component {
-    constructor(props) {
-        super(props);
-	this.onDeleteClick = this.onDeleteClick.bind(this);
-    }
-
     componentWillReceiveProps(nextProps) {
         const { deleted_gluon, current_quark } = this.props;
 	if (nextProps.deleted_gluon) {
@@ -48,7 +43,7 @@ class Gluon extends Component {
 	return res;
     }
 
-    onDeleteClick(event) {
+    onDeleteClick = (event) => {
 	if (confirm('Are you sure you want to delete?')) {
 	    // let doc_name = 'post_delete_gluon_' + gluon_id;
 	    // document.doc_name.submit();

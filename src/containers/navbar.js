@@ -17,42 +17,18 @@ import { changePrivacyTo } from '../actions/privacy';
 import LoginUtil from '../utils/login';
 
 class Navbar extends Component {
-    constructor(props) {
-        super(props);
-	this.onLogoutClick = this.onLogoutClick.bind(this);
-	this.execLogout = props.execLogout.bind(this);
-
-	this.changePrivacyTo = this.changePrivacyTo.bind(this);
-	this.onPrivacyPublicClick = this.onPrivacyPublicClick.bind(this);
-	this.onPrivacyPrivateClick = this.onPrivacyPrivateClick.bind(this);
-	this.onPrivacyAllClick = this.onPrivacyAllClick.bind(this);
-	this.onPrivacyAdminClick = this.onPrivacyAdminClick.bind(this);
-    }
-
     componentWillMount() {
         if (!this.props.qtype_properties) {
             this.props.fetchQtypeProperties();
         }
     }
 
-    onLogoutClick() {
-	this.execLogout();
+    onLogoutClick = () => {
+	this.props.execLogout();
     }
 
-    onPrivacyPublicClick() {
-	this.changePrivacyTo(1);
-    }
-    onPrivacyPrivateClick() {
-	this.changePrivacyTo(2);
-    }
-    onPrivacyAllClick() {
-	this.changePrivacyTo(3);
-    }
-    onPrivacyAdminClick() {
-	this.changePrivacyTo(4);
-    }
-    changePrivacyTo(privacy_id) {
-	this.props.changePrivacyTo(privacy_id)
+    onPrivacyChangeClick = (event) => {
+	this.props.changePrivacyTo(event.target.name)
     }
 
     renderSearchBar () {
@@ -116,12 +92,12 @@ class Navbar extends Component {
                  <li className="dropdown-header">Privacy Modes</li>
 
               {(() => { if (login_util.isAdmin(logged_in_user)) { return (
-                 <li><a href="javascript:void(0)" name="privacy_4" onClick={this.onPrivacyAdminClick} >Admin</a></li>
+                 <li><a href="javascript:void(0)" name="4" onClick={this.onPrivacyChangeClick} >Admin</a></li>
               );} })()}
 
-                 <li><a href="javascript:void(0)" name="privacy_1" onClick={this.onPrivacyPublicClick} >Public</a></li>
-                 <li><a href="javascript:void(0)" name="privacy_2" onClick={this.onPrivacyPrivateClick} >Private</a></li>
-                 <li><a href="javascript:void(0)" name="privacy_3" onClick={this.onPrivacyAllClick} >All</a></li>
+                 <li><a href="javascript:void(0)" name="1" onClick={this.onPrivacyChangeClick} >Public</a></li>
+                 <li><a href="javascript:void(0)" name="2" onClick={this.onPrivacyChangeClick} >Private</a></li>
+                 <li><a href="javascript:void(0)" name="3" onClick={this.onPrivacyChangeClick} >All</a></li>
 
                  <li role="separator" className="divider"></li>
                  <li><a href="javascript:void(0)" onClick={this.onLogoutClick}>Logout</a></li>

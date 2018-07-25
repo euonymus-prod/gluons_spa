@@ -29,9 +29,6 @@ class Detail extends Component {
             sub_gluon_side = props.match.params.sub_gluon_side;
         }
         props.initDetail(sub_gluon_side);
-
-        this.onLinkClick = this.onLinkClick.bind(this);
-        this.initDetail = props.initDetail.bind(this);
     }
 
 
@@ -116,9 +113,9 @@ class Detail extends Component {
         }
     }
 
-    onLinkClick(event) {
+    onLinkClick = (event) => {
 	event.preventDefault();
-	this.initDetail(event.target.name);
+	this.props.initDetail(event.target.name);
     }
 
  render () {

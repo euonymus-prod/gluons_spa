@@ -9,10 +9,9 @@ class SearchBar extends Component {
 	this.state = {
 	    value: '',
 	}
-	this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
 	event.preventDefault();
 	this.props.history.push(`/subjects/search/${this.state.value}`);
     }

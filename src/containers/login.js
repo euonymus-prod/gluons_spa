@@ -21,7 +21,6 @@ class Login extends Component {
 	    username: '',
 	    password: []
 	};
-	this.handleLogin = this.handleLogin.bind(this);
     }
 
     handleUsernameChange = (event) => {
@@ -30,7 +29,7 @@ class Login extends Component {
     handlePasswordChange = (event) => {
 	this.setState({password: event.target.value});
     }
-    handleLogin(event) {
+    handleLogin = (event) => {
 	event.preventDefault();
 	this.props.execLogin(this.state.username, this.state.password);
     };
