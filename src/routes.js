@@ -10,7 +10,7 @@ import Navbar from './containers/navbar';
 import Home          from './containers/home';
 import Detail        from './containers/detail';
 import SearchResults from './containers/search_results';
-import QuarkList     from './containers/quarks';
+import QuarkList     from './containers/quark_list';
 import Login         from './containers/login';
 import Signup        from './containers/signup';
 import AddQuark      from './containers/add_quark';

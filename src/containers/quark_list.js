@@ -7,20 +7,20 @@ import { connect } from 'react-redux';
 // component
 import Quarks from '../components/quarks';
 // action
-import { searchQuarks } from '../actions/quark';
+import { fetchQuarks } from '../actions/quark';
 
 
-class SearchResults extends Component {
+class QuarkList extends Component {
     // --------------------------------------------------------
     componentWillMount() {
 	const { qtype_properties, privacy } = this.props;
-	this.props.searchQuarks(qtype_properties, this.props.match.params.keywords, privacy);
+	this.props.fetchQuarks(qtype_properties, privacy);
     }
     // --------------------------------------------------------
 
     componentWillReceiveProps(nextProps) {
-	if ((nextProps.current_quarks.length === 0) || (nextProps.match.params.keywords !== this.props.match.params.keywords)) {
-	    this.props.searchQuarks(nextProps.qtype_properties, nextProps.match.params.keywords, nextProps.privacy);
+	if (nextProps.current_quarks.length === 0) {
+	    this.props.fetchQuarks(nextProps.qtype_properties, nextProps.privacy);
 	}
     }
 
@@ -31,10 +31,11 @@ class SearchResults extends Component {
 	}
 	return (
            <Quarks
-              quark_property_caption={this.props.match.params.keywords + "の検索結果"}
+              quark_property_caption="Quarks"
               current_quarks={current_quarks} />
 	)
     }
 }
 
-export default connect(state => state, { searchQuarks })(SearchResults);
+export default connect(state => state, { fetchQuarks })(QuarkList);
+

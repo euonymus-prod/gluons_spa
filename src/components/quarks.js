@@ -1,30 +1,11 @@
 // general
-import axios from 'axios';
+import _ from 'lodash';
 // react
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-// redux
-import { connect } from 'react-redux';
 // component
-import QuarkInList from '../components/quark_in_list';
-// action
-import { fetchQuarks } from '../actions/quark';
+import QuarkInList from './quark_in_list';
 
-
-
-class QuarkList extends Component {
-    // --------------------------------------------------------
-    componentWillMount() {
-	const { qtype_properties, privacy } = this.props;
-	this.props.fetchQuarks(qtype_properties, privacy);
-    }
-    // --------------------------------------------------------
-
-    componentWillReceiveProps(nextProps) {
-	if (nextProps.current_quarks.length === 0) {
-	    this.props.fetchQuarks(nextProps.qtype_properties, nextProps.privacy);
-	}
-    }
+class Quarks extends Component {
 
     renderQuarks() {
 	const { current_quarks } = this.props;
@@ -47,7 +28,7 @@ class QuarkList extends Component {
     }
 
     render () {
-	const { current_quarks } = this.props;
+	const { current_quarks, quark_property_caption } = this.props;
 
 	if (current_quarks.length == 0) {
 	    return '';
@@ -56,7 +37,7 @@ class QuarkList extends Component {
 	return (
       <div className="container">
            <div>
-               <h2>{this.props.quark_property_caption}</h2>
+               <h2>{quark_property_caption}</h2>
                <div className="related" >
                    <div className="well subject-relation white">
                        {this.renderQuarks()}
@@ -68,5 +49,5 @@ class QuarkList extends Component {
     }
 }
 
-export default connect(state => state, { fetchQuarks })(QuarkList);
+export default Quarks;
 
