@@ -139,6 +139,11 @@ class AddQuark extends Component {
     }
 
  render () {
+     const { quark_types } = this.props;
+     if (!quark_types) {
+	 return ''
+     }
+
   const { handleSubmit } = this.props;
   return (
       <div>

@@ -41,6 +41,8 @@ export const execLogout = () => {
     localStorage.setItem('logged_in_user', null);
     localStorage.setItem('qtype_properties', null);
     localStorage.setItem('privacy_mode', null);
+    localStorage.setItem('quark_types', null);
+    localStorage.setItem('gluon_types', null);
     return {
 	type: EXEC_LOGOUT,
 	payload: null

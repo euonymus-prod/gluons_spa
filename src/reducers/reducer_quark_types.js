@@ -6,7 +6,6 @@ export default (state = initState, action) => {
     case FETCH_QUARK_TYPES :
 	return action.payload;
     default :
-	let quark_types = JSON.parse(localStorage.getItem('quark_types'));
-	return quark_types
+	return state
     }
 }

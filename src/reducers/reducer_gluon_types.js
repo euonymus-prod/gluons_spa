@@ -6,7 +6,6 @@ export default (state = initState, action) => {
     case FETCH_GLUON_TYPES :
 	return action.payload;
     default :
-	let gluon_types = JSON.parse(localStorage.getItem('gluon_types'));
-	return gluon_types
+	return state
     }
 }

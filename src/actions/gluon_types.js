@@ -3,6 +3,14 @@ import { FETCH_GLUON_TYPES, FETCH_GLUON_TYPES_FAILURE } from '../types/gluon_typ
 import { API_URI } from '../statics';
 
 export const fetchGluonTypes = () => {
+    let gluon_types = JSON.parse(localStorage.getItem('gluon_types'));
+    if (gluon_types) {
+	return {
+	    type: FETCH_GLUON_TYPES,
+	    payload: gluon_types
+	};
+    }
+
     return dispatch => {
 	axios.get(`${API_URI}/gluon_types`)
 	    .then((response) => {

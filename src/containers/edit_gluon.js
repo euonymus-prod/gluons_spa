@@ -117,8 +117,8 @@ class EditGluon extends Component {
 
 
  render () {
-     const { editing_gluon } = this.props;
-     if (!editing_gluon || (editing_gluon.status != -1)) {
+     const { editing_gluon, gluon_types } = this.props;
+     if (!editing_gluon || (editing_gluon.status != -1) || !gluon_types) {
 	 return ''
      }
 

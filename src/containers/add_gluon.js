@@ -212,8 +212,8 @@ class AddGluon extends Component {
 
  render () {
      const { value, suggestions } = this.state;
-     const { editing_quark } = this.props;
-     if (!editing_quark) {
+     const { editing_quark, gluon_types } = this.props;
+     if (!editing_quark || !gluon_types) {
 	 return ''
      }
 
