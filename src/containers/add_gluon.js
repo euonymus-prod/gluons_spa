@@ -4,7 +4,6 @@
 //Thanks to redux-form
 //   https://redux-form.com/6.0.5/docs/gettingstarted.md/
 // general
-import axios from 'axios'
 import _ from 'lodash';
 // react
 import React, { Component } from 'react';
@@ -16,10 +15,9 @@ import { Field, reduxForm } from 'redux-form';
 // action
 import { execLogout } from '../actions/login';
 import { fetchGluonTypes } from '../actions/gluon_types';
-import { fetchEditingQuark, readEditingQuark } from '../actions/quark';
+import { fetchEditingQuark, readEditingQuark, searchQuarks } from '../actions/quark';
 import { addGluon, removeAddedGluon } from '../actions/gluon';
 // common util
-import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
 
 // When suggestion is clicked, Autosuggest needs to populate the input
@@ -102,17 +100,8 @@ class AddGluon extends Component {
     };
 
     debouncedGetInfo = _.debounce(() => {
-	this.getInfo(this.state.value);
+	this.props.searchQuarks(this.props.qtype_properties, this.state.value, this.props.privacy);
     }, 300);
-
-    getInfo = () => {
-	axios.get(`${API_URI}/quarks/search?keywords=${this.state.value}&limit=7`)
-	    .then(({ data }) => {
-		this.setState({
-		    suggestions: data
-		})
-	    })
-    }
 
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
@@ -142,7 +131,8 @@ class AddGluon extends Component {
 
     componentWillReceiveProps(nextProps) {
 	const login_util = new LoginUtil();
-        const { logged_in_user, added_gluon, editing_quark } = this.props;
+        const { added_gluon, editing_quark } = this.props;
+
         // initialize
 	// !! without (Object.keys(nextProps.quarks.list).length > 0) check, componentWillReceiveProps eternally fires
 	if (Object.keys(nextProps.quarks.list).length > 0) {
@@ -153,6 +143,12 @@ class AddGluon extends Component {
 		// !Important: Authorization check. This has to be after initialization of editing_quark
 		this.props.history.push('/');
 	    }
+	}
+
+	if (nextProps.current_quarks) {
+	    this.setState({
+		suggestions: nextProps.current_quarks
+	    })
 	}
 
 	if (nextProps.added_gluon) {
@@ -303,5 +299,5 @@ export default  reduxForm({
   form: 'add_gluon', // a unique name for this form
 　initialValues: {'gluon_type_id':'1', 'is_exclusive': true},
   validate,
-})(withRouter(connect(state => state, { fetchGluonTypes, addGluon, removeAddedGluon, execLogout, fetchEditingQuark, readEditingQuark })(AddGluon)));
+})(withRouter(connect(state => state, { fetchGluonTypes, addGluon, removeAddedGluon, execLogout, fetchEditingQuark, readEditingQuark, searchQuarks })(AddGluon)));
 // --------------------------------------------------------
