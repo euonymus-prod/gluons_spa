@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 // component
-import TopPickupDetail from './top_pickup_detail';
+import TopPickupDetail from '../components/top_pickup_detail';
 // action
 import { fetchPickups } from '../actions/quark';
 
@@ -15,8 +15,10 @@ import { fetchPickups } from '../actions/quark';
 
 class TopPickups extends Component {
     componentWillMount() {
-	const { qtype_properties } = this.props;
-	this.props.fetchPickups(qtype_properties);
+	const { pickups, qtype_properties } = this.props;
+	if (pickups.length == 0) {
+	    this.props.fetchPickups(qtype_properties);
+	}
     }
 
     renderPickups() {
