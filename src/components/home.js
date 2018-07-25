@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 // component
-import Navbar from './navbar';
-import SearchBar from '../components/search_bar';
-import TopPickups from './top_pickups';
+import Navbar from '../containers/navbar';
+import SearchBar from './search_bar';
+import TopPickups from '../containers/top_pickups';
 
 
 class Home extends Component {

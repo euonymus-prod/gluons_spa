@@ -6,7 +6,7 @@ import ScrollMemory from 'react-router-scroll-memory';
 // component
 import GlobalFooter from './components/global_footer';
 
-import Home          from './containers/home';
+import Home          from './components/home';
 import Detail        from './containers/detail';
 import SearchResults from './containers/search_results';
 import QuarkList     from './containers/quark_list';
