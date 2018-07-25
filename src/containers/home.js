@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 // component
-import Search from './search';
+import SearchBar from '../components/search_bar';
 import TopPickups from './top_pickups';
 
 
@@ -18,7 +18,7 @@ class Home extends Component {
 
          <div className="home">
             <p className="text-center">気になる人、物、会社の隠れた関係を見つけよう</p>
-            <Search />
+            <SearchBar type="home" />
             <TopPickups />
          </div>
 

@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 // component
-import SearchBar from './search_bar';
+import SearchBar from '../components/search_bar';
 import QuarkNav from './quark_nav';
 import BaryonNav from './baryon_nav';
 // action
@@ -69,7 +69,7 @@ class Navbar extends Component {
 
        if (withSearchBar) {
            return (
-              <SearchBar />
+              <SearchBar type="navbar" />
            );
        }
        return '';
