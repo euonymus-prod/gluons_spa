@@ -54,7 +54,7 @@ class SubGluonList extends Component {
 	}
 
 	return (
-          <div className="subject-relation-sub">
+          <div className="subject-relation-sub">{this.props.privacy}
               <div className="well ">
                  <h4>{this.props.sub_quark.name}とは</h4>
                  {this.props.sub_quark.description}

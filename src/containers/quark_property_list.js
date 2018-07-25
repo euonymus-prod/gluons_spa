@@ -57,7 +57,7 @@ class QuarkPropertyList extends Component {
     }
 }
 
-function mapStateToProps({ gluons, quark_properties }, ownProps) {
-    return { gluons, quark_properties };
+function mapStateToProps({ gluons, quark_properties, privacy }, ownProps) {
+    return { gluons, quark_properties, privacy };
 }
 export default connect(mapStateToProps, { fetchGluons })(QuarkPropertyList);

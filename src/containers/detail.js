@@ -147,8 +147,7 @@ class Detail extends Component {
 
                <QuarkPropertyList
                   qtype_properties = {this.props.qtype_properties}
-                  current_quark = {this.props.current_quark}
-                  privacy = {this.props.privacy} />
+                  current_quark = {this.props.current_quark} />
             </div>
 
          </div>
