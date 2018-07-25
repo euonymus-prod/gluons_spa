@@ -24,17 +24,16 @@ import Contacts      from './containers/contacts';
 import Terms         from './components/terms';
 import Privacy       from './components/privacy';
 // action
+import { initLogin } from './actions/login';
 import { initPrivacy } from './actions/privacy';
-import { fetchQtypeProperties } from './actions/qtype_properties';
+import { initQtypeProperties } from './actions/qtype_properties';
 
 
 class AppRoutes extends Component {
     componentWillMount() {
+	this.props.initLogin();
         this.props.initPrivacy();
-
-        if (!this.props.qtype_properties) {
-            this.props.fetchQtypeProperties();
-        }
+	this.props.initQtypeProperties();
     }
 
     render () {
@@ -79,6 +78,6 @@ class AppRoutes extends Component {
     }
 }
 
-export default connect(state => state, { initPrivacy, fetchQtypeProperties })(AppRoutes);
+export default connect(state => state, { initLogin, initPrivacy, initQtypeProperties })(AppRoutes);
 
     

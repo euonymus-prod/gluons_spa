@@ -1,14 +1,14 @@
 import { INIT_PRIVACY, CHANGE_PRIVACY } from '../types/privacy';
 
 export const initPrivacy = () => {
-    let privacy_id = 1
+    let payload = 1
     let privacy_mode = JSON.parse(localStorage.getItem('privacy_mode'));
     if (privacy_mode) {
-	privacy_id = privacy_mode
+	payload = privacy_mode
     }
     return {
 	type: INIT_PRIVACY,
-	payload: privacy_id
+	payload
     };
 }
 
