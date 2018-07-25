@@ -12,7 +12,7 @@ import { fetchGluons } from '../actions/gluon';
 
 
 
-class GluonTypeList extends Component {
+class QuarkPropertyList extends Component {
 
     // --------------------------------------------------------
     componentWillMount() {
@@ -66,5 +66,5 @@ function mapStateToProps({ qtype_properties, current_quark, gluons, quark_proper
     return { qtype_properties, current_quark, gluons, quark_properties };	
 }
 // --------------------------------------------------------
-export default connect(mapStateToProps, { fetchGluons })(GluonTypeList);
+export default connect(mapStateToProps, { fetchGluons })(QuarkPropertyList);
 // --------------------------------------------------------
