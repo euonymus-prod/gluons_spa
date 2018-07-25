@@ -19,7 +19,7 @@ class GluonList extends Component {
                         if (gluon.id != first.id)
                         return <hr />;
                     })()}
-                    <Gluon gluon = {gluon} />
+                    <Gluon gluon={gluon} />
 		</div>
 	    );
 	});
