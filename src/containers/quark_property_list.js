@@ -13,7 +13,7 @@ import { fetchGluons } from '../actions/gluon';
 class QuarkPropertyList extends Component {
     componentWillMount() {
 	const { qtype_properties, current_quark, privacy } = this.props;
-    	if (!current_quark.is_fetched) {
+    	if (!current_quark.is_gluon_fetched) {
             this.props.fetchGluons(current_quark, qtype_properties, privacy);
         }
     }
