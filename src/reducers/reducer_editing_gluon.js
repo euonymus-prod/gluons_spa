@@ -1,4 +1,4 @@
-import { FETCH_EDITING_GLUON, EDIT_GLUON, REMOVE_EDITED_GLUON } from '../types/gluon';
+import { FETCH_EDITING_GLUON, EDIT_GLUON } from '../types/gluon';
 import Util from '../utils/common';
 
 const initState = null;
@@ -18,9 +18,6 @@ export default (state = initState, action) => {
 
     case EDIT_GLUON:
 	return action.payload;
-
-    case REMOVE_EDITED_GLUON:
-	return initState
 
     default :
 	return state

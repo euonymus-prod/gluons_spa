@@ -1,18 +1,14 @@
 import axios from 'axios';
 
-import {
-         // fetch gluon list
+import { // fetch gluon list
          FETCH_GLUONS, FETCH_GLUONS_FAILURE,
          // adding
          ADD_GLUON, ADD_GLUON_FAILURE,
-         REMOVE_ADDED_GLUON,
          // editing
          FETCH_EDITING_GLUON, FETCH_EDITING_GLUON_FAILURE,
          EDIT_GLUON, EDIT_GLUON_FAILURE,
-         REMOVE_EDITED_GLUON,
          // deleting
          DELETE_GLUON, DELETE_GLUON_FAILURE,
-         REMOVE_DELETED_GLUON, 
 } from '../types/gluon';
 import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
@@ -86,13 +82,6 @@ export const addGluon = (quark_id, form) => {
     }
 }
 
-export const removeAddedGluon = () => {
-    return {
-	type: REMOVE_ADDED_GLUON,
-	payload: null
-    };
-}
-
 export const fetchEditingGluon = (gluon_id) => {
     const login_util = new LoginUtil();
     return dispatch => {
@@ -156,14 +145,6 @@ export const editGluon = (form) => {
     }
 }
 
-export const removeEditedGluon = () => {
-    return {
-	type: REMOVE_EDITED_GLUON,
-	payload: null
-    };
-}
-
-
 
 export const deleteGluon = (gluon_id) => {
     const login_util = new LoginUtil();
@@ -194,9 +175,3 @@ export const deleteGluon = (gluon_id) => {
     }
 }
 
-export const removeDeletedGluon = () => {
-    return {
-	type: REMOVE_DELETED_GLUON,
-	payload: null
-    };
-}

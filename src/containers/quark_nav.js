@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 // redux
 import { connect } from 'react-redux';
 // action
-import {deleteQuark, removeDeletedQuark} from '../actions/quark';
+import { deleteQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 // common util
 import LoginUtil from '../utils/login';
@@ -12,18 +12,18 @@ import LoginUtil from '../utils/login';
 
 class QuarkNav extends Component {
     componentWillReceiveProps(nextProps) {
-        const { deleted_quark } = this.props;
-	if (nextProps.deleted_quark) {
-	    if (!nextProps.deleted_quark.message) {
-		this.props.execLogout();
-		alert('Please login again');
-	    } else {
-		alert(nextProps.deleted_quark.message);
-	    }
-	    this.props.removeDeletedQuark();
+	if (nextProps.submit_count > this.props.submit_count) {
+	    if (nextProps.deleted_quark) {
+		if (!nextProps.deleted_quark.message) {
+		    alert('Please login again');
+		    this.props.execLogout();
+		} else {
+		    alert(nextProps.deleted_quark.message);
+		}
 
-	    if (nextProps.deleted_quark.status == 1) {
-		this.props.history.push('/subjects');
+		if (nextProps.deleted_quark.status == 1) {
+		    this.props.history.push('/subjects');
+		}
 	    }
 	}
     }
@@ -57,4 +57,4 @@ class QuarkNav extends Component {
 	)
     }
 }
-export default withRouter(connect(state => state, { deleteQuark, removeDeletedQuark, execLogout })(QuarkNav));
+export default withRouter(connect(state => state, { deleteQuark, execLogout })(QuarkNav));

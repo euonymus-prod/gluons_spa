@@ -13,7 +13,7 @@ import Navbar from './navbar';
 // action
 import { execLogout } from '../actions/login';
 import { fetchQuarkTypes } from '../actions/quark_types';
-import { addQuark, removeAddedQuark } from '../actions/quark';
+import { addQuark } from '../actions/quark';
 // common util
 import Util from '../utils/common';
 import LoginUtil from '../utils/login';
@@ -74,29 +74,26 @@ class AddQuark extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { logged_in_user, added_quark } = this.props;
         // initialize
 	const login_util = new LoginUtil();
 	if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
 	    this.props.history.push('/');
 	}
 
-	if (nextProps.added_quark) {
-	    if (!nextProps.added_quark.message) {
-		alert('Please login again');
-		this.props.execLogout();
-	    } else {
-		alert(nextProps.added_quark.message);
-	    }
+	// after editing post
+	if (nextProps.submit_count > this.props.submit_count) {
+	
+	    if (nextProps.added_quark) {
+		if (!nextProps.added_quark.message) {
+		    alert('Please login again');
+		    this.props.execLogout();
+		} else {
+		    alert(nextProps.added_quark.message);
+		}
 
-	    // if (nextProps.added_quark.status != 1) {
-	    // 	this.props.removeAddedQuark();
-	    // } else if ( !added_quark || (nextProps.added_quark.id != added_quark.id) ) {
-	    // 	this.props.history.push('/subjects/relations/' + nextProps.added_quark.result.name);
-	    // }
-	    this.props.removeAddedQuark();
-	    if (nextProps.added_quark.status == 1) {
-		this.props.history.push('/subjects/relations/' + nextProps.added_quark.result.name);
+		if (nextProps.added_quark.status == 1) {
+		    this.props.history.push('/subjects/relations/' + nextProps.added_quark.result.name);
+		}
 	    }
 	}
     }
@@ -221,4 +218,4 @@ export default  reduxForm({
 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
   validate,
   warn
-})(withRouter(connect(state => state, { fetchQuarkTypes, addQuark, removeAddedQuark, execLogout })(AddQuark)));
+})(withRouter(connect(state => state, { fetchQuarkTypes, addQuark, execLogout })(AddQuark)));

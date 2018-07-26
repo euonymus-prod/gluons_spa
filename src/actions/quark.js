@@ -11,15 +11,12 @@ import {
          SEARCH_QUARKS, SEARCH_QUARKS_FAILURE,
          // adding
          ADD_QUARK, ADD_QUARK_FAILURE,
-         REMOVE_ADDED_QUARK,
          // editing
          FETCH_EDITING_QUARK, FETCH_EDITING_QUARK_FAILURE,
          READ_EDITING_QUARK, READ_EDITING_QUARK_FAILURE,
          EDIT_QUARK, EDIT_QUARK_FAILURE,
-         REMOVE_EDITED_QUARK,
          // deleting
          DELETE_QUARK, DELETE_QUARK_FAILURE,
-         REMOVE_DELETED_QUARK,
 } from '../types/quark';
 import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
@@ -195,13 +192,6 @@ export const addQuark = (form) => {
     }
 }
 
-export const removeAddedQuark = () => {
-    return {
-	type: REMOVE_ADDED_QUARK,
-	payload: null
-    };
-}
-
 export const fetchEditingQuark = (quark_id, qtype_properties) => {
     const login_util = new LoginUtil();
     return dispatch => {
@@ -275,14 +265,6 @@ export const editQuark = (form) => {
     }
 }
 
-export const removeEditedQuark = () => {
-    return {
-	type: REMOVE_EDITED_QUARK,
-	payload: null
-    };
-}
-
-
 export const deleteQuark = (quark_id) => {
     const login_util = new LoginUtil();
     return dispatch => {
@@ -312,12 +294,4 @@ export const deleteQuark = (quark_id) => {
 	    }))
     }
 }
-
-export const removeDeletedQuark = () => {
-    return {
-	type: REMOVE_DELETED_QUARK,
-	payload: null
-    };
-}
-
 

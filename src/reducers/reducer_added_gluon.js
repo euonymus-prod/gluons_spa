@@ -1,4 +1,4 @@
-import { ADD_GLUON, REMOVE_ADDED_GLUON } from '../types/gluon';
+import { ADD_GLUON } from '../types/gluon';
 
 const initState = null;
 export default (state = initState, action) => {
@@ -6,9 +6,6 @@ export default (state = initState, action) => {
 
     case ADD_GLUON:
 	return action.payload;
-
-    case REMOVE_ADDED_GLUON:
-	return initState
 
     default :
 	return state

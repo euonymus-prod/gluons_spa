@@ -13,7 +13,7 @@ import Navbar from './navbar';
 // action
 import { execLogout } from '../actions/login';
 import { fetchQuarkTypes } from '../actions/quark_types';
-import { fetchEditingQuark, readEditingQuark, editQuark, removeEditedQuark } from '../actions/quark';
+import { fetchEditingQuark, readEditingQuark, editQuark } from '../actions/quark';
 // common util
 import Util from '../utils/common';
 import LoginUtil from '../utils/login';
@@ -67,15 +67,10 @@ class EditQuark extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-	const login_util = new LoginUtil();
-
-        const { logged_in_user, editing_quark } = this.props;
         // initialize
+	const login_util = new LoginUtil();
 	if (!nextProps.editing_quark ||
 	    (nextProps.match.params.id != nextProps.editing_quark.id)) {
-	// if (!editing_quark ||
-	//     (nextProps.match.params.id != this.props.match.params.id) ||
-	//     (nextProps.match.params.id != editing_quark.id)) {
 	    this.props.readEditingQuark(nextProps.match.params.id, nextProps.quarks);
 	} else if (!login_util.isAuthorized(nextProps.logged_in_user, nextProps.editing_quark)) {
             // !Important: Authorization check. This has to be after initialization of editing_quark
@@ -83,18 +78,19 @@ class EditQuark extends Component {
 	}
 
 	// after editing post
-	if (nextProps.editing_quark && (nextProps.editing_quark.status >= 0)) {
-	    if (!nextProps.editing_quark.message) {
-		alert('Please login again');
-		this.props.execLogout();
-	    } else {
-		alert(nextProps.editing_quark.message);
-	    }
+	if (nextProps.submit_count > this.props.submit_count) {
 
-	    this.props.removeEditedQuark();
-	    if (nextProps.editing_quark.status == 1) {
-	    // if ( !editing_quark || (nextProps.editing_quark.id != editing_quark.id) ) {
-		this.props.history.push('/subjects/relations/' + nextProps.editing_quark.result.name);
+	    if (nextProps.editing_quark) {
+		if (!nextProps.editing_quark.message) {
+		    alert('Please login again');
+		    this.props.execLogout();
+		} else {
+		    alert(nextProps.editing_quark.message);
+		}
+
+		if (nextProps.editing_quark.status == 1) {
+		    this.props.history.push('/subjects/relations/' + nextProps.editing_quark.result.name);
+		}
 	    }
 	}
     }
@@ -217,7 +213,7 @@ class EditQuark extends Component {
 //   form: 'edit_quark', // a unique name for this form
 // 　initialValues: {'auto_fill': true, 'quark_type_id':'1', 'is_exclusive': true},
 //   validate,
-// })(withRouter(connect(state => state, { fetchQuarkTypes, readEditingQuark, editQuark, removeEditedQuark, execLogout })(EditQuark)));
+// })(withRouter(connect(state => state, { fetchQuarkTypes, readEditingQuark, editQuark, execLogout })(EditQuark)));
 
 const EditQuarkForm = reduxForm({
   form: 'edit_quark',
@@ -225,15 +221,15 @@ const EditQuarkForm = reduxForm({
 })(EditQuark)
 
 export default connect(
-  ({ qtype_properties, logged_in_user, quark_types, editing_quark, quarks }, ownProps) => {
+  ({ qtype_properties, logged_in_user, quark_types, editing_quark, quarks, submit_count }, ownProps) => {
     let ret = { 
 	initialValues: editing_quark,
-	qtype_properties, logged_in_user, quark_types, editing_quark, quarks
+	qtype_properties, logged_in_user, quark_types, editing_quark, quarks, submit_count
     };
     if (ret.initialValues) {
 	ret.initialValues['auto_fill'] = true
     }
     return ret
   },
-  { fetchQuarkTypes, fetchEditingQuark, readEditingQuark, editQuark, removeEditedQuark, execLogout }
+  { fetchQuarkTypes, fetchEditingQuark, readEditingQuark, editQuark, execLogout }
 )(withRouter(EditQuarkForm))

@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-import { SEND_CONTACT_FORM, SEND_CONTACT_FORM_FAILURE,
-	 REMOVE_CONTACT_FORM, REMOVE_CONTACT_FORM_FAILURE } from '../types/contact';
+import { SEND_CONTACT_FORM, SEND_CONTACT_FORM_FAILURE } from '../types/contact';
 import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
 
@@ -21,10 +20,4 @@ export const sendContactForm = (form) => {
 		error: response.error
 	    }))
     }
-}
-export const removeContactForm = () => {
-    return {
-	type: REMOVE_CONTACT_FORM,
-	payload: null
-    };
 }

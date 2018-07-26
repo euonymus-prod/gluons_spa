@@ -8,7 +8,7 @@ import { Field, reduxForm } from 'redux-form';
 // component
 import Navbar from './navbar';
 // action
-import { sendContactForm, removeContactForm } from '../actions/contact';
+import { sendContactForm } from '../actions/contact';
 
 
 const validate = values => {
@@ -76,11 +76,13 @@ const renderSelect = ({ input, label, type, meta: { touched, error } }) => (
 
 class Contacts extends Component {
     componentWillReceiveProps(nextProps) {
-	if (nextProps.contact_form) {
-	    if (nextProps.contact_form.message) {
-		alert(nextProps.contact_form.message);
+	// after editing post
+	if (nextProps.submit_count > this.props.submit_count) {
+	    if (nextProps.contact_form) {
+		if (nextProps.contact_form.message) {
+		    alert(nextProps.contact_form.message);
+		}
 	    }
-	    this.props.removeContactForm();
 	}
     }
 
@@ -127,4 +129,4 @@ class Contacts extends Component {
 export default  reduxForm({
   form: 'contact_form',
   validate,
-})(withRouter(connect(state => state, { sendContactForm, removeContactForm })(Contacts)));
+})(withRouter(connect(state => state, { sendContactForm })(Contacts)));

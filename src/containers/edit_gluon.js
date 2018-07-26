@@ -13,7 +13,7 @@ import Navbar from './navbar';
 // action
 import { execLogout } from '../actions/login';
 import { fetchGluonTypes } from '../actions/gluon_types';
-import { fetchEditingGluon, editGluon, removeEditedGluon } from '../actions/gluon';
+import { fetchEditingGluon, editGluon } from '../actions/gluon';
 // common util
 import LoginUtil from '../utils/login';
 
@@ -60,24 +60,26 @@ class EditGluon extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-	const login_util = new LoginUtil();
-        const { logged_in_user } = this.props;
         // initialize
+	const login_util = new LoginUtil();
 	if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
 	    this.props.history.push('/');
 	}
 
-	if (nextProps.editing_gluon && (nextProps.editing_gluon.status >= 0)) {
-	    if (!nextProps.editing_gluon.message) {
-		alert('Please login again');
-		this.props.execLogout();
-	    } else {
-		alert(nextProps.editing_gluon.message);
-	    }
+	// after editing post
+	if (nextProps.submit_count > this.props.submit_count) {
 
-	    this.props.removeEditedGluon();
-	    if (nextProps.editing_gluon.status == 1) {
-	    	this.props.history.push('/subjects/relations/' + nextProps.editing_gluon.result.active.name);
+	    if (nextProps.editing_gluon) {
+		if (!nextProps.editing_gluon.message) {
+		    alert('Please login again');
+		    this.props.execLogout();
+		} else {
+		    alert(nextProps.editing_gluon.message);
+		}
+
+		if (nextProps.editing_gluon.status == 1) {
+	    	    this.props.history.push('/subjects/relations/' + nextProps.editing_gluon.result.active.name);
+		}
 	    }
 	}
     }
@@ -184,12 +186,12 @@ const EditGluonForm = reduxForm({
 })(EditGluon)
 
 export default connect(
-  ({ logged_in_user, gluon_types, editing_gluon }, ownProps) => {
+  ({ logged_in_user, gluon_types, editing_gluon, submit_count }, ownProps) => {
     let ret = { 
 	initialValues: editing_gluon,
-	logged_in_user, gluon_types, editing_gluon
+	logged_in_user, gluon_types, editing_gluon, submit_count
     };
     return ret
   },
-    { fetchGluonTypes, fetchEditingGluon, editGluon, removeEditedGluon, execLogout }
+    { fetchGluonTypes, fetchEditingGluon, editGluon, execLogout }
 )(withRouter(EditGluonForm))

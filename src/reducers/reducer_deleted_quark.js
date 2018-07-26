@@ -1,4 +1,4 @@
-import { DELETE_QUARK, REMOVE_DELETED_QUARK } from '../types/quark';
+import { DELETE_QUARK } from '../types/quark';
 
 const initState = null;
 export default (state = initState, action) => {
@@ -6,9 +6,6 @@ export default (state = initState, action) => {
 
     case DELETE_QUARK:
 	return action.payload;
-
-    case REMOVE_DELETED_QUARK:
-	return initState
 
     default :
 	return state

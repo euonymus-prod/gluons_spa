@@ -1,4 +1,4 @@
-import { READ_EDITING_QUARK, EDIT_QUARK, REMOVE_EDITED_QUARK } from '../types/quark';
+import { READ_EDITING_QUARK, EDIT_QUARK } from '../types/quark';
 import Util from '../utils/common';
 
 const initState = null;
@@ -14,9 +14,6 @@ export default (state = initState, action) => {
 
     case EDIT_QUARK:
 	return action.payload;
-
-    case REMOVE_EDITED_QUARK:
-	return initState
 
     default :
 	return state

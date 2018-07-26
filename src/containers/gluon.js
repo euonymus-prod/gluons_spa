@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // component
 import SubGluonList from './sub_gluon_list';
 // action
-import { deleteGluon, removeDeletedGluon } from '../actions/gluon';
+import { deleteGluon } from '../actions/gluon';
 import { execLogout } from '../actions/login';
 // common util
 import Util from '../utils/common';
@@ -16,20 +16,21 @@ let gluon_util = new GluonUtil();
 
 class Gluon extends Component {
     componentWillReceiveProps(nextProps) {
-        const { deleted_gluon, current_quark } = this.props;
-	if (nextProps.deleted_gluon) {
+	// after editing post
+	if (nextProps.submit_count > this.props.submit_count) {
 
-	    if (this.props.gluon.id == nextProps.deleted_gluon.gluon_id) {
-		if (!nextProps.deleted_gluon.message) {
-		    this.props.execLogout();
-		    alert('Please login again');
-		} else {
-		    alert(nextProps.deleted_gluon.message);
-		}
-		this.props.removeDeletedGluon();
+	    if (nextProps.deleted_gluon) {
+		if (nextProps.gluon.id == nextProps.deleted_gluon.gluon_id) {
+		    if (!nextProps.deleted_gluon.message) {
+			this.props.execLogout();
+			alert('Please login again');
+		    } else {
+			alert(nextProps.deleted_gluon.message);
+		    }
 
-		if (nextProps.deleted_gluon.status == 1) {
-		    this.props.history.push('/subjects/relations/' + current_quark.name);
+		    if (nextProps.deleted_gluon.status == 1) {
+			this.props.history.push('/subjects/relations/' + nextProps.current_quark.name);
+		    }
 		}
 	    }
 	}
@@ -108,5 +109,5 @@ class Gluon extends Component {
     }
 }
 // export default connect(state => state)(Gluon);
-export default withRouter(connect(state => state, { deleteGluon, removeDeletedGluon, execLogout })(Gluon));
+export default withRouter(connect(state => state, { deleteGluon, execLogout })(Gluon));
 

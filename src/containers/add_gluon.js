@@ -18,7 +18,7 @@ import Navbar from './navbar';
 import { execLogout } from '../actions/login';
 import { fetchGluonTypes } from '../actions/gluon_types';
 import { fetchEditingQuark, readEditingQuark, searchQuarks } from '../actions/quark';
-import { addGluon, removeAddedGluon } from '../actions/gluon';
+import { addGluon } from '../actions/gluon';
 // common util
 import LoginUtil from '../utils/login';
 
@@ -130,19 +130,14 @@ class AddGluon extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-	const login_util = new LoginUtil();
-        const { added_gluon, editing_quark } = this.props;
-
         // initialize
-	// !! without (Object.keys(nextProps.quarks.list).length > 0) check, componentWillReceiveProps eternally fires
-	if (Object.keys(nextProps.quarks.list).length > 0) {
-	    if (!editing_quark || (nextProps.match.params.quark_id != this.props.match.params.quark_id) ||
-		(nextProps.match.params.quark_id != editing_quark.id)) {
-		this.props.readEditingQuark(nextProps.match.params.quark_id, nextProps.quarks);
-	    } else if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
-		// !Important: Authorization check. This has to be after initialization of editing_quark
-		this.props.history.push('/');
-	    }
+	const login_util = new LoginUtil();
+	if (!nextProps.editing_quark ||
+	    (nextProps.match.params.quark_id != nextProps.editing_quark.id)) {
+	    this.props.readEditingQuark(nextProps.match.params.quark_id, nextProps.quarks);
+	} else if (!login_util.isLoggedIn(nextProps.logged_in_user)) {
+	    // !Important: Authorization check. This has to be after initialization of editing_quark
+	    this.props.history.push('/');
 	}
 
 	if (nextProps.current_quarks) {
@@ -151,18 +146,20 @@ class AddGluon extends Component {
 	    })
 	}
 
-	if (nextProps.added_gluon) {
-	    if (!nextProps.added_gluon.message) {
-		alert('Please login again');
-		this.props.execLogout();
-	    } else {
-		alert(nextProps.added_gluon.message);
-	    }
+	// after editing post
+	if (nextProps.submit_count > this.props.submit_count) {
 
-	    if (nextProps.added_gluon.status != 1) {
-		this.props.removeAddedGluon();
-	    } else if ( !added_gluon || (nextProps.added_gluon.id != added_gluon.id) ) {
-		this.props.history.push('/subjects/relations/' + nextProps.editing_quark.name);
+	    if (nextProps.added_gluon) {
+		if (!nextProps.added_gluon.message) {
+		    alert('Please login again');
+		    this.props.execLogout();
+		} else {
+		    alert(nextProps.added_gluon.message);
+		}
+
+		if (nextProps.added_gluon.status == 1) {
+		    this.props.history.push('/subjects/relations/' + nextProps.editing_quark.name);
+		}
 	    }
 	}
     }
@@ -301,4 +298,4 @@ export default  reduxForm({
   form: 'add_gluon', // a unique name for this form
 　initialValues: {'gluon_type_id':'1', 'is_exclusive': true},
   validate,
-})(withRouter(connect(state => state, { fetchGluonTypes, addGluon, removeAddedGluon, execLogout, fetchEditingQuark, readEditingQuark, searchQuarks })(AddGluon)));
+})(withRouter(connect(state => state, { fetchGluonTypes, addGluon, execLogout, fetchEditingQuark, readEditingQuark, searchQuarks })(AddGluon)));

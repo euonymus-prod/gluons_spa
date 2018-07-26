@@ -1,6 +1,6 @@
 import { CHANGE_CURRENT_QUARK, EDIT_QUARK } from '../types/quark';
 import { FETCH_GLUONS, FETCH_GLUONS_FAILURE, FETCH_ONE_QUARK_NOT_FOUND,
-	 ADD_GLUON, EDIT_GLUON, REMOVE_DELETED_GLUON } from '../types/gluon';
+	 ADD_GLUON, EDIT_GLUON, DELETE_GLUON } from '../types/gluon';
 import { CHANGE_PRIVACY } from '../types/privacy';
 import Util from '../utils/common';
 import QuarkUtil from '../utils/quark';
@@ -31,7 +31,7 @@ export default (state = initState, action) => {
     case CHANGE_PRIVACY:
     case ADD_GLUON:
     case EDIT_GLUON:
-    case REMOVE_DELETED_GLUON:
+    case DELETE_GLUON:
 	return initState
 
     default :

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { FETCH_ONE_QUARK, FETCH_ONE_QUARK_FAILURE, FETCH_QUARKS, SEARCH_QUARKS, FETCH_PICKUPS, ADD_QUARK,
-	 FETCH_EDITING_QUARK, EDIT_QUARK } from '../types/quark';
-import { ADD_GLUON, EDIT_GLUON, REMOVE_DELETED_GLUON } from '../types/gluon';
+	 FETCH_EDITING_QUARK, EDIT_QUARK, DELETE_QUARK } from '../types/quark';
+import { ADD_GLUON, EDIT_GLUON, DELETE_GLUON } from '../types/gluon';
 import { FETCH_GLUONS } from '../types/gluon';
 import { CHANGE_PRIVACY } from '../types/privacy';
 import Util from '../utils/common';
@@ -123,10 +123,12 @@ export default (state = initState, action) => {
 
     // This should be optimized to be more presisely configured when reducer should return initState
     case CHANGE_PRIVACY:
+    case ADD_QUARK:
     case EDIT_QUARK:
+    case DELETE_QUARK:
     case ADD_GLUON:
     case EDIT_GLUON:
-    case REMOVE_DELETED_GLUON:
+    case DELETE_GLUON:
 	return initState
 
     default :
