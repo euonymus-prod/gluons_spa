@@ -10,6 +10,10 @@ class Quarks extends Component {
 
     renderQuarks() {
 	const { current_quarks } = this.props;
+	if (current_quarks.length == 0) {
+	    return 'No results';
+	}
+
 	var first = current_quarks[0];
 	if (!first.id) {
 	    return 'failed to fetch';
@@ -29,11 +33,7 @@ class Quarks extends Component {
     }
 
     render () {
-	const { current_quarks, quark_property_caption } = this.props;
-
-	if (current_quarks.length == 0) {
-	    return '';
-	}
+	const { quark_property_caption } = this.props;
 
 	return (
       <div>
