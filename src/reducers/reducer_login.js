@@ -9,6 +9,9 @@ export default (state = initState, action) => {
     case EXEC_LOGOUT :
 	return action.payload;
     default :
-	return state
+	// NOTE: I don't know why, but if you return 'state' directly, main_quark's current_quark blinks when you visit it from the toppage.
+	// return state
+	let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
+	return logged_in_user
     }
 }
