@@ -28,3 +28,4 @@ export const EDIT_QUARK_FAILURE      = 'EDIT_QUARK_FAILURE';
 export const DELETE_QUARK            = 'DELETE_QUARK';
 export const DELETE_QUARK_FAILURE    = 'DELETE_QUARK_FAILURE';
 
+export const REMOVE_DELETED_QUARK    = 'REMOVE_DELETED_QUARK';

@@ -7,7 +7,7 @@ import LoginUtil from '../utils/login';
 export const sendContactForm = (form) => {
     return dispatch => {
 	let params = new URLSearchParams(form);
-	axios.post(`${API_URI}/contacts/send`, params, {
+	axios.post(`${API_URI}/contacts`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	})
 	    .then((response) => {

@@ -21,7 +21,7 @@ export const execLogin = (username, password) => {
 	params.append('username', username);
 	params.append('password', password);
 
-	axios.post(`${API_URI}/users/login`, params, {
+	axios.post(`${API_URI}/login`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	})
 	    .then((response) => {

@@ -17,6 +17,7 @@ import {
          EDIT_QUARK, EDIT_QUARK_FAILURE,
          // deleting
          DELETE_QUARK, DELETE_QUARK_FAILURE,
+         REMOVE_DELETED_QUARK,
 } from '../types/quark';
 import { API_URI } from '../statics';
 import LoginUtil from '../utils/login';
@@ -33,7 +34,7 @@ export const fetchCurrentQuark = (quark_name, qtype_properties, privacy) => {
 
     let endpoint = 'quarks'
     let privacy_level = ''
-    if (privacy !== 1) {
+    if (parseInt(privacy) !== 1) {
 	endpoint = 'private_quarks'
 	privacy_level = privacy
     }
@@ -70,7 +71,7 @@ export const changeCurrentQuark = (quark) => {
     };
 }
 
-export const fetchQuarks = (qtype_properties, privacy, limit = 100) => {
+export const fetchQuarks = (qtype_properties, privacy, limit = 100, page = 1) => {
     const login_util = new LoginUtil();
     let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
     if (!login_util.isLoggedIn(logged_in_user)) {
@@ -81,13 +82,13 @@ export const fetchQuarks = (qtype_properties, privacy, limit = 100) => {
 
     let endpoint = 'quarks'
     let privacy_level = ''
-    if (privacy !== 1) {
+    if (parseInt(privacy) !== 1) {
 	endpoint = 'private_quarks'
 	privacy_level = privacy
     }
 
     return dispatch => {
-	axios.get(`${API_URI}/${endpoint}/list/${privacy_level}?limit=${limit}`, {
+	axios.get(`${API_URI}/${endpoint}/${privacy_level}?limit=${limit}&page=${page}`, {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain
@@ -107,7 +108,7 @@ export const fetchQuarks = (qtype_properties, privacy, limit = 100) => {
 
 export const fetchPickups = (qtype_properties) => {
     return dispatch => {
-	axios.get(`${API_URI}/quarks/pickups`)
+	axios.get(`${API_URI}/quarks?is_pickup=1`)
 	    .then((response) => {
 		dispatch({
 		    type: FETCH_PICKUPS,
@@ -120,7 +121,7 @@ export const fetchPickups = (qtype_properties) => {
     }
 }
 
-export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100) => {
+export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100, page = 1) => {
     const login_util = new LoginUtil();
     let logged_in_user = JSON.parse(localStorage.getItem('logged_in_user'));
     if (!login_util.isLoggedIn(logged_in_user)) {
@@ -131,13 +132,13 @@ export const searchQuarks = (qtype_properties, keywords, privacy, limit = 100) =
 
     let endpoint = 'quarks'
     let privacy_level = ''
-    if (privacy !== 1) {
+    if (parseInt(privacy) !== 1) {
 	endpoint = 'private_quarks'
 	privacy_level = privacy
     }
 
     return dispatch => {
-	axios.get(`${API_URI}/${endpoint}/search/${privacy_level}?keywords=${keywords}&limit=${limit}`, {
+	axios.get(`${API_URI}/${endpoint}/${privacy_level}?keywords=${keywords}&limit=${limit}&page=${page}`, {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain
@@ -173,7 +174,7 @@ export const addQuark = (form) => {
 	// });
 	let sendingForm = quark_util.sanitizeFormData(form);
 	let params = new URLSearchParams(sendingForm);
-	axios.post(`${API_URI}/quarks/add`, params, {
+	axios.post(`${API_URI}/quarks`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -203,7 +204,7 @@ export const fetchEditingQuark = (quark_id, qtype_properties) => {
 	    };
 	}
 
-	axios.get(`${API_URI}/quarks/one/${quark_id}`, {
+	axios.get(`${API_URI}/quarks/${quark_id}`, {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain
@@ -246,7 +247,7 @@ export const editQuark = (form) => {
 
 	let sendingForm = quark_util.sanitizeFormData(form);
 	let params = new URLSearchParams(sendingForm);
-	axios.post(`${API_URI}/quarks/edit/${form.id}`, params, {
+	axios.patch(`${API_URI}/quarks/${form.id}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -276,7 +277,7 @@ export const deleteQuark = (quark_id) => {
 	    };
 	}
 
-	axios.delete(`${API_URI}/quarks/delete/${quark_id}`, {
+	axios.delete(`${API_URI}/quarks/${quark_id}`, {
 	    // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -295,3 +296,9 @@ export const deleteQuark = (quark_id) => {
     }
 }
 
+export const removeDeletedQuark = () => {
+    return {
+       type: REMOVE_DELETED_QUARK,
+       payload: null
+    };
+}

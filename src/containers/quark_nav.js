@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 // redux
 import { connect } from 'react-redux';
 // action
-import { deleteQuark } from '../actions/quark';
+import { deleteQuark, removeDeletedQuark } from '../actions/quark';
 import { execLogout } from '../actions/login';
 // common util
 import LoginUtil from '../utils/login';
@@ -21,6 +21,8 @@ class QuarkNav extends Component {
 		    alert(nextProps.deleted_quark.message);
 		}
 
+		// NOTE: removeDeletedQuark is required, because this is located in navbar.
+		this.props.removeDeletedQuark()
 		if (nextProps.deleted_quark.status == 1) {
 		    this.props.history.push('/subjects');
 		}
@@ -57,4 +59,4 @@ class QuarkNav extends Component {
 	)
     }
 }
-export default withRouter(connect(state => state, { deleteQuark, execLogout })(QuarkNav));
+export default withRouter(connect(state => state, { deleteQuark, removeDeletedQuark, execLogout })(QuarkNav));

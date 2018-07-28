@@ -25,13 +25,13 @@ export const fetchGluons = (quark, qtype_properties, privacy, limit = 100) => {
 
     let endpoint = 'gluons'
     let privacy_level = ''
-    if (privacy !== 1) {
+    if (parseInt(privacy) !== 1) {
 	endpoint = 'private_gluons'
 	privacy_level = privacy
     }
 
     return dispatch => {
-	axios.get(`${API_URI}/${endpoint}/list/${quark.id}/${quark.quark_type_id}/${privacy_level}?limit=${limit}`, {
+	axios.get(`${API_URI}/${endpoint}/${quark.id}/${quark.quark_type_id}/${privacy_level}?limit=${limit}`, {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain
@@ -63,7 +63,7 @@ export const addGluon = (quark_id, form) => {
 
 	let sendingForm = gluon_util.sanitizeFormData(form);
 	let params = new URLSearchParams(sendingForm);
-	axios.post(`${API_URI}/gluons/add/${quark_id}`, params, {
+	axios.post(`${API_URI}/gluons/${quark_id}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -92,7 +92,7 @@ export const fetchEditingGluon = (gluon_id) => {
 		payload: false
 	    };
 	}
-	axios.get(`${API_URI}/gluons/one/${gluon_id}`, {
+	axios.get(`${API_URI}/gluons/${gluon_id}`, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -126,7 +126,7 @@ export const editGluon = (form) => {
 
 	let sendingForm = gluon_util.sanitizeFormData(form);
 	let params = new URLSearchParams(sendingForm);
-	axios.post(`${API_URI}/gluons/edit/${form.id}`, params, {
+	axios.patch(`${API_URI}/gluons/${form.id}`, params, {
 	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    auth: {
 		username: logged_in_user.username,
@@ -157,7 +157,7 @@ export const deleteGluon = (gluon_id) => {
 	    };
 	}
 
-	axios.delete(`${API_URI}/gluons/delete/${gluon_id}`,  {
+	axios.delete(`${API_URI}/gluons/${gluon_id}`,  {
 	    auth: {
 		username: logged_in_user.username,
 		password: logged_in_user.api_key_plain
