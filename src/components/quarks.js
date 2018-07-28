@@ -11,7 +11,11 @@ class Quarks extends Component {
     renderQuarks() {
 	const { current_quarks } = this.props;
 	if (current_quarks.length == 0) {
-	    return 'No results';
+	    if (this.props.result) {
+		return 'Searching...';
+	    } else {
+		return 'No results';
+	    }
 	}
 
 	var first = current_quarks[0];
