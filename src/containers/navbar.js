@@ -25,7 +25,6 @@ class Navbar extends Component {
     }
 
     renderSearchBar () {
-	//console.log(this.props.location.pathname)
 	let patterns = ['^\/(?!\/)$', '^\/login\/?', '^\/signup\/?',
 			'^\/subjects\/add\/?', '^\/subjects\/edit\/', '^\/relations\/add\/?', '^\/relations\/edit\/']
 

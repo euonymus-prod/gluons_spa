@@ -17,13 +17,10 @@ import LoginUtil from '../utils/login';
 
 
 class Login extends Component {
-    constructor(props) {
-	super(props);
-	this.state = {
-	    username: '',
-	    password: []
-	};
-    }
+    state = {
+	username: '',
+	password: []
+    };
 
     handleUsernameChange = (event) => {
 	this.setState({username: event.target.value});
@@ -42,7 +39,7 @@ class Login extends Component {
      const login_util = new LoginUtil();
      if (login_util.isLoggedIn(logged_in_user)) {
 	 let redirectLocation = '/';
-	 if (lastLocation && (lastLocation.pathname != '/login')) {
+	 if (lastLocation && (lastLocation.pathname != '/signup') && (lastLocation.pathname != '/login')) {
 	     redirectLocation = lastLocation;
 	 }
 	 return (
@@ -62,15 +59,15 @@ class Login extends Component {
             <form method="post" acceptCharset="utf-8" className="search_top text-centerh" onSubmit={this.handleLogin}>
                <div style={{display:'none'}}><input type="hidden" name="_method" value="POST"/></div>
                <div className="form-group center-block input-container-signup">
-                  <div className="input text">
+                  <div className="input text required">
                      <label htmlFor="username">Username</label>
-                     <input type="text" name="username" className="form-control" id="username"
+                     <input type="text" name="username" className="form-control" id="username" required="required" maxLength="50"
                             value={this.state.username}
                             onChange={this.handleUsernameChange} />
                   </div>
-                  <div className="input password">
+                  <div className="input password required">
                      <label htmlFor="password">Password</label>
-                     <input type="password" name="password" className="form-control" id="password"
+                     <input type="password" name="password" className="form-control" id="password" required="required"
                             value={this.state.password}
                             onChange={this.handlePasswordChange} />
                   </div>
