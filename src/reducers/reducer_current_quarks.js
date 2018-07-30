@@ -6,14 +6,15 @@ const initState = [];
 export default (state = initState, action) => {
     
     switch(action.type) {
+
     case FETCH_QUARKS:
-	return action.payload.response;
+    case SEARCH_QUARKS:
+	//return action.payload.response;
+	//console.log([...state, ...action.payload.response]);
+	return [...state, ...action.payload.response];
 
     case FETCH_QUARKS_FAILURE:
 	return [{'error': 'failed to fetch'}]
-
-    case SEARCH_QUARKS:
-	return action.payload.response;
 
     case CHANGE_PRIVACY:
 	return initState

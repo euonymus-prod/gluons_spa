@@ -1,7 +1,10 @@
+// Thanks to react-infinite-scroller
+//    github: https://github.com/CassetteRocks/react-infinite-scroller
 // general
 import _ from 'lodash';
 // react
 import React, { Component } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 // component
 import Navbar from '../containers/navbar';
 import QuarkInList from './quark_in_list';
@@ -36,6 +39,10 @@ class Quarks extends Component {
 	});
     }
 
+    loadMore = (page) => {
+	this.props.quarkFetcher(page);
+    }
+
     render () {
 	const { quark_property_caption } = this.props;
 
@@ -47,7 +54,14 @@ class Quarks extends Component {
                <h2>{quark_property_caption}</h2>
                <div className="related" >
                    <div className="well subject-relation white">
-                       {this.renderQuarks()}
+                      <InfiniteScroll
+                          pageStart={0}
+                          loadMore={this.loadMore}
+                          hasMore={true}
+                          threshold={1500}
+                          loader={<div className="loader" key={0}>Loading ...</div>} >
+                          {this.renderQuarks()}
+                      </InfiniteScroll>
                    </div>
                </div>
 	   </div>
