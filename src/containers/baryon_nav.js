@@ -14,13 +14,13 @@ class BaryonNav extends Component {
     }
 
     render () {
-        const { quark, logged_in_user } = this.props;
+        const { current_quark, logged_in_user } = this.props;
 	const login_util = new LoginUtil();
 	if (!login_util.isLoggedIn(logged_in_user)) {
 	    return '';
 	}
 	var re = new RegExp("^\/subjects\/relations\/");
-	if (!re.test(this.props.location.pathname) || !quark) {
+	if (!re.test(this.props.location.pathname) || !current_quark) {
 	    return '';
         }
 	return (

@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 // component
 import SearchBar from '../components/search_bar';
 import QuarkNav from './quark_nav';
-import BaryonNav from './baryon_nav';
 // action
 import {execLogout} from '../actions/login';
 import { changePrivacyTo } from '../actions/privacy';
@@ -74,7 +73,6 @@ class Navbar extends Component {
            <li><Link to={'/subjects/add'} >New Quark</Link></li>
 
            <QuarkNav />
-           <BaryonNav />
 
            <li className="dropdown">
               <a href="javascript:void(0)" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{ logged_in_user.username } <span className="caret"></span></a>
