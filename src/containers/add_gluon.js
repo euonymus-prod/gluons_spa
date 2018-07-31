@@ -142,7 +142,7 @@ class AddGluon extends Component {
 
 	if (nextProps.current_quarks) {
 	    this.setState({
-		suggestions: nextProps.current_quarks
+		suggestions: nextProps.current_quarks.results
 	    })
 	}
 

@@ -11,10 +11,6 @@ import { fetchQuarks } from '../actions/quark';
 
 
 class QuarkList extends Component {
-    state = {
-	result: true
-    }
-
     componentWillMount() {
 	// const { qtype_properties, privacy } = this.props;
 	// this.props.fetchQuarks(qtype_properties, privacy);
@@ -24,13 +20,6 @@ class QuarkList extends Component {
 	// if ( next page ) {
 	//     this.props.fetchQuarks(nextProps.qtype_properties, nextProps.privacy);
 	// }
-	if (nextProps.submit_count > this.props.submit_count) {
-	    if (nextProps.current_quarks.length === 0) {
-		this.setState({ result: false })
-	    } else {
-		this.setState({ result: true })
-	    }
-	}
     }
 
     quarkFetcher = (page) => {
@@ -44,7 +33,6 @@ class QuarkList extends Component {
            <Quarks
               quark_property_caption="Quarks"
               current_quarks={current_quarks}
-              result={this.state.result}
               quarkFetcher={this.quarkFetcher} />
 	)
     }

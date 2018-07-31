@@ -13,20 +13,20 @@ class Quarks extends Component {
 
     renderQuarks() {
 	const { current_quarks } = this.props;
-	if (current_quarks.length == 0) {
-	    if (this.props.result) {
-		return 'Searching...';
+	if (current_quarks.results.length == 0) {
+	    if (current_quarks.pagination.has_next) {
+		return '';
 	    } else {
 		return 'No results';
 	    }
 	}
 
-	var first = current_quarks[0];
+	var first = current_quarks.results[0];
 	if (!first.id) {
 	    return 'failed to fetch';
 	}
 
-	return _.map(current_quarks, quark => {
+	return _.map(current_quarks.results, quark => {
 	    return (
 		<div key={quark.id}>
                     {(() => {
@@ -44,8 +44,7 @@ class Quarks extends Component {
     }
 
     render () {
-	const { quark_property_caption } = this.props;
-
+	const { quark_property_caption, current_quarks } = this.props;
 	return (
       <div>
          <Navbar />
@@ -57,7 +56,7 @@ class Quarks extends Component {
                       <InfiniteScroll
                           pageStart={0}
                           loadMore={this.loadMore}
-                          hasMore={true}
+                          hasMore={current_quarks.pagination.has_next}
                           threshold={1500}
                           loader={<div className="loader" key={0}>Loading ...</div>} >
                           {this.renderQuarks()}
